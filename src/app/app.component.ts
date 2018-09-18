@@ -25,11 +25,10 @@ export class AppComponent {
 
 
   public getData(){
-    this.http.get("https://jsonplaceholder.typicode.com/users")
+    this.http.get("http://localhost:8084/testeAngular//servletAngular")
     .subscribe(response => {
       this.dados = response;
       console.log(this.dados);
-      
     });
   }
 }

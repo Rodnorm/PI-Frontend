@@ -10,3 +10,29 @@
 </div>
 
 <div *ngIf = "dados" class="alert alert-primary" role="alert">Dados obtidos com sucesso! Confira o console</div>
+
+
+<div class="row center-table">
+  <div class="col-sm-8">
+    <table *ngIf = "dados" class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Cargo</th>
+          <th scope="col">Login</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let dado of dados">
+          <th>{{ dado.nome }} </th>
+          <td>{{ dado.email }}</td>
+          <td>{{ dado.cargo }}</td>
+          <td>{{ dado.login }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+  
