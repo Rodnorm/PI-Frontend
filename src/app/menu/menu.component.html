@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light bg-primary" >
+    <ul class="navbar-nav">
+        <li class="nav-item" *ngFor="let item of menu">
+            <a class="nav-link" href="#">{{ item.campo }}</a>
+        </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0 positionedBox">
+        <input class="form-control mr-sm-2" type="search" placeholder="Pesquise algo" aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pesquisar</button>
+    </form>
+</nav>
