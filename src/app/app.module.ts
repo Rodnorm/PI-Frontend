@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';  
 import { CarousselComponent } from './caroussel/caroussel.component';
 import { MenuComponent } from './menu/menu.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     CarousselComponent,
-    MenuComponent
+    MenuComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
