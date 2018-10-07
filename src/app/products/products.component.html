@@ -1,26 +1,31 @@
-<div class="item col-xs-4 col-lg-4 mt-4">
-  <div class="thumbnail card">
-      <div class="img-event">
-          <img class="group list-group-image img-fluid" src="'
-              productArray[i].src+'" alt="'+productArray[i].alt+'" />
+<div id="products" class="row view-group">
+  <div class="container">
+    <div class="row">
+      <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let product of products">
+        <div class="thumbnail card">
+            <div class="img-event">
+                <img class="group list-group-image img-fluid" [src]="product?.src" [alt]="product?.alt" />
+            </div>
+            <div class="caption card-body">
+                <h4 class="group card-title inner list-group-item-heading">
+                    {{product?.name}}</h4>
+                <p class="group inner list-group-item-text">
+                    {{product?.description}}
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <p class="lead">
+                            R$
+                            {{product?.price}}
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <a class="btn btn-outline-success btn-sm" (click)="openModal(product)">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
-      <div class="caption card-body">
-          <h4 class="group card-title inner list-group-item-heading">
-              productArray[i].name+'</h4>
-          <p class="group inner list-group-item-text">
-              productArray[i].description
-          </p>
-          <div class="row">
-              <div class="col-xs-12 col-md-6">
-                  <p class="lead">
-                      R$
-                      productArray[i].price
-                  </p>
-              </div>
-              <div class="col-xs-12 col-md-6">
-                  <a class="btn btn-outline-success btn-sm" OnClick="openModal('+i+')">Adicionar ao carrinho</a>
-              </div>
-          </div>
-      </div>
- </div>
+    </div>
+  </div>
 </div>

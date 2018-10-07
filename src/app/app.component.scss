@@ -1,4 +1,51 @@
-.center-table{
+.carouselMenu{
+    display: flex;
+    flex-direction: column; 
+}
+.carouselRetractor{
+    margin-top: -4em;
+}
+.showHide{
+    display: none;
+}
+.centeredPagination{
+    position: absolute;
+    left: 44%;
+}
+.disabledRadio{
+    color: #636c72;
+    cursor: not-allowed;
+}
+.divLoader{
     display: flex;
     justify-content: center;
 }
+.loader{
+    height: 5em;
+}
+.loaderModalClass{
+ background-color: #E5EFF1;   
+}
+.alertHold{
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .carouselRetractor{
+        margin-top: 0em;
+    }
+    .centeredPagination{
+        position: absolute;
+        left: 30%;
+    }
+}
+
+
+.sticky.is-sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+  }

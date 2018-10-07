@@ -1,0 +1,50 @@
+    <div class="modal-header" id="teste" >
+        <h5 class="modal-title" id="productModal" data-mobile-text=":)">{{product?.name}}</h5>
+        <button class="btn btn-danger" (click)="activeModal.close()">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="thumbnail card">
+            <div class="alert alert-success" role="alert" hidden id="productAddedToCartAlert">
+                <strong>Boa!</strong> Item adicionado com sucesso ao carrinho!
+            </div>
+            <div class="alert alert-danger" role="alert" hidden id="invalidQuantityAlert">
+                <strong>Preencha a quantidade!</strong> Tem que comprar mais que zero, né?!
+            </div>
+            <div class="img-event">
+                <img class="group list-group-image img-fluid" [src]="product?.src" [alt]="product?.alt" />
+            </div>
+            <div class="caption card-body">
+                <h4 class="group card-title inner list-group-item-heading">
+                    {{product?.name}}</h4>
+                    <p class="group inner list-group-item-text">
+                        {{product?.description}}
+                    </p>
+                    <p class="group inner list-group-item-text">
+                        <strong>Faixa etária: </strong> {{product?.age}}
+                    </p>
+                    <p class="group inner list-group-item-text">
+                        <strong>Características: </strong>{{product?.carac}}
+                    </p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <p class="lead">
+                                R$
+                                {{product?.price}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
+                </div>
+                <input type="number" class="form-control" placeholder="00" aria-label="quantity" OnKeyup="addQuantity(event)" aria-describedby="basic-addon1">
+            </div>
+            <div class="alignModalButtons">
+                <button type="button" class="btn btn-secondary" (click)="addItemToCart('+i+')" >Adicionar</button>
+                <button type="button" class="btn btn-primary" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
+            </div>
+        </div>
