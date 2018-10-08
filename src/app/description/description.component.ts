@@ -1,29 +1,37 @@
 import { Component, ViewChild, AfterViewInit, ElementRef, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-@Component({
-  selector: 'modal-content',
-  templateUrl: './description.component.html',
-  styleUrls: ['./description.component.scss']
-})
-export class DescriptionModalContent {
+// @Component({
+//   selector: 'modal-content',
+//   templateUrl: './description.component.html',
+//   styleUrls: ['./description.component.scss']
+// })
+// export class DescriptionModalContent {
 
-  constructor(public activeModal: NgbActiveModal) {}
-}
+//   constructor(public activeModal: NgbActiveModal) {}
+// }
 
 
 @Component({
   selector: 'app-description',
   template: '',
 })
-export class DescriptionComponent {
 
-  constructor(private modalService: NgbModal) { }
-  @ViewChild('content') content: ElementRef;
+export class DescriptionComponent {
+  @ViewChild('basicModal') content;
+
+  constructor (private modalService: NgbModal) {}
+
   product;
   
  public open(product) {
-    const modalRef = this.modalService.open(DescriptionModalContent);
-    modalRef.componentInstance.product = product;
+  debugger
+  this.product = product;
+  
+  
+  this.content.nativeElement.show();
+
+    // const modalRef = this.modalService.open(DescriptionComponent);
+    // modalRef.componentInstance.product = product;
   }
 }

@@ -6,7 +6,7 @@ import { DescriptionComponent } from '../description/description.component';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
 
     products= [
             {
@@ -121,8 +121,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(private DescriptionComponent: DescriptionComponent) { }
 
-  ngOnInit() {
-  }
+
   
   private openModal(product){
     this.DescriptionComponent.open(product);
