@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+// import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-cart',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
-  constructor() { }
-
+  
+  constructor() {}
+  @Input() public products = []
+  private productExists: boolean = false;
   ngOnInit() {
   }
 
+  public updateView(prod) {
+    this.productExists = true;
+    this.products = prod;
+    console.log(this.products);
+  }
 }

@@ -1,70 +1,37 @@
-
 <app-caroussel></app-caroussel>
 <app-menu></app-menu> 
 <app-products></app-products>
 <app-cart></app-cart>
 <app-description></app-description>
 
-<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hides()" mdbWavesEffect>Launch demo modal</button>
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Launch demo modal</button>
 
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-            <div >
-                    <div class="modal-header" id="teste" >
-                        <h5 class="modal-title" id="productModal" data-mobile-text=":)">{{product?.name}}</h5>
-                        <button class="btn btn-outline-danger btn-sm" (click)="basicModal.hide()">
-                            <i class="fa fa-chevron-left"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="thumbnail card">
-                            <div class="alert alert-success" role="alert" hidden id="productAddedToCartAlert">
-                                <strong>Boa!</strong> Item adicionado com sucesso ao carrinho!
-                            </div>
-                            <div class="alert alert-danger" role="alert" hidden id="invalidQuantityAlert">
-                                <strong>Preencha a quantidade!</strong> Tem que comprar mais que zero, né?!
-                            </div>
-                            <div class="img-event">
-                                <img class="group list-group-image img-fluid" [src]="product?.src" [alt]="product?.alt" />
-                            </div>
-                            <div class="caption card-body">
-                                <h4 class="group card-title inner list-group-item-heading">
-                                    {{product?.name}}</h4>
-                                    <p class="group inner list-group-item-text">
-                                        {{product?.description}}
-                                    </p>
-                                    <p class="group inner list-group-item-text">
-                                        <strong>Faixa etária: </strong> {{product?.age}}
-                                    </p>
-                                    <p class="group inner list-group-item-text">
-                                        <strong>Características: </strong>{{product?.carac}}
-                                    </p>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <p class="lead">
-                                                R$
-                                                {{product?.price}}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
-                                </div>
-                                <input type="number" class="form-control" placeholder="00" aria-label="quantity" OnKeyup="addQuantity(event)" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="alignModalButtons">
-                                <button type="button" class="btn btn-secondary btn-sm" (click)="addItemToCart('+i+')" >Adicionar</button>
-                                <button type="button" class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
-                            </div>
-                        </div>
-                </div>
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Popover in a modal</h5>
+        <p>This
+          <a type="button" mdbBtn color="default" class="waves-light" mdbPopover="And here some amazing content. It's very engaging. Right?"
+            placement="top" mdbPopoverHeader="Popover on top" mdbWavesEffect>
+            Popover on top
+          </a> triggers a popover on click.</p>
+        <hr>
+        <h5>Tooltips in a modal</h5>
+        <p>
+          <a mdbTooltip="Tooltip on top" placement="top">
+            This link have a tooltip on it
+          </a>
+      </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save changes</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save!</button>
       </div>
     </div>
   </div>

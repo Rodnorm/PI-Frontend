@@ -5,13 +5,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
-// import { DescriptionModalContent } from './description/description.component';
 import { MainComponent } from './main/main.component';  
 import { CarousselComponent } from './caroussel/caroussel.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProductsComponent } from './products/products.component';
 import { DescriptionComponent } from './description/description.component';
 import { CartComponent } from './cart/cart.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,22 +21,24 @@ import { CartComponent } from './cart/cart.component';
     MenuComponent,
     ProductsComponent,
     DescriptionComponent,
-    // DescriptionModalContent,
     CartComponent
     ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
-    DescriptionComponent,
-    // DescriptionModalContent
+    DescriptionComponent
   ],
   providers: [
     ProductsComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    ProductsComponent,
+    CartComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],

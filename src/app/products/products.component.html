@@ -20,9 +20,7 @@
                         </p>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <button class="btn btn-success btn-sm btn-light-blue"(click)="openModal(product)" >
-                                Comprar
-                        </button>
+                        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="changeProduct(product); basicModal.show()" mdbWavesEffect>Comprar</button>
                     </div>
                 </div>
             </div>
@@ -30,4 +28,77 @@
       </div>
     </div>
   </div>
+</div>
+
+
+
+
+
+
+
+
+<div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+            <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">{{item.name}}</h4>
+        </div>
+        <div class="modal-body" [formGroup]="formulario">
+                <div class="thumbnail card">
+                    <div class="img-event">
+                        <img class="group list-group-image img-fluid" [src]="item?.src" [alt]="item?.alt" />
+                    </div>
+                    <div class="caption card-body">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            {{item?.name}}</h4>
+                            <p class="group inner list-group-item-text">
+                                {{item?.description}}
+                            </p>
+                            <p class="group inner list-group-item-text">
+                                <strong>Faixa etária: </strong> {{item?.age}}
+                            </p>
+                            <p class="group inner list-group-item-text">
+                                <strong>Características: </strong>{{item?.carac}}
+                            </p>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <p class="lead">
+                                        R$
+                                        {{item?.price}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
+                        </div>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            placeholder="00" 
+                            aria-label="quantity" 
+                            formControlName="quantidade" 
+                            aria-describedby="basic-addon1"
+                            >
+                        </div>
+                        <div class="alert alert-success" role="alert" *ngIf="success" id="productAddedToCartAlert">
+                            <strong>Boa!</strong> Item adicionado com sucesso ao carrinho!
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="quantityError" id="invalidQuantityAlert">
+                            <strong>Preencha a quantidade!</strong> Tem que comprar mais que zero, né?xD
+                        </div>
+            </div>
+            <div class="modal-footer">
+                <div class="alignModalButtons">
+                    <button type="button" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.name, item.id, item.price)">Adicionar</button>
+                    <button type="button" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
