@@ -1,0 +1,45 @@
+<a 
+  class="btn btn-outline-secondary btn-sm" 
+  data-toggle="collapse" href="#subscribeForm" role="button" 
+  aria-expanded="false" aria-controls="subscribeForm"
+  data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+  >
+  Cadastre-se 
+  <i class="fa fa-heart"></i>
+</a>
+
+
+<div mdbModal #frame="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Cadastre-se :)
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
+          <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect (click)="facebookLogin()">Entrar com facebook
+            <i class="fa fa-user ml-1"></i>
+          </a>
+          <hr>
+        </div>
+            <p>
+              <strong>ou</strong>
+            </p>
+            <p>Cadastre-se à moda antiga :)
+            </p>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="frame.hide()">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
