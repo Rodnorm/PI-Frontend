@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DescriptionComponent } from '../description/description.component';
-import { CartComponent } from '../cart/cart.component';
 
-@Component({
+@Component({ 
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
@@ -15,6 +14,8 @@ export class ProductsComponent implements OnInit {
     success: boolean = false;
     public carrinho = [];
     item = [];
+    total = 0;
+    removeId;
     products= [
             {
                 name: "Patinho de Borracha",
@@ -141,7 +142,6 @@ export class ProductsComponent implements OnInit {
   constructor(
       private DescriptionComponent: DescriptionComponent,
       private formBuilder: FormBuilder,
-      private CartComponent: CartComponent
       ) {}
 
   ngOnInit() {
@@ -180,12 +180,10 @@ export class ProductsComponent implements OnInit {
                 id : id,
                 nome : nomeProduto,
                 quantidade: this.formulario.value.quantidade,
-                preço: preco,
+                preco: preco,
                 subtotal: subtotal
                 }
-                // console.log(this.carrinho);
-                this.CartComponent.updateView(this.carrinho);
-                this.CartComponent.products = this.carrinho;
+                this.updateTotal();
                 return;
             }
         }
@@ -196,22 +194,42 @@ export class ProductsComponent implements OnInit {
                 id : id,
                 nome : nomeProduto,
                 quantidade: this.formulario.value.quantidade,
-                preço: preco,
+                preco: preco,
                 subtotal: subtotal
             });
-            // console.log(this.carrinho);
-            this.CartComponent.updateView(this.carrinho);
-            this.CartComponent.products = this.carrinho;
+            this.updateTotal();
             return;
         }
         this.carrinho.push({
             id : id,
             nome : nomeProduto,
             quantidade: this.formulario.value.quantidade,
-            preço: preco,
+            preco: preco,
             subtotal: subtotal
         });
-        this.CartComponent.updateView(this.carrinho);
-        this.CartComponent.products = this.carrinho;
+        this.updateTotal();
+    } 
+
+    protected updateTotal(){
+        if (this.carrinho.length === 0) {
+            this.total = 0;
+        }
+        for (let item in this.carrinho) {
+            this.total = this.total + this.carrinho[item].subtotal;
+        }
+    }
+
+    protected removeThis(id){
+        this.removeId = id;
+    }
+    protected removeItem(){
+        let index = 0;
+        for (let item in this.carrinho) {
+            if (this.carrinho[item].id === this.removeId) {
+                this.carrinho.splice(index, 1);
+                this.updateTotal();
+            }
+            index++;
+        }
     }
 }

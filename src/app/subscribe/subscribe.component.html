@@ -1,0 +1,124 @@
+<a 
+  class="btn btn-outline-secondary btn-sm" 
+  data-toggle="collapse" href="#subscribeForm" role="button" 
+  aria-expanded="false" aria-controls="subscribeForm"
+  data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+  >
+  Cadastre-se 
+  <i class="fa fa-heart"></i>
+</a>
+
+
+<div mdbModal #frame="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: auto"
+  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Cadastre-se :)
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
+          <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect (click)="facebookLogin()">Entrar com facebook
+            <i class="fa fa-user ml-1"></i>
+          </a>
+          <hr>
+        </div>
+            <p>
+              <strong>ou</strong>
+            </p>
+            <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
+            <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect
+            data-toggle="modal" data-target="#oldUserModal" (click)="oldUser.show()" data-dismiss="#frameModalTop"
+            >Cadastre-se à moda antiga :)
+          </a>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="frame.hide()">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div mdbModal #oldUser="mdbModal" class="modal fade right" id="oldUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+style="overflow-y: auto"
+  aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Formulário :)
+        </p>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="oldUser.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+       <div class="modal-body">
+        <div class="text-center md-form" [formGroup]="subscribeForm" >
+            
+            <div class="input-group mb-4">      
+                <input mdbInputDirective 
+                  type="email" class="form-control input-sm" id="inputEmail"
+                  aria-describedby="dataHelp"
+                  data-error="email invalido" data-success="email dos bons"
+                  formControlName="email" 
+                  >
+                  <label for="inputEmail">Email</label>
+            </div>  
+            <div class="input-group mb-4">  
+                
+                <input type="password" class="form-control input-sm" id="inputPassword" 
+                  mdbInputDirective 
+                  data-error="senha pequena" data-success="senha boa"
+                  formControlName="senha"
+                >
+                <label for="inputPassword">Senha</label>
+            </div>  
+            <div class="input-group mb-4">  
+                <input type="password" class="form-control input-sm" id="inputRepeatPassword"
+                  mdbInputDirective
+                  [mdbValidate]="false"> 
+                <label>Repita a senha</label>
+            </div>
+             <small id="dataHelp" class="form-text text-muted">Seus dados estão seguros conosco :)</small>  
+                  
+            <div class="input-group mt-4">  
+                <input mdbInputDirective
+                  type="text" class="form-control input-sm" id="name" formControlName="nome" data-error="campo obrigatório">
+                <label for="name">Nome</label>
+            </div>      
+            <div class="input-group mt-4">  
+                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
+                <label for="cep">CEP</label>
+            </div> 
+            <div class="input-group mt-4">
+                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="rua" formControlName="rua"
+                data-error="campo obrigatório">
+                <label for="rua">Rua</label>
+              </div>
+              <div class="input-group mt-4">
+                <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" 
+                data-error="campo obrigatório">  
+                <label for="numero">Número</label>
+              </div>
+              <div class="input-group mt-4">
+                <input mdbInputDirective type="text" aria-label="complemento" class="form-control" id="complemento" formControlName="complemento" 
+                data-error="campo obrigatório">
+                <label for="complemento">Complemento</label>
+            </div>
+       <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cancelar</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cadastrar</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
