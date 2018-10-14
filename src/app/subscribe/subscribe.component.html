@@ -8,7 +8,6 @@
   <i class="fa fa-heart"></i>
 </a>
 
-
 <div mdbModal #frame="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
   <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
@@ -33,12 +32,89 @@
             <p>
               <strong>ou</strong>
             </p>
-            <p>Cadastre-se à moda antiga :)
-            </p>
+            <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
+            <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect
+            data-toggle="modal" data-target="#oldUserModal" (click)="oldUser.show()"
+            >Cadastre-se à moda antiga :)</a>
 
-      <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="frame.hide()">Cancel</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="frame.hide()">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div mdbModal #oldUser="mdbModal" class="modal fade right" id="oldUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Formulário :)
+        </p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="oldUser.hide()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="text-center">
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">Email</span>  
+                </div>  
+                <input type="email" class="form-control input-sm" id="inputEmail" aria-describedby="dataHelp" placeholder="Insira seu email">  
+            </div>  
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">Senha</span>  
+                </div>  
+                <input type="password" class="form-control input-sm" id="inputPassword" placeholder="Senha">  
+            </div>  
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">:)</span>  
+                </div>  
+                <input type="password" class="form-control input-sm" id="inputRepeatPassword" placeholder="Repita a senha">  
+            </div>  
+
+            <small id="dataHelp" class="form-text text-muted">Seus dados estão seguros conosco :)</small>  
+                  
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">Nome</span>  
+                </div>  
+                <input type="text" class="form-control input-sm" id="name" aria-describedby="" placeholder="Insira seu nome">  
+            </div>      
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">Endereço</span>  
+                </div>  
+                <input type="text" aria-label="rua" class="form-control" id="rua" placeholder="Rua, avenida...">  
+              </div>
+              <div class="input-group mt-2">
+                <div class="input-group-prepend">  
+                  <span class="input-group-text">Número</span>  
+                </div>
+                <input type="number" aria-label="numero" class="form-control" id="numero" placeholder="número">  
+              </div>
+              <div class="input-group mt-2">
+                <div class="input-group-prepend">  
+                  <span class="input-group-text">Complemento</span>  
+                </div>
+                <input type="text" aria-label="complemento" class="form-control" id="complemento" placeholder="Complemento">  
+            </div>
+            <div class="input-group mt-2">  
+                <div class="input-group-prepend">  
+                    <span class="input-group-text">CEP</span>  
+                </div>  
+                <input type="text" aria-label="rua" class="form-control" id="cep" placeholder="Insira seu cep...">  
+            </div> 
+
+      <div class="modal-footer justify-content-center">
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cadastrar</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cancelar</a>
       </div>
     </div>
   </div>

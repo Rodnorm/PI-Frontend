@@ -58,7 +58,7 @@ private facebookLogin(){
       },
       (response) => {
         if (response && !response.error) {
-          console.log('Deu certo');
+          console.log('Deu certo'); 
           
           console.log(response);
         }
