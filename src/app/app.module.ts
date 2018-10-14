@@ -10,8 +10,8 @@ import { CarousselComponent } from './caroussel/caroussel.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProductsComponent } from './products/products.component';
 import { DescriptionComponent } from './description/description.component';
+import { CartComponent } from './cart/cart.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SubscribeComponent } from './subscribe/subscribe.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
     MenuComponent,
     ProductsComponent,
     DescriptionComponent,
-    SubscribeComponent
+    CartComponent
     ],
   imports: [
     BrowserModule,
@@ -37,7 +37,8 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
   providers: [
     ProductsComponent,
     DescriptionComponent,
-    ProductsComponent
+    ProductsComponent,
+    CartComponent,
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],

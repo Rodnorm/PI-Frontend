@@ -1,0 +1,51 @@
+<a class="nav-link btn btn-primary blue waves-effect waves-light" data-toggle="modal" data-target="#sideModalTRSuccessDemo" data-backdrop="false"><i class="fa fa-shopping-cart"></i></a>
+
+<div _ngcontent-c0="" aria-labelledby="myModalLabel" class="modal fade right modal-scrolling" data-backdrop="false" id="sideModalTRSuccessDemo" role="dialog" style="display: none;" tabindex="-1" aria-hidden="true">
+    <div _ngcontent-c0="" class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
+        <div _ngcontent-c0="" class="modal-content">
+            <div _ngcontent-c0="" class="modal-header">
+                <p _ngcontent-c0="" class="heading lead">Carrinho</p>
+                <button _ngcontent-c0="" aria-label="Close" class="close" data-dismiss="modal" type="button"><span _ngcontent-c0="" aria-hidden="true" class="white-text">×</span></button>
+            </div>
+            <div _ngcontent-c0="" class="modal-body">
+                <div _ngcontent-c0="" class="text-center">
+                  <form id="cartForm">  
+                      <div class="form-group">  
+                          <div class="alignModalButtons">  
+                              <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
+                              <button class="btn btn-sm btn-outline-danger" id="resetCart">Esvaziar carrinho</button>  
+                          </div>
+                          <p>Teste {{products.name}}</p>
+                        <div class="col">  
+                            <div class="collapse" id="cartProductTable">  
+                                <table class="table table-hover table-sm" id="prodTableCart" _ngcontent-c0="">   
+                                    <thead>
+                                        <tr>  
+                                            <th scope="col">Produto</th>  
+                                            <th scope="col">Preço</th>  
+                                            <th scope="col">Quantidade</th>  
+                                            <th scope="col">Subtotal</th>  
+                                            <th scope="col">Total</th>  
+                                        </tr>  
+                                    </thead>  
+                                    <tbody>
+                                      <tr *ngFor="let product of products">
+                                          <td scope="row">{{product?.nome}}</td>
+                                          <td scope="row">{{product?.preco}}</td>
+                                          <td scope="row">{{product?.quantidade}}</td>
+                                          <td scope="row">{{product?.subtotal}}</td>
+                                      </tr>  
+                                    </tbody>      
+                                </table>  
+                            </div>  
+                        </div>
+                      <div class="mt-2">  
+                        <a class="btn btn-outline-secondary btn-sm" data-toggle="collapse" href="#subscribeForm" role="button" aria-expanded="false" aria-controls="subscribeForm">Cadastre-se <i class="fa fa-heart"></i></a>  
+                      </div>
+                    </div>
+                  </form>  
+                </div>  
+                </div>
+            </div>
+        </div>
+    </div>

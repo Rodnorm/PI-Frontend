@@ -30,10 +30,12 @@
   </div>
 </div>
 
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- Product Description -->
+
+
+
+
+
+
 
 <div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
     <div class="modal-dialog modal-lg" role="document">
@@ -99,93 +101,4 @@
             </div>
         </div>
     </div>
-</div>
-
-<!--  -->
-<!--  -->
-<!--  -->
-<!-- Cart Modal -->
-
-<div _ngcontent-c0="" aria-labelledby="myModalLabel" class="modal fade right modal-scrolling" data-backdrop="false" id="sideModalTRSuccessDemo" role="dialog" style="display: none;" tabindex="-1" aria-hidden="true">
-    <div _ngcontent-c0="" class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
-        <div _ngcontent-c0="" class="modal-content">
-            <div _ngcontent-c0="" class="modal-header">
-                <p _ngcontent-c0="" class="heading lead">Carrinho</p>
-                <button _ngcontent-c0="" aria-label="Close" class="close" data-dismiss="modal" type="button"><span _ngcontent-c0="" aria-hidden="true" class="white-text">×</span></button>
-            </div>
-            <div _ngcontent-c0="" class="modal-body">
-                <div _ngcontent-c0="" class="text-center">
-                    <form id="cartForm">  
-                        <div class="form-group">  
-                            <div class="alignModalButtons">  
-                                <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
-                                <button class="btn btn-sm btn-outline-danger" id="resetCart">Esvaziar carrinho</button>  
-                            </div>      
-                        <div class="row">
-                        <div class="col">  
-                            <div class="collapse" id="cartProductTable">
-                                <table class="table table-hover table-sm" id="prodTableCart" _ngcontent-c0="">   
-                                    <thead>  
-                                        <tr>  
-                                            <th scope="col">Produto</th>  
-                                            <th scope="col">Preço</th>  
-                                            <th scope="col">Quantidade</th>  
-                                            <th scope="col">Subtotal</th>
-                                            <th>Ações</th>
-                                        </tr>  
-                                    </thead>  
-                                    <tbody>
-                                        <tr *ngFor="let product of carrinho">
-                                            <td scope="row">{{product.nome}}</td>
-                                            <td scope="row">{{product.preco}}</td>
-                                            <td scope="row">{{product.quantidade}}</td>
-                                            <td scope="row">{{product.subtotal}}</td>
-                                            <td>
-                                                <button class="btn btn-secondary btn-sm" (click)="removeThis(product.id); frame.show();">
-                                                    <i class="fa fa-remove" mdbTooltip="Remover Item" placement="top" ></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>      
-                                </table>  
-                                <p> Total: R${{total}} </p>  
-                            </div>  
-                        </div>  
-                        </div>  
-                        <div class="mt-2">  
-                            <app-subscribe></app-subscribe>
-                        </div>
-                    </div>
-                    </form>  
-                </div>  
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--  -->
-    <!--  -->
-    <!--  -->
-    <!-- Confirm delete -->
-  
-
-<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Tem certeza?</p>
-      </div>
-
-      <div class="modal-body">
-        <i class="fa fa-times fa-4x animated rotateIn"></i>
-      </div>
-
-      <div class="modal-footer flex-center">
-        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="frame.hide(); removeItem();"
-          mdbWavesEffect>Sim</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">Não</a>
-      </div>
-    </div>
-  </div>
 </div>
