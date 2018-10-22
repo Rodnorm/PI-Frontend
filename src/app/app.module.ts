@@ -12,6 +12,7 @@ import { ProductsComponent } from './products/products.component';
 import { DescriptionComponent } from './description/description.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscribeComponent } from './subscribe/subscribe.component';
+import { GeneralServices } from 'src/app/services/services';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
   providers: [
     ProductsComponent,
     DescriptionComponent,
-    ProductsComponent
+    ProductsComponent,
+    GeneralServices
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],

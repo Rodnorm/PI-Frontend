@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DescriptionComponent } from '../description/description.component';
+import { GeneralServices } from 'src/app/services/services';
 
 @Component({ 
   selector: 'app-products',
@@ -16,143 +17,31 @@ export class ProductsComponent implements OnInit {
     item = [];
     total = 0;
     removeId;
-    products= [
-            {
-                name: "Patinho de Borracha",
-                price: "19,90",    
-                id: 233,    
-                description: "Pato de borracha para você",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img1.jpeg",
-                alt: "Patinho de borracha"
-            },
-            {
-                name: "Aviãozinho de papel",
-                price: "199,90",
-                id: 232,
-                description: "Modelo alienígena para você!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img2.jpeg",
-                alt: "Seu pai sabe fazer aviões de papel?"
-            },
-            {
-                name: "Cubo Mágico da Ursal",
-                price: "00,00",
-                id: 231,
-                description: "Todos os lados sao IGUAIS!!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img3.jpg",
-                alt: "Cubo mágido unicolor"
-            },
-            {
-                name: "Patinho de Borracha",
-                price: "19,90",
-                id: 230,
-                description: "Pato de borracha para você",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img1.jpeg",
-                alt: "Patinho de borracha"
-            },
-            {
-                name: "Aviãozinho de papel",
-                price: "199,90",
-                id: 203,
-                description: "Modelo alienígena para você!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img2.jpeg",
-                alt: "Seu pai sabe fazer aviões de papel?"
-            },
-            {
-                name: "Cubo Mágico da Ursal",
-                price: "00,00",
-                id: 73,
-                description: "Todos os lados sao IGUAIS!!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img3.jpg",
-                alt: "Cubo mágido unicolor"
-            },
-            {
-                name: "Patinho de Borracha",
-                price: "19,90",
-                id: 83,
-                description: "Pato de borracha para você",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img1.jpeg",
-                alt: "Patinho de borracha"
-            },
-            {
-                name: "Aviãozinho de papel",
-                price: "199,90",
-                id: 93,
-                description: "Modelo alienígena para você!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img2.jpeg",
-                alt: "Seu pai sabe fazer aviões de papel?"
-            },
-            {
-                name: "Cubo Mágico da Ursal",
-                price: "00,00",
-                id: 334,
-                description: "Todos os lados sao IGUAIS!!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img3.jpg",
-                alt: "Cubo mágido unicolor"
-            },
-            {
-                name: "Patinho de Borracha",
-                price: "19,90",
-                id: 13,
-                description: "Pato de borracha para você",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img1.jpeg",
-                alt: "Patinho de borracha"
-            },
-            {
-                name: "Aviãozinho de papel",
-                price: "199,90",
-                id: 53,
-                description: "Modelo alienígena para você!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img2.jpeg",
-                alt: "Seu pai sabe fazer aviões de papel?"
-            },
-            {
-                name: "Cubo Mágico da Ursal",
-                price: "00,00",
-                id: 43,
-                description: "Todos os lados sao IGUAIS!!",
-                age: "livre",
-                carac: "15cm | 100g",
-                src: "../../assets/imgs/products/img3.jpg",
-                alt: "Cubo mágido unicolor"
-            }
-        ];
+    products = [];
+
 
   constructor(
       private DescriptionComponent: DescriptionComponent,
       private formBuilder: FormBuilder,
+      private GS: GeneralServices
       ) {}
 
   ngOnInit() {
     this.formulario = new FormGroup({
         quantidade: new FormControl(null)
     });
+
+    this.GS.getProducts()
+    .subscribe(data => {
+        debugger    
+        this.products = data;
+    });
   }
   
     private changeProduct(product){
         this.item = product;
     }
+    
     private checkValue(nomeProduto, id, preco) {
         if (this.formulario.value.quantidade === 0 ||
             this.formulario.value.quantidade === null ) {

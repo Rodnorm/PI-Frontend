@@ -1,26 +1,26 @@
-<div id="products" class="row view-group">
+<div id="products" class="row view-group mb-5">
   <div class="container">
     <div class="row">
-      <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let product of products">
+      <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
         <div class="thumbnail card">
-            <div class="img-event">
+            <!-- <div class="img-event">
                 <img class="group list-group-image img-fluid" [src]="product?.src" [alt]="product?.alt" />
-            </div>
+            </div> -->
             <div class="caption card-body">
                 <h4 class="group card-title inner list-group-item-heading">
-                    {{product?.name}}</h4>
+                    {{produto?.nome}}</h4>
                 <p class="group inner list-group-item-text">
-                    {{product?.description}}
+                    {{produto?.descricao}}
                 </p>
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <p class="lead">
                             R$
-                            {{product?.price}}
+                            {{produto?.preco}}
                         </p>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="changeProduct(product); basicModal.show()" mdbWavesEffect>Comprar</button>
+                        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="changeProduct(produto); basicModal.show()" mdbWavesEffect>Comprar</button>
                     </div>
                 </div>
             </div>
@@ -36,36 +36,36 @@
 <!-- Product Description -->
 
 <div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
             <span aria-hidden="true">×</span>
             </button>
-            <h4 class="modal-title w-100" id="myModalLabel">{{item.name}}</h4>
+            <h4 class="modal-title w-100" id="myModalLabel">{{item.nome}}</h4>
         </div>
         <div class="modal-body" [formGroup]="formulario">
                 <div class="thumbnail card">
-                    <div class="img-event">
+                    <!-- <div class="img-event">
                         <img class="group list-group-image img-fluid" [src]="item?.src" [alt]="item?.alt" />
-                    </div>
+                    </div> -->
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
-                            {{item?.name}}</h4>
+                            {{item?.nome}}</h4>
                             <p class="group inner list-group-item-text">
-                                {{item?.description}}
+                                {{item?.descricao}}
                             </p>
                             <p class="group inner list-group-item-text">
-                                <strong>Faixa etária: </strong> {{item?.age}}
+                                <strong>Faixa etária: </strong> {{item?.idade}}
                             </p>
                             <p class="group inner list-group-item-text">
-                                <strong>Características: </strong>{{item?.carac}}
+                                <strong>Características: </strong>{{item?.caracteristicas}}
                             </p>
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <p class="lead">
                                         R$
-                                        {{item?.price}}
+                                        {{item?.preco}}
                                     </p>
                                 </div>
                             </div>
