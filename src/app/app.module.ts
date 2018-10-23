@@ -3,6 +3,7 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ToastModule } from 'ng-uikit-pro-standard';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';  
@@ -27,6 +28,7 @@ import { GeneralServices } from 'src/app/services/services';
   imports: [
     BrowserModule,
     HttpClientModule,
+    TostModule.forRoot(),
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     FormsModule,

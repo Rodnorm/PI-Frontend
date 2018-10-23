@@ -1,15 +1,15 @@
 <a 
   class="btn btn-outline-secondary btn-sm" 
   data-toggle="collapse" href="#subscribeForm" role="button" 
-  aria-expanded="false" aria-controls="subscribeForm"
-  data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+  aria-expanded="false" aria-controls="subscribeForm" data-toggle="modal" data-target="#sideCartModalId"
+  data-toggle="modal" data-target="#basicExample" (click)="subscribeModal.show()"
   >
   Cadastre-se 
   <i class="fa fa-heart"></i>
 </a>
 
 
-<div mdbModal #frame="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: auto"
+<div mdbModal #subscribeModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: auto"
   aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
   <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
     <div class="modal-content">
@@ -17,7 +17,7 @@
         <p class="heading lead">Cadastre-se :)
         </p>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="subscribeModal.hide()">
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
@@ -35,34 +35,35 @@
             </p>
             <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
             <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect
-            data-toggle="modal" data-target="#oldUserModal" (click)="oldUser.show()" data-dismiss="#frameModalTop"
+              (click)="oldUser.show()"
             >Cadastre-se à moda antiga :)
           </a>
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="frame.hide()">Cancel</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="subscribeModal.hide()">Cancel</a>
       </div>
     </div>
   </div>
 </div>
 
 
-<div mdbModal #oldUser="mdbModal" class="modal fade right" id="oldUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-style="overflow-y: auto"
-  aria-hidden="true" [config]="{backdrop: true, ignoreBackdropClick: true}">
+<div mdbModal #oldUser="mdbModal" class="modal fade right" id="oldUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="overflow-y: auto"
+  aria-hidden="true" 
+  [config]="{backdrop: true, ignoreBackdropClick: true}"
+  >
   <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <p class="heading lead">Formulário :)
         </p>
-         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="oldUser.hide()">
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="oldUser.hide(); subscribeModal.hide();"data-toggle="modal" data-target="#sideCartModalId">
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
        <div class="modal-body">
-        <div class="text-center md-form" [formGroup]="subscribeForm" >
+        <div class="text-center md-form form-sm" [formGroup]="subscribeForm" >
             
-            <div class="input-group mb-4">      
+            <div class="input-group mb-4">
                 <input mdbInputDirective 
                   type="email" class="form-control input-sm" id="inputEmail"
                   aria-describedby="dataHelp"
@@ -114,11 +115,34 @@ style="overflow-y: auto"
             </div>
        <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cancelar</a>
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide()">Cadastrar</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide(); subscribeModal.hide();"data-toggle="modal" data-target="#sideCartModalId">Cancelar</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="oldUser.hide(); subscribeModal.hide(); sendData(errorModal)"data-toggle="modal" data-target="#sideCartModalId">Cadastrar</a>
       </div>
     </div>
   </div>
 </div>
 </div>
+</div>
+
+
+<!--  -->
+
+<div mdbModal #errorModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Algo deu errado no formulário</p>
+      </div>
+
+      <div class="modal-body">
+        <i class="fa fa-times fa-4x animated rotateIn"></i>
+      </div>
+
+      <div class="modal-footer flex-center">
+        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="oldUser.hide()"
+          mdbWavesEffect>Tentar novamente</a>
+      </div>
+    </div>
+  </div>
 </div>

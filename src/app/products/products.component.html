@@ -3,9 +3,9 @@
     <div class="row">
       <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
         <div class="thumbnail card">
-            <!-- <div class="img-event">
-                <img class="group list-group-image img-fluid" [src]="product?.src" [alt]="product?.alt" />
-            </div> -->
+            <div class="img-event">
+                <img class="group list-group-image img-fluid" [src]="produto?.imagem" [alt]="produto?.alt" />
+            </div>
             <div class="caption card-body">
                 <h4 class="group card-title inner list-group-item-heading">
                     {{produto?.nome}}</h4>
@@ -46,9 +46,9 @@
         </div>
         <div class="modal-body" [formGroup]="formulario">
                 <div class="thumbnail card">
-                    <!-- <div class="img-event">
-                        <img class="group list-group-image img-fluid" [src]="item?.src" [alt]="item?.alt" />
-                    </div> -->
+                    <div class="img-event">
+                        <img class="group list-group-image img-fluid" [src]="item?.imagem" [alt]="item?.alt" />
+                    </div>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
                             {{item?.nome}}</h4>
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-footer">
                 <div class="alignModalButtons">
-                    <button type="button" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.name, item.id, item.price)">Adicionar</button>
+                    <button type="button" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.nome, item.idProduto, item.preco)">Adicionar</button>
                     <button type="button" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
                 </div>
             </div>
@@ -107,70 +107,67 @@
 <!--  -->
 <!-- Cart Modal -->
 
-<div _ngcontent-c0="" aria-labelledby="myModalLabel" class="modal fade right modal-scrolling" data-backdrop="false" id="sideModalTRSuccessDemo" role="dialog" style="display: none;" tabindex="-1" aria-hidden="true" style="overflow-y: auto"  >
-    <div _ngcontent-c0="" class="modal-dialog modal-side modal-top-right modal-notify modal-primary" role="document">
-        <div _ngcontent-c0="" class="modal-content">
-            <div _ngcontent-c0="" class="modal-header">
-                <p _ngcontent-c0="" class="heading lead">Carrinho</p>
-                <button _ngcontent-c0="" aria-label="Close" class="close" data-dismiss="modal" type="button"><span _ngcontent-c0="" aria-hidden="true" class="white-text">×</span></button>
-            </div>
-            <div _ngcontent-c0="" class="modal-body">
-                <div _ngcontent-c0="" class="text-center">
-                    <form id="cartForm">  
-                        <div class="form-group">  
-                            <div class="alignModalButtons">  
-                                <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
-                                <button class="btn btn-sm btn-outline-danger" id="resetCart">Esvaziar carrinho</button>  
-                            </div>      
-                        <div class="row">
-                        <div class="col">  
-                            <div class="collapse" id="cartProductTable">
-                                <table class="table table-hover table-sm" id="prodTableCart" _ngcontent-c0="">   
-                                    <thead>  
-                                        <tr>  
-                                            <th scope="col">Produto</th>  
-                                            <th scope="col">Preço</th>  
-                                            <th scope="col">Quantidade</th>  
-                                            <th scope="col">Subtotal</th>
-                                            <th>Ações</th>
-                                        </tr>  
-                                    </thead>  
-                                    <tbody>
-                                        <tr *ngFor="let product of carrinho">
-                                            <td scope="row">{{product.nome}}</td>
-                                            <td scope="row">{{product.preco}}</td>
-                                            <td scope="row">{{product.quantidade}}</td>
-                                            <td scope="row">{{product.subtotal}}</td>
-                                            <td>
-                                                <button class="btn btn-secondary btn-sm" (click)="removeThis(product.id); frame.show();">
-                                                    <i class="fa fa-remove" mdbTooltip="Remover Item" placement="top" ></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>      
-                                </table>  
-                                <p> Total: R${{total}} </p>  
-                            </div>  
-                        </div>  
-                        </div>  
-                        <div class="mt-2">  
-                            <app-subscribe></app-subscribe>
+<div mdbModal #sideCartModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" id="sideCartModalId" aria-labelledby="myBasicModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-notify modal-side modal-top-right modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead">Carrinho</p>
+        <button type="button" class="close pull-right" aria-label="Close" data-toggle="modal" data-target="#sideCartModalId">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="text-center">
+               <form id="cartForm">
+                  <div class="form-group">
+                     <div class="alignModalButtons">  
+                        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
+                        <button class="btn btn-sm btn-outline-danger" id="resetCart">Esvaziar carrinho</button>  
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <div class="collapse" id="cartProductTable">
+                              <table class="table table-hover table-sm" id="prodTableCart">
+                                 <thead>
+                                    <tr>
+                                       <th scope="col">Produto</th>
+                                       <th scope="col">Preço</th>
+                                       <th scope="col">Quantidade</th>
+                                       <th scope="col">Subtotal</th>
+                                       <th>Ações</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr *ngFor="let product of carrinho">
+                                       <td scope="row">{{product.nome}}</td>
+                                       <td scope="row">{{product.preco}}</td>
+                                       <td scope="row">{{product.quantidade}}</td>
+                                       <td scope="row">{{product.subtotal}}</td>
+                                       <td>
+                                          <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
+                                          <i class="fa fa-remove"></i>
+                                          </button>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                              <p> Total: R${{total}} </p>
+                           </div>
                         </div>
-                    </div>
-                    </form>  
-                </div>  
-                </div>
+                     </div>
+                     <app-subscribe></app-subscribe>
+                  </div>
+               </form>
             </div>
-        </div>
+         </div>
     </div>
+  </div>
+</div>
 
-    <!--  -->
-    <!--  -->
-    <!--  -->
-    <!-- Confirm delete -->
+<!-- Confirm delete -->
   
-
-<div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <div class="modal-content text-center">
@@ -183,9 +180,9 @@
       </div>
 
       <div class="modal-footer flex-center">
-        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="frame.hide(); removeItem();"
+        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); removeItem();"
           mdbWavesEffect>Sim</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">Não</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide()">Não</a>
       </div>
     </div>
   </div>

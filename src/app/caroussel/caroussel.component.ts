@@ -11,6 +11,6 @@ export class CarousselComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+  } 
 //1850x853 --> caroussel  
 }

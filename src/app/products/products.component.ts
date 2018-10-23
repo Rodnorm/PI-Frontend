@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
     total = 0;
     removeId;
     products = [];
+    imgUrl = 'https://i.imgur.com/';
 
 
   constructor(
@@ -32,10 +33,10 @@ export class ProductsComponent implements OnInit {
     });
 
     this.GS.getProducts()
-    .subscribe(data => {
-        debugger    
+    .subscribe(data => {    
         this.products = data;
     });
+
   }
   
     private changeProduct(product){
@@ -43,6 +44,7 @@ export class ProductsComponent implements OnInit {
     }
     
     private checkValue(nomeProduto, id, preco) {
+        debugger
         if (this.formulario.value.quantidade === 0 ||
             this.formulario.value.quantidade === null ) {
             this.quantityError = true;
