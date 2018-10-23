@@ -46,7 +46,7 @@ export class SubscribeComponent implements OnInit {
       'rua' : [null, Validators.required],
       'numero' : [null, Validators.required],
       'complemento' : [null, Validators.required],
-      'cep' : [null, Validators.required, Validators.required],
+      'cep' : [null, Validators.required],
     });
   }
 
@@ -88,10 +88,8 @@ private facebookLogin(){
     // );
   }
 
-  private sendData(errorModal){
-    if(this.subscribeForm.invalid) {
-      alert('aaaaaaa')
-    }
+  private sendData(){
+    debugger
   }
 
 }

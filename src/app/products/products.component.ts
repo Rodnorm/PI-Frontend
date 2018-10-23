@@ -28,8 +28,9 @@ export class ProductsComponent implements OnInit {
       ) {}
 
   ngOnInit() {
-    this.formulario = new FormGroup({
-        quantidade: new FormControl(null)
+
+    this.formulario = this.formBuilder.group({
+        'quantidade': [1]
     });
 
     this.GS.getProducts()
@@ -56,6 +57,7 @@ export class ProductsComponent implements OnInit {
             this.addItemToCart(nomeProduto, id, preco);
 
             setTimeout (() => {
+                debugger
                 this.success = false;
                 this.formulario.reset();
             }, 2000);
