@@ -7,7 +7,7 @@ import { GeneralServices } from 'src/app/services/services';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
-})
+}) 
 
 export class ProductsComponent implements OnInit {
     formulario : FormGroup;

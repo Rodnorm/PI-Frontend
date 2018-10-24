@@ -10,7 +10,7 @@ import { NgbModule, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-boots
 export class AppComponent {
 
  
-  constructor(
+  constructor( 
     private http:HttpClient,
     private modalService: NgbModal){}
   closeResult: string;
