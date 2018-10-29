@@ -13,9 +13,27 @@ import { DescriptionComponent } from './description/description.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { GeneralServices } from 'src/app/services/services';
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
 
-@NgModule({
-  declarations: [
+
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("1364820396988229")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("Your-Google-Client-Id")
+        }
+      ]
+  );
+  return config;
+}
+
+@NgModule({ 
+  declarations: [ 
     AppComponent,
     MainComponent,
     CarousselComponent,
@@ -25,6 +43,7 @@ import { GeneralServices } from 'src/app/services/services';
     SubscribeComponent
     ],
   imports: [
+    SocialLoginModule,
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
@@ -39,7 +58,11 @@ import { GeneralServices } from 'src/app/services/services';
     ProductsComponent,
     DescriptionComponent,
     ProductsComponent,
-    GeneralServices
+    GeneralServices,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],

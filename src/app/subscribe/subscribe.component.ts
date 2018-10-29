@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angular-6-social-login';
+import { GeneralServices } from '../services/services';
 
 @Component({
   selector: 'app-subscribe',
@@ -8,41 +10,29 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class SubscribeComponent implements OnInit {
  
+  private ps1;
+  private ps2;
+  private matchPassword: boolean;
+  private clicked = false;
+
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private socialAuthService: AuthService,
+    private GS: GeneralServices
   ) {}
     
   subscribeForm: FormGroup;
 
 
   ngOnInit() {
-
-    // (window as any).fbAsyncInit = function() {
-    //   FB.init({
-    //     appId      : '1364820396988229',
-    //     cookie     : true,
-    //     xfbml      : true,
-    //     version    : 'v3.1'
-    //   });
-    //   FB.AppEvents.logPageView();
-    // };
-
-    // (function(d, s, id){
-    //   var js, fjs = d.getElementsByTagName(s)[0];
-    //   if (d.getElementById(id)) {return;}
-    //   js = d.createElement(s); js.id = id;
-    //   js.src = "https://connect.facebook.net/en_US/sdk.js";
-    //   fjs.parentNode.insertBefore(js, fjs);
-    // }(document, 'script', 'facebook-jssdk'));
-    
     this.createFormGroup()
   }
 
   private createFormGroup(){
     this.subscribeForm = this.formBuilder.group({
-      'email': [null, Validators.required],
-      'senha': [null, Validators.required],
-      'nome' : [null, Validators.required],
+      'email': [null, Validators.compose([Validators.required, Validators.email])],
+      'senha': [null, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
+      'nome' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
       'rua' : [null, Validators.required],
       'numero' : [null, Validators.required],
       'complemento' : [null, Validators.required],
@@ -50,48 +40,45 @@ export class SubscribeComponent implements OnInit {
     });
   }
 
-private facebookLogin(){
-  // FB.login((response)=>
-  //           {
-  //             // console.log('submitLogin',response);
-  //             if (response.authResponse)
-  //             {
-  //               this.fetchData(response.authResponse.userID);
-  //             }
-  //              else
-  //              {
-                 
-  //            }
-  //         });
-
-  }
-
-  private fetchData(userId) {
-    // FB.api(
-    //   '/'+userId+'/accounts',
-    //   {
-    //     fields: 'id,name,first_name,middle_name,last_name,' +
-    //             'email,birthday,about,address,gender,hometown,link,location,education,work,relationship_status,picture,' +
-    //             'religion,interested_in,languages,meeting_for,payment_pricepoints,political,significant_other,sports,website,' +
-    //             'books,events,family,favorite_athletes,favorite_teams,inspirational_people,' +
-    //             'friends,friendlists,games,likes,groups,ad_studies'
-    //   },
-    //   (response) => {
-    //     if (response && !response.error) {
-    //       console.log('Deu certo');
-          
-    //       console.log(response);
-    //     }
-    //     console.log('Deu errado');
-    //     console.log(response);
-    //   }
-    // );
-  }
 
   private sendData(){
     debugger
+    this.GS.postClient(this.subscribeForm.value)
+    .subscribe( response => {
+      
+    });
   }
 
+  public socialSignIn(socialPlatform : string) {
+    let socialPlatformProvider;
+    
+    if(socialPlatform == "facebook"){
+      socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
+    }
+    else if(socialPlatform == "google"){
+      socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;
+    }
+    
+    this.socialAuthService.signIn(socialPlatformProvider).then(
+      (userData) => {
+        console.log(socialPlatform+" sign in data : " , userData);
+        // Now sign-in with userData
+        // ...
+            
+      }
+    );
+  }
+
+
+  private checkPassword(event) {
+    this.clicked = true;  
+    if (event.target.value == this.subscribeForm.value.senha) {
+        this.matchPassword = true;
+        return;
+    }
+    this.matchPassword = false;
+    }
+  
 }
 
 

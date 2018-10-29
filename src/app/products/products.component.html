@@ -3,46 +3,13 @@
     <div class="row">
       <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
         <div class="thumbnail card">
-
-            
-
-
-
-
-            <div class="carouselProd">
-                    <div id="carouselProd" class="">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item" [ngClass]="{'active': i === 0}" *ngFor="let imagem of produto.imagem; index as i">
-                                    <img class="d-block w-100" [src]="imagem?.imagem" [alt]="imagem?.alt">
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Anterior</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Próximo</span>
-                            </a>
-                        </div>
-                    </div>
-
-
-
-
-
-            <!-- <div *ngFor="let imagem of produto.imagem">
-                tamanho da imagem 640 x 408
-                <div class="img-event">
-                    <img class="group list-group-image img-fluid" [src]="imagem?.imagem" [alt]="imagem?.alt" />
+            <mdb-carousel [isControls]="true" [animation]="'slide'">
+                <div *ngFor="let imagem of produto.imagem; index as i">
+                    <mdb-carousel-item>
+                        <img class="d-block w-100" [src]="imagem.imagem" alt="First slide">
+                    </mdb-carousel-item>
                 </div>
-            </div> -->
+            </mdb-carousel>
             <div class="caption card-body">
                 <h4 class="group card-title inner list-group-item-heading">
                     {{produto?.nome}}</h4>
@@ -67,9 +34,7 @@
   </div>
 </div>
 
-<!--  -->
-<!--  -->
-<!--  -->
+
 <!-- Product Description -->
 
 <div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
@@ -83,9 +48,13 @@
         </div>
         <div class="modal-body" [formGroup]="formulario">
                 <div class="thumbnail card">
-                    <div class="img-event">
-                        <img class="group list-group-image img-fluid" [src]="item?.imagem" [alt]="item?.alt" />
-                    </div>
+                    <mdb-carousel [isControls]="true" [animation]="'slide'">
+                        <div *ngFor="let imagem of item.imagem; index as i">
+                            <mdb-carousel-item>
+                                <img class="d-block w-100" [src]="imagem.imagem" alt="First slide">
+                            </mdb-carousel-item>
+                        </div>
+                    </mdb-carousel>
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
                             {{item?.nome}}</h4>
@@ -160,7 +129,7 @@
                   <div class="form-group">
                      <div class="alignModalButtons">  
                         <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
-                        <button class="btn btn-sm btn-outline-danger" id="resetCart">Esvaziar carrinho</button>  
+                        <button class="btn btn-sm btn-outline-danger" id="resetCart" (click)="deleteModal.show(); esvaziarCarrinhoToggle()">Esvaziar carrinho</button>
                      </div>
                      <div class="row">
                         <div class="col">
@@ -219,7 +188,7 @@
       <div class="modal-footer flex-center">
         <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); removeItem();"
           mdbWavesEffect>Sim</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide()">Não</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide(); esvaziarCarrinhoToggle(false)">Não</a>
       </div>
     </div>
   </div>

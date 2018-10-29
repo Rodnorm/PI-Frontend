@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
     total = 0;
     removeId;
     products = [];
-    imgUrl = 'https://i.imgur.com/';
+    esvaziarCarrinho = false;
 
 
   constructor(
@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit {
     });
 
     this.GS.getProducts()
-    .subscribe(data => {    
+    .subscribe(data => {
         this.products = data;
     });
 
@@ -101,7 +101,7 @@ export class ProductsComponent implements OnInit {
             subtotal: subtotal
         });
         this.updateTotal();
-    } 
+    }
 
     protected updateTotal(){
         if (this.carrinho.length === 0) {
@@ -115,7 +115,13 @@ export class ProductsComponent implements OnInit {
     protected removeThis(id){
         this.removeId = id;
     }
-    protected removeItem(){
+    protected removeItem() {
+        if (this.esvaziarCarrinho) {
+            this.carrinho = [];
+            this.updateTotal();
+            this.esvaziarCarrinhoToggle();
+            return;
+        }
         let index = 0;
         for (let item in this.carrinho) {
             if (this.carrinho[item].id === this.removeId) {
@@ -124,5 +130,16 @@ export class ProductsComponent implements OnInit {
             }
             index++;
         }
+    }
+    private esvaziarCarrinhoToggle(checker?) {
+        if (!checker) {
+            this.esvaziarCarrinho = false;
+        }
+
+        if (this.esvaziarCarrinho) {
+            this.esvaziarCarrinho = false;
+            return
+        }
+        this.esvaziarCarrinho = true;
     }
 }
