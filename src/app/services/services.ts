@@ -19,6 +19,6 @@ export class GeneralServices {
         return this.http.get<any[]>(this.endPointUrl + 'produto/list-produto');
     }
     public postClient(body) {
-        return this.http.post(body, + this.endPointUrl+'produto/')  
+        return this.http.post<any>(this.endPointUrl+'cliente/save', body);
     }
 }

@@ -37,6 +37,8 @@ export class ProductsComponent implements OnInit {
     this.GS.getProducts()
     .subscribe(data => {
         this.products = data;
+    }, error => {
+        console.log(error);
     });
 
     //implementar aqui o método que verifica usuário

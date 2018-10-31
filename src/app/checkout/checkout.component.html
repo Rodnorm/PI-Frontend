@@ -23,7 +23,7 @@
       </div>
 
       <div class="modal-body">
-        <div class="collapse in text-center md-form form-sm" id="confirmAddress">
+        <div class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutForm">
           Confirme ou altere seus dados de entrega =)
             <div class="input-group mt-4">
                 <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?" [value]="user.cep">
@@ -85,6 +85,40 @@
                     <p> Total: R${{total}} </p>
                  </div>
               </div>
+           </div>
+           <hr>
+           <div class="mt-2 mb-2">
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="metodoBoleto" name="inlineDefaultRadiosExample" mdbInputDirective>
+                <label class="custom-control-label" for="metodoBoleto" (click)="cardToggle()">Boleto</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="metodoCartao" name="inlineDefaultRadiosExample" mdbInputDirective>
+                <label class="custom-control-label" for="metodoCartao" data-toggle="collapse" href="#dadosCartao" (click)="cardToggle('1')">Cartão</label>
+              </div>
+              <div *ngIf="isCardMethod" id="dadosCartao">
+                  <div class="text-center md-form form-sm" [formGroup]="checkoutFormCard">
+                    Insira os dados do cartao
+                    <div class="input-group mt-4">
+                        <input mdbInputDirective type="number" aria-label="nome_titular" class="form-control" id="nome_titular" formControlName="nome_titular" data-error="">
+                        <label for="nome_titular">Nome do Titular</label>
+                    </div> 
+                    <div class="input-group mt-4">
+                        <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" data-error="">
+                        <label for="numero">Número</label>
+                    </div>
+                    <div class="input-group mt-4">
+                        <input mdbInputDirective type="number" aria-label="cvv" class="form-control" id="cvv" formControlName="cvv" data-error="">
+                        <label for="cvv">CVV</label>
+                    </div> 
+                    <div class="input-group mt-4">
+                        <input mdbInputDirective type="number" aria-label="data_expiracao" class="form-control" id="data_expiracao" formControlName="data_expiracao" data-error="">
+                        <label for="data_expiracao">Data de expiração</label>
+                    </div> 
+                  </div> 
+              </div>
+
            </div>
           
       <!--Footer-->

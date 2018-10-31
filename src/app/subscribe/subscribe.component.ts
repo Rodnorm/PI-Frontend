@@ -37,15 +37,20 @@ export class SubscribeComponent implements OnInit {
       'numero' : [null, Validators.required],
       'complemento' : [null, Validators.required],
       'cep' : [null, Validators.required],
+      'cpf' : [null, Validators.required],
     });
   }
 
 
-  private sendData(){
+  private sendData() {
     debugger
-    this.GS.postClient(this.subscribeForm.value)
+    console.log(this.subscribeForm.value);
+    this.GS.postClient(JSON.stringify(this.subscribeForm.value))
     .subscribe( response => {
-      
+      debugger
+            console.log(response);
+    }, error => {
+      console.log(error);
     });
   }
 

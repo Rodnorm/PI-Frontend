@@ -26,9 +26,7 @@
                 <a class="nav-link btn btn-primary blue waves-effect waves-light" data-toggle="modal" data-target="#sideCartModalId"><i class="fa fa-shopping-cart"></i></a>
             </li>
             <div *ngIf="!logado; else userOK">
-                <li class="nav-item waves-light" mdbRippleRadius>
-                    <a href="#" class="nav-link">Login</a>
-                </li>
+                <app-login></app-login>
             </div>
             <ng-template #userOK>
                 <li class="nav-item waves-light" mdbRippleRadius>
