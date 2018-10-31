@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { GeneralServices } from 'src/app/services/services';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 export function getAuthServiceConfigs() {
@@ -40,7 +41,8 @@ export function getAuthServiceConfigs() {
     MenuComponent,
     ProductsComponent,
     DescriptionComponent,
-    SubscribeComponent
+    SubscribeComponent,
+    CheckoutComponent
     ],
   imports: [
     SocialLoginModule,

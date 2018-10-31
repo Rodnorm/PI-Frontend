@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralServices } from 'src/app/services/services';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   protected menu: Array<any> = []
-  constructor() {
+  logado = this.GS.logado;
+  
+  constructor(
+    private GS: GeneralServices
+  ) {
     this.menu = [
       { campo: 'Brinquedos' },
       { campo: 'Colecionáveis' },

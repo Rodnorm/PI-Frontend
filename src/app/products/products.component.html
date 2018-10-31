@@ -162,7 +162,12 @@
                            </div>
                         </div>
                      </div>
-                     <app-subscribe></app-subscribe>
+                     <div *ngIf="!logado; else checkout">
+                         <app-subscribe></app-subscribe>
+                     </div>
+                     <ng-template #checkout>
+                         <app-checkout></app-checkout>
+                    </ng-template>
                   </div>
                </form>
             </div>

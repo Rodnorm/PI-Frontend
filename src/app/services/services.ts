@@ -9,7 +9,8 @@ export class GeneralServices {
 
     endPointUrl = 'http://localhost:8080/';
     produtos = [];
-    
+    public logado: boolean = false;
+    public carrinho = [];
     constructor(
         private http: HttpClient
     ) {}

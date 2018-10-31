@@ -13,12 +13,13 @@ export class ProductsComponent implements OnInit {
     formulario : FormGroup;
     quantityError: boolean = false;
     success: boolean = false;
-    public carrinho = [];
+    public carrinho = [] = this.GS.carrinho;
     item = [];
     total = 0;
     removeId;
     products = [];
     esvaziarCarrinho = false;
+    logado = this.GS.logado;
 
 
   constructor(
@@ -38,6 +39,8 @@ export class ProductsComponent implements OnInit {
         this.products = data;
     });
 
+    //implementar aqui o método que verifica usuário
+    
   }
   
     private changeProduct(product){
