@@ -1,7 +1,7 @@
 <a 
   class="btn btn-outline-secondary btn-sm" 
-  data-toggle="collapse" href="#subscribeForm" role="button" 
-  aria-expanded="false" aria-controls="subscribeForm" data-toggle="modal" data-target="#sideCartModalId"
+  role="button" aria-expanded="false" 
+  aria-controls="subscribeForm" data-toggle="modal" 
   data-toggle="modal" (click)="subscribeModal.show()"
   >
   Cadastre-se 
@@ -68,7 +68,8 @@
                   type="email" class="form-control input-sm" id="inputEmail"
                   aria-describedby="dataHelp"
                   data-error="email invalido" data-success="email dos bons"
-                  formControlName="email" 
+                  formControlName="login" 
+                  [value]=value?.email
                   >
                   <label for="inputEmail">Email</label>
             </div>  
@@ -78,13 +79,15 @@
                   mdbInputDirective 
                   data-error="senha pequena" data-success="senha boa"
                   formControlName="senha"
+                  [value]=value?.senha
                 >
                 <label for="inputPassword">Senha</label>
             </div>  
             <div class="input-group mb-4">  
                 <input type="password" (keyup)="checkPassword($event)" class="form-control input-sm" id="inputRepeatPassword"
                   mdbInputDirective
-                  [mdbValidate]="false"> 
+                  [mdbValidate]="false"
+                  [value]="value?.senha"> 
                 <label>Repita a senha</label>
             </div>
             <div *ngIf="matchPassword; else errorPass">
@@ -108,31 +111,37 @@
                   
             <div class="input-group mt-4">  
                 <input mdbInputDirective
-                  type="text" class="form-control input-sm" id="name" formControlName="nome" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório">
+                  type="text" class="form-control input-sm" id="name" formControlName="nome" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório"
+                  [value]=value?.nome>
                 <label for="name">Nome</label>
             </div>
             <div class="input-group mt-4">  
               <input mdbInputDirective
-                type="text" class="form-control input-sm" id="cpf" formControlName="cpf" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório">
+                type="text" class="form-control input-sm" id="cpf" formControlName="cpf" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório"
+                [value]=value?.cpf>
               <label for="cpf">CPF</label>
             </div>      
             <div class="input-group mt-4">  
-                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
+                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?"
+                [value]=value?.cep>
                 <label for="cep">CEP</label>
             </div> 
             <div class="input-group mt-4">
                 <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="rua" formControlName="rua"
-                data-error="campo obrigatório">
+                data-error="campo obrigatório"
+                [value]=value?.rua>
                 <label for="rua">Rua</label>
               </div>
               <div class="input-group mt-4">
                 <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" 
-                data-error="campo obrigatório">  
+                data-error="campo obrigatório"
+                [value]=value?.numero>
                 <label for="numero">Número</label>
               </div>
               <div class="input-group mt-4">
                 <input mdbInputDirective type="text" aria-label="complemento" class="form-control" id="complemento" formControlName="complemento" 
-                data-error="campo obrigatório">
+                data-error="campo obrigatório"
+                [value]=value?.complemento>
                 <label for="complemento">Complemento</label>
             </div>
        <!--Footer-->
