@@ -27,7 +27,7 @@ export class SubscribeComponent implements OnInit {
 
   ngOnInit() {
     if(this.GS.testScenario) {
-      this.value = {
+      this.value = { 
         'email': 'r.normando@hotmail.com',
         'senha': 'senhasenhasenha',
         'nome' : 'Rodrigo',
@@ -69,11 +69,11 @@ export class SubscribeComponent implements OnInit {
 
 
   private sendData() {
-    debugger
+
     console.log(this.subscribeForm.value);
     this.GS.postClient(JSON.stringify(this.subscribeForm.value))
     .subscribe( response => {
-      debugger
+
             console.log(response);
     }, error => {
       console.log(error);

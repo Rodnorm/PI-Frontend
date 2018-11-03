@@ -25,7 +25,6 @@ export class DescriptionComponent {
   product;
   
  public open(product) {
-  debugger
   this.product = product;
   
   

@@ -23,37 +23,43 @@
       </div>
 
       <div class="modal-body">
-        <div class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutForm">
+        <a 
+          class="btn btn-outline-secondary btn-sm" 
+          data-toggle="collapse" role="button" 
+          aria-expanded="false" data-target="#confirmAddress"
+          >
+            Confirmar endereço
+          <i class="fa fa-heart"></i>
+        </a>
+        <div class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutFormAddress">
           Confirme ou altere seus dados de entrega =)
             <div class="input-group mt-4">
-                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?" [value]="user.cep">
+                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
                 <label for="cep">CEP</label>
             </div> 
             <div class="input-group mt-4">
                 <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="rua" formControlName="rua"
-                data-error="campo obrigatório"
-                [value]="user.rua">
+                data-error="campo obrigatório">
                 <label for="rua">Rua</label>
               </div>
               <div class="input-group mt-4">
                 <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" 
-                data-error="campo obrigatório" [value]="user.numero">  
+                data-error="campo obrigatório" >
+                <!-- [value]="user.numero"   -->
                 <label for="numero">Número</label>
               </div>
               <div class="input-group mt-4">
                 <input mdbInputDirective type="text" aria-label="complemento" class="form-control" id="complemento" formControlName="complemento" 
-                data-error="campo obrigatório" [value]="user.complemento">
+                data-error="campo obrigatório" >
+                <!-- [value]="user.complemento" -->
                 <label for="complemento">Complemento</label>
             </div>
+            <a 
+              class="btn btn-outline-success btn-sm" role="button" (click)="correiosService.calcFrete(checkoutFormAddress.value.cep)">
+              Clique para confirmar o endereço
+            </a>
           </div>
-          <a 
-            class="btn btn-outline-secondary btn-sm" 
-            data-toggle="collapse" role="button" 
-            aria-expanded="false" data-target="#confirmAddress"
-            >
-            Confirmar endereço
-            <i class="fa fa-heart"></i>
-          </a>
+          
           <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
           <div class="row">
               <div class="col">
@@ -69,7 +75,7 @@
                           </tr>
                        </thead>
                        <tbody>
-                          <tr *ngFor="let product of carrinho">
+                          <tr *ngFor="let product of itens">
                              <td scope="row">{{product.nome}}</td>
                              <td scope="row">{{product.preco}}</td>
                              <td scope="row">{{product.quantidade}}</td>
@@ -90,12 +96,12 @@
            <div class="mt-2 mb-2">
 
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="metodoBoleto" name="inlineDefaultRadiosExample" mdbInputDirective>
+                <input type="radio" class="custom-control-input" id="metodoBoleto" (click)="cardToggle()" name="inlineDefaultRadiosExample" mdbInputDirective>
                 <label class="custom-control-label" for="metodoBoleto" (click)="cardToggle()">Boleto</label>
               </div>
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="metodoCartao" name="inlineDefaultRadiosExample" mdbInputDirective>
-                <label class="custom-control-label" for="metodoCartao" data-toggle="collapse" href="#dadosCartao" (click)="cardToggle('1')">Cartão</label>
+                <input type="radio" class="custom-control-input" id="metodoCartao" name="inlineDefaultRadiosExample" disabled mdbInputDirective>
+                <label class="custom-control-label" for="metodoCartao" data-toggle="collapse" href="#dadosCartao" (click)="cardToggle('1'); createCardFormGroup()">Cartão</label>
               </div>
               <div *ngIf="isCardMethod" id="dadosCartao">
                   <div class="text-center md-form form-sm" [formGroup]="checkoutFormCard">
@@ -118,12 +124,38 @@
                     </div> 
                   </div> 
               </div>
-
-           </div>
+            </div>
+            <hr>
+            <div *ngIf="correiosService.freteOk && !correiosService.loading">
+                <i class="fa fa-gift mb-2 fa-3x"></i>
+                <div class="flexFrete">
+                  <div>
+                      <span><strong>Sedex</strong></span>
+                      <p>Por R${{correiosService.correiosInfo.sedex.valor}}.</p>
+                      <p>Em até {{correiosService.correiosInfo.sedex.prazo}} dia(s).</p>
+                      <input type="radio" class="custom-control-input" id="sedex" name="frete" mdbInputDirective>
+                      <label class="custom-control-label" for="sedex">Sedex</label>  
+                  </div>
+                  <div>
+                      <span><strong>PAC</strong></span>
+                      <p>Por R${{correiosService.correiosInfo.pac.valor}}.</p>  
+                      <p>Em até {{correiosService.correiosInfo.pac.prazo}} dia(s).</p>  
+                      <input type="radio" class="custom-control-input" id="PAC"name="frete" mdbInputDirective>
+                      <label class="custom-control-label" for="PAC">PAC</label>  
+                  </div>
+                </div>
+            </div>
+            <div *ngIf="!correiosService.loading && !correiosService.freteOk">
+              Confirme seu endereço para ver o frete :)
+            </div>
+                <div *ngIf="correiosService.loading">
+                  <img class="loaderImg" src="../../assets/imgs/icons/loader.gif">
+                </div>
           
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">Cancelar</a>
+        <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn-sm" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">Cancelar</a>
+        <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendData()">Finalizar Compra</a>
       </div>
     </div>
   </div>

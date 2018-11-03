@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
     }
     
     private checkValue(nomeProduto, id, preco) {
-        debugger
+
         if (this.formulario.value.quantidade === 0 ||
             this.formulario.value.quantidade === null ) {
             this.quantityError = true;
@@ -62,7 +62,6 @@ export class ProductsComponent implements OnInit {
             this.addItemToCart(nomeProduto, id, preco);
 
             setTimeout (() => {
-                debugger
                 this.success = false;
                 this.formulario.reset();
             }, 2000);
@@ -75,7 +74,7 @@ export class ProductsComponent implements OnInit {
         for (let i in this.carrinho) {
             if (this.carrinho[i].id === id) {
                 this.carrinho[i] = {
-                id : id,
+                idProduto : id,
                 nome : nomeProduto,
                 quantidade: this.formulario.value.quantidade,
                 preco: preco,
@@ -89,7 +88,7 @@ export class ProductsComponent implements OnInit {
         if (this.carrinho.length === 0) {
             
             this.carrinho.push({
-                id : id,
+                idProduto : id,
                 nome : nomeProduto,
                 quantidade: this.formulario.value.quantidade,
                 preco: preco,
@@ -99,7 +98,7 @@ export class ProductsComponent implements OnInit {
             return;
         }
         this.carrinho.push({
-            id : id,
+            idProduto : id,
             nome : nomeProduto,
             quantidade: this.formulario.value.quantidade,
             preco: preco,
@@ -129,7 +128,7 @@ export class ProductsComponent implements OnInit {
         }
         let index = 0;
         for (let item in this.carrinho) {
-            if (this.carrinho[item].id === this.removeId) {
+            if (this.carrinho[item].idProduto === this.removeId) {
                 this.carrinho.splice(index, 1);
                 this.updateTotal();
             }
