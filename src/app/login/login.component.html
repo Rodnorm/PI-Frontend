@@ -11,20 +11,20 @@
       <div class="modal-body text-center md-form form-sm" [formGroup]="loginForm">
         <div class="input-group mb-4">
             <input mdbInputDirective 
-                type="email" class="form-control input-sm" id="inputEmail"
+                type="email" class="form-control input-sm" id="inputEmailLogin"
                 aria-describedby="dataHelp"
                 data-error="email invalido" data-success="email dos bons"
                 formControlName="login"
                 >
-            <label for="inputEmail">Email</label>
+            <label for="inputEmailLogin">Email</label>
         </div>  
         <div class="input-group mb-4">  
-            <input type="password" class="form-control input-sm" id="inputPassword" 
+            <input type="password" class="form-control input-sm" id="inputPasswordLogin" 
                 mdbInputDirective 
                 formControlName="senha"
                 [mdbValidate]="false"
             >
-            <label for="inputPassword">Senha</label>
+            <label for="inputPasswordLogin">Senha</label>
         </div>  
       </div>
       <div class="modal-footer">

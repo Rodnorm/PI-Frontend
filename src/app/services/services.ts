@@ -10,8 +10,8 @@ export class GeneralServices {
     endPointUrl = 'http://localhost:8080/';
     produtos = [];
     // 
-    public logado: boolean = true;
-    public testScenario: boolean = true;
+    public logado: boolean = false;
+    public testScenario:  boolean = true;
     // 
     public carrinho = [];
     constructor(
