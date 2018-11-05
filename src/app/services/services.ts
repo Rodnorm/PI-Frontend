@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 
 export class GeneralServices {
 
-    endPointUrl = 'http://localhost:8080/';
+    // endPointUrl = 'http://localhost:8080/';
+    endPointUrl = 'http://10.135.147.13:8080/';
 
     produtos = [];
     total;
