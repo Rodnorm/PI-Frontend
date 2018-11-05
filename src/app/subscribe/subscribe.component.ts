@@ -74,7 +74,7 @@ export class SubscribeComponent implements OnInit {
     this.GS.postClient(JSON.stringify(this.subscribeForm.value))
     .subscribe( response => {
 
-            console.log(response);
+            // console.log(response);
     }, error => {
       console.log(error);
     });

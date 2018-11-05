@@ -116,10 +116,10 @@ export class ProductsComponent implements OnInit {
         }
     }
 
-    protected removeThis(id){
+    public removeThis(id){
         this.removeId = id;
     }
-    protected removeItem() {
+    public removeItem() {
         if (this.esvaziarCarrinho) {
             this.carrinho = [];
             this.updateTotal();

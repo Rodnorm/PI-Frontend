@@ -9,7 +9,7 @@ import { GeneralServices } from 'src/app/services/services';
 export class MenuComponent implements OnInit {
   protected menu: Array<any> = []
   logado = this.GS.logado;
-  
+  pedidos; 
   constructor(
     private GS: GeneralServices
   ) {
@@ -24,5 +24,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
   }
-
+private carregarPedidos() {
+  this.GS.getPedidos().subscribe(response => {
+    this.pedidos = response;
+  });
+}
 }

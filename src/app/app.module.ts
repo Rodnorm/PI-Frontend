@@ -63,6 +63,7 @@ export function getAuthServiceConfigs() {
     DescriptionComponent,
     ProductsComponent,
     GeneralServices,
+    ProductsComponent,
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs

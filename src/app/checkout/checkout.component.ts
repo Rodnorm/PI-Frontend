@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralServices } from 'src/app/services/services';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { CorreiosService } from '../services/correios.services';
+import { ProductsComponent } from '../products/products.component';
 
 @Component({
   selector: 'app-checkout',
@@ -10,7 +11,8 @@ import { CorreiosService } from '../services/correios.services';
 })
 
 export class CheckoutComponent implements OnInit {
-  
+  protocolo;
+  valorFrete: number;
   itens = this.GS.carrinho;
   isCardMethod: boolean = false;
   tipoPagamento: string;
@@ -23,6 +25,7 @@ export class CheckoutComponent implements OnInit {
   checkoutFormAddress: FormGroup;
   checkoutFormCard: FormGroup;
   constructor(
+    private products: ProductsComponent, 
     private GS: GeneralServices,
     private formBuilder: FormBuilder,
     private correiosService: CorreiosService
@@ -31,6 +34,17 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     //pega os dados to usuário
     this.createFormGroup();
+  }
+  setFrete(frete) {
+    if (frete == 'sedex') {
+      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',','.'));
+      return; 
+    }
+    if (frete == 'PAC') {
+      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',','.'));
+      return;
+    }
+
   }
   private createFormGroup() {
     
@@ -86,16 +100,22 @@ export class CheckoutComponent implements OnInit {
       });
     }
 
-    let sendObj = {
+    let sendObj = { 
       idCliente: 1,
-      enderecoEntrega: "avenida x",
+      enderecoEntrega: `${this.checkoutFormAddress.value.rua}, ${this.checkoutFormAddress.value.numero}, `,
       status: 'aguardando pagamento',
       tipoPagamento: this.tipoPagamento,
-      itens: this.itens
+      itens: this.itens, 
+      valorFrete: this.valorFrete
     }
     this.GS.postOrder(JSON.stringify(sendObj))
     .subscribe( response => {
-      if (response.returnMsg == 'Success.') {
+      debugger
+      if (response.response.returnMsg == 'Success.') {
+        this.protocolo = response.data;
+        alert(`Anote seu protocolo ${this.protocolo}`)
+      }else {
+        alert('Algo deu errado. ;(')
       }
     });
 

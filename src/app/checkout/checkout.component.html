@@ -81,14 +81,14 @@
                              <td scope="row">{{product.quantidade}}</td>
                              <td scope="row">{{product.subtotal}}</td>
                              <td>
-                                <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
+                                <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="products.removeThis(product.id); deleteModal.show();">
                                 <i class="fa fa-remove"></i>
                                 </button>
                              </td>
                           </tr>
                        </tbody>
                     </table>
-                    <p> Total: R${{total}} </p>
+                    <p> Total: R${{products.total}} </p> 
                  </div>
               </div>
            </div>
@@ -133,14 +133,14 @@
                       <span><strong>Sedex</strong></span>
                       <p>Por R${{correiosService.correiosInfo.sedex.valor}}.</p>
                       <p>Em até {{correiosService.correiosInfo.sedex.prazo}} dia(s).</p>
-                      <input type="radio" class="custom-control-input" id="sedex" name="frete" mdbInputDirective>
+                      <input type="radio" class="custom-control-input" id="sedex" name="frete" mdbInputDirective (click)="setFrete('sedex')">
                       <label class="custom-control-label" for="sedex">Sedex</label>  
                   </div>
                   <div>
                       <span><strong>PAC</strong></span>
                       <p>Por R${{correiosService.correiosInfo.pac.valor}}.</p>  
                       <p>Em até {{correiosService.correiosInfo.pac.prazo}} dia(s).</p>  
-                      <input type="radio" class="custom-control-input" id="PAC"name="frete" mdbInputDirective>
+                      <input type="radio" class="custom-control-input" id="PAC"name="frete" mdbInputDirective (click)="setFrete('PAC')">
                       <label class="custom-control-label" for="PAC">PAC</label>  
                   </div>
                 </div>
@@ -156,6 +156,28 @@
       <div class="modal-footer justify-content-center">
         <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn-sm" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">Cancelar</a>
         <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendData()">Finalizar Compra</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Tem certeza?</p>
+      </div>
+
+      <div class="modal-body">
+        <i class="fa fa-times fa-4x animated rotateIn"></i>
+      </div>
+
+      <div class="modal-footer flex-center">
+        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); products.removeItem();"
+          mdbWavesEffect>Sim</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide(); product.esvaziarCarrinhoToggle(false)">Não</a>
       </div>
     </div>
   </div>

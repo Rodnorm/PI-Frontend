@@ -4,6 +4,7 @@
       <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
         <div class="thumbnail card">
             <mdb-carousel [isControls]="true" [animation]="'slide'">
+                <!-- 640 x 408 -->
                 <div *ngFor="let imagem of produto.imagem; index as i">
                     <mdb-carousel-item>
                         <img class="d-block w-100" [src]="imagem.imagem" alt="First slide">

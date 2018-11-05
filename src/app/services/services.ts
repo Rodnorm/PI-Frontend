@@ -8,10 +8,12 @@ import { Injectable } from '@angular/core';
 export class GeneralServices {
 
     endPointUrl = 'http://localhost:8080/';
+
     produtos = [];
+    total;
     // 
-    public logado: boolean = false;
-    public testScenario:  boolean = true;
+    public logado: boolean = true;
+    public testScenario:  boolean = false;
     // 
     public carrinho = [];
     constructor(
@@ -34,5 +36,9 @@ export class GeneralServices {
             "Content-Type": "application/json"
         });
         return this.http.post<any>(this.endPointUrl+'pedido/save', body, {headers : headers});
+    }
+
+    public getPedidos() {
+        return this.http.get(this.endPointUrl+'pedido/list-pedido');
     }
 }
