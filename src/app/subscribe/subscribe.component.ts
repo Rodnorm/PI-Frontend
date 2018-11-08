@@ -26,44 +26,44 @@ export class SubscribeComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.GS.testScenario) {
-      this.value = { 
-        'email': 'r.normando@hotmail.com',
-        'senha': 'senhasenhasenha',
-        'nome' : 'Rodrigo',
-        'rua' : 'rua de teste',
-        'numero' : '1002',
-        'complemento' : 'casa 2',
-        'cep' : '04890550',
-        'cpf' : '41934663883'  
-      }
-    }
+    // if(this.GS.testScenario) {
+    //   this.value = { 
+    //     'email': 'r.normando@hotmail.com',
+    //     'senha': 'senhasenhasenha',
+    //     'nome' : 'Rodrigo',
+    //     'rua' : 'rua de teste',
+    //     'numero' : '1002',
+    //     'complemento' : 'casa 2',
+    //     'cep' : '04890550',
+    //     'cpf' : '41934663883'  
+    //   }
+    // }
     this.createFormGroup()
   }
 
   private createFormGroup(){
-    if (this.GS.testScenario){
-      this.subscribeForm = this.formBuilder.group({
-        'login': [this.value.email, Validators.compose([Validators.required, Validators.email])],
-        'senha': [this.value.senha, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
-        'nome' : [this.value.senha, Validators.compose([Validators.required, Validators.minLength(2)])],
-        'rua' : [this.value.rua, Validators.required],
-        'numero' : [this.value.numero, Validators.required],
-        'complemento' : [this.value.complemento, Validators.required],
-        'cep' : [this.value.cep, Validators.required],
-        'cpf' : [this.value.cpf, Validators.required],
-      });
-      return;
-    }
+    // if (this.GS.testScenario){
+    //   this.subscribeForm = this.formBuilder.group({
+    //     'login': [this.value.email, Validators.compose([Validators.required, Validators.email])],
+    //     'senha': [this.value.senha, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
+    //     'nome' : [this.value.senha, Validators.compose([Validators.required, Validators.minLength(2)])],
+    //     'rua' : [this.value.rua, Validators.required],
+    //     'numero' : [this.value.numero, Validators.required],
+    //     'complemento' : [this.value.complemento, Validators.required],
+    //     'cep' : [this.value.cep, Validators.required],
+    //     'cpf' : [this.value.cpf, Validators.required],
+    //   });
+    //   return;
+    // }
     this.subscribeForm = this.formBuilder.group({
       'login': [null, Validators.compose([Validators.required, Validators.email])],
       'senha': [null, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
       'nome' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'rua' : [null, Validators.required],
-      'numero' : [null, Validators.required],
-      'complemento' : [null, Validators.required],
-      'cep' : [null, Validators.required],
-      'cpf' : [null, Validators.required],
+      'rua' : [null],
+      'numero' : [null],
+      'complemento' : [null],
+      'cep' : [null],
+      'cpf' : [null],
     });
   }
 
@@ -71,7 +71,15 @@ export class SubscribeComponent implements OnInit {
   private sendData() {
 
     console.log(this.subscribeForm.value);
-    this.GS.postClient(JSON.stringify(this.subscribeForm.value))
+    debugger
+    let sendableObj = {
+      email: this.subscribeForm.value.email,
+      nome: this.subscribeForm.value.nome,
+      login: this.subscribeForm.value.login,
+      senha: this.subscribeForm.value.senha,
+      cpf: this.subscribeForm.value.cpf
+    }
+    this.GS.postClient(JSON.stringify(sendableObj))
     .subscribe( response => {
 
             // console.log(response);

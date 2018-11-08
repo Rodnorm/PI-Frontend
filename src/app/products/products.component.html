@@ -1,53 +1,54 @@
 <div id="products" class="row view-group mb-5">
-  <div class="container">
-    <div class="row">
-      <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
-        <div class="thumbnail card">
-            <mdb-carousel [isControls]="true" [animation]="'slide'">
-                <!-- 640 x 408 -->
-                <div *ngFor="let imagem of produto.imagem; index as i">
-                    <mdb-carousel-item>
-                        <img class="d-block w-100" [src]="imagem.imagem" alt="First slide">
-                    </mdb-carousel-item>
-                </div>
-            </mdb-carousel>
-            <div class="caption card-body">
-                <h4 class="group card-title inner list-group-item-heading">
-                    {{produto?.nome}}</h4>
-                <p class="group inner list-group-item-text">
-                    {{produto?.descricao}}
-                </p>
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <p class="lead">
-                            R$
-                            {{produto?.preco}}
+    <div class="container">
+        <div class="row">
+            <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
+                <div class="thumbnail card">
+                    <mdb-carousel [isControls]="true" [animation]="'slide'">
+                        <!-- 640 x 408 -->
+                        <div *ngFor="let imagem of produto.imagem; index as i">
+                            <mdb-carousel-item>
+                                <img class="d-block w-100" [src]="imagem.imagem" alt="First slide">
+                            </mdb-carousel-item>
+                        </div>
+                    </mdb-carousel>
+                    <div class="caption card-body">
+                        <h4 class="group card-title inner list-group-item-heading">
+                            {{produto?.nome}}</h4>
+                        <p class="group inner list-group-item-text">
+                            {{produto?.descricao}}
                         </p>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="changeProduct(produto); basicModal.show()" mdbWavesEffect>Comprar</button>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    R$ {{produto?.preco}}
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="changeProduct(produto); basicModal.show()"
+                                    mdbWavesEffect>Comprar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 
 <!-- Product Description -->
 
-<div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" style="overflow-y: auto">
+<div mdbModal #basicModal="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" style="overflow-y: auto">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-            <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title w-100" id="myModalLabel">{{item.nome}}</h4>
-        </div>
-        <div class="modal-body" [formGroup]="formulario">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">{{item.nome}}</h4>
+            </div>
+            <div class="modal-body" [formGroup]="formulario">
                 <div class="thumbnail card">
                     <mdb-carousel [isControls]="true" [animation]="'slide'">
                         <div *ngFor="let imagem of item.imagem; index as i">
@@ -59,45 +60,37 @@
                     <div class="caption card-body">
                         <h4 class="group card-title inner list-group-item-heading">
                             {{item?.nome}}</h4>
-                            <p class="group inner list-group-item-text">
-                                {{item?.descricao}}
-                            </p>
-                            <p class="group inner list-group-item-text">
-                                <strong>Faixa etária: </strong> {{item?.idade}}
-                            </p>
-                            <p class="group inner list-group-item-text">
-                                <strong>Características: </strong>{{item?.caracteristicas}}
-                            </p>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <p class="lead">
-                                        R$
-                                        {{item?.preco}}
-                                    </p>
-                                </div>
+                        <p class="group inner list-group-item-text">
+                            {{item?.descricao}}
+                        </p>
+                        <p class="group inner list-group-item-text">
+                            <strong>Faixa etária: </strong> {{item?.idade}}
+                        </p>
+                        <p class="group inner list-group-item-text">
+                            <strong>Características: </strong>{{item?.caracteristicas}}
+                        </p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    R$ {{item?.preco}}
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
-                        </div>
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            placeholder="00" 
-                            aria-label="quantity" 
-                            formControlName="quantidade" 
-                            aria-describedby="basic-addon1"
-                            autofocus
-                            >
-                        </div>
-                        <div class="alert alert-success" role="alert" *ngIf="success" id="productAddedToCartAlert">
-                            <strong>Boa!</strong> Item adicionado com sucesso ao carrinho!
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="quantityError" id="invalidQuantityAlert">
-                            <strong>Preencha a quantidade!</strong> Tem que comprar mais que zero, né?xD
-                        </div>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
+                    </div>
+                    <input type="number" class="form-control" placeholder="00" aria-label="quantity" formControlName="quantidade" aria-describedby="basic-addon1"
+                        autofocus>
+                </div>
+                <div class="alert alert-success" role="alert" *ngIf="success" id="productAddedToCartAlert">
+                    <strong>Boa!</strong> Item adicionado com sucesso ao carrinho!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="quantityError" id="invalidQuantityAlert">
+                    <strong>Preencha a quantidade!</strong> Tem que comprar mais que zero, né?xD
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="alignModalButtons">
@@ -115,87 +108,94 @@
 <!-- Cart Modal -->
 
 <div mdbModal #sideCartModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" id="sideCartModalId" aria-labelledby="myBasicModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-side modal-top-right modal-primary" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="heading lead">Carrinho</p>
-        <button type="button" class="close pull-right" aria-label="Close" data-toggle="modal" data-target="#sideCartModalId">
-          <span aria-hidden="true" class="white-text">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-            <div class="text-center">
-               <form id="cartForm">
-                  <div class="form-group">
-                     <div class="alignModalButtons">  
-                        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>  
-                        <button class="btn btn-sm btn-outline-danger" id="resetCart" (click)="deleteModal.show(); esvaziarCarrinhoToggle()">Esvaziar carrinho</button>
-                     </div>
-                     <div class="row">
-                        <div class="col">
-                           <div class="collapse" id="cartProductTable">
-                              <table class="table table-hover table-sm" id="prodTableCart">
-                                 <thead>
-                                    <tr>
-                                       <th scope="col">Produto</th>
-                                       <th scope="col">Preço</th>
-                                       <th scope="col">Quantidade</th>
-                                       <th scope="col">Subtotal</th>
-                                       <th>Ações</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr *ngFor="let product of carrinho">
-                                       <td scope="row">{{product.nome}}</td>
-                                       <td scope="row">{{product.preco}}</td>
-                                       <td scope="row">{{product.quantidade}}</td>
-                                       <td scope="row">{{product.subtotal}}</td>
-                                       <td>
-                                          <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
-                                          <i class="fa fa-remove"></i>
-                                          </button>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                              <p> Total: R${{total}} </p>
-                           </div>
-                        </div>
-                     </div>
-                     <div *ngIf="!logado; else checkout">
-                         <app-subscribe></app-subscribe>
-                     </div>
-                     <ng-template #checkout>
-                         <app-checkout></app-checkout>
-                    </ng-template>
-                  </div>
-               </form>
+    aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-side modal-top-right modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="heading lead">Carrinho</p>
+                <button type="button" class="close pull-right" aria-label="Close" data-toggle="modal" data-target="#sideCartModalId">
+                    <span aria-hidden="true" class="white-text">×</span>
+                </button>
             </div>
-         </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <form id="cartForm">
+                        <div class="form-group">
+                            <div class="alignModalButtons">
+                                <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false"
+                                    aria-controls="multiCollapseExample1">Mostrar produtos</a>
+                                <button class="btn btn-sm btn-outline-danger" id="resetCart" (click)="deleteModal.show(); esvaziarCarrinhoToggle()">Esvaziar carrinho</button>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="collapse" id="cartProductTable">
+                                        <table class="table table-hover table-sm" id="prodTableCart">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Produto</th>
+                                                    <th scope="col">Preço</th>
+                                                    <th scope="col">Quantidade</th>
+                                                    <th scope="col">Subtotal</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let product of carrinho">
+                                                    <td scope="row">{{product.nome}}</td>
+                                                    <td scope="row">{{product.preco}}</td>
+                                                    <td scope="row">{{product.quantidade}}</td>
+                                                    <td scope="row">{{product.subtotal}}</td>
+                                                    <td>
+                                                        <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
+                                                            <i class="fa fa-remove"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p> Total: R${{total}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!logado; else checkout">
+                                <app-subscribe></app-subscribe>
+                            </div>
+                            <ng-template #checkout>
+                                <app-checkout></app-checkout>
+                            </ng-template>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- Confirm delete -->
-  
+
 <div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Tem certeza?</p>
-      </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Tem certeza?</p>
+            </div>
 
-      <div class="modal-body">
-        <i class="fa fa-times fa-4x animated rotateIn"></i>
-      </div>
+            <div class="modal-body">
+                <i class="fa fa-times fa-4x animated rotateIn"></i>
+            </div>
 
-      <div class="modal-footer flex-center">
-        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); removeItem();"
-          mdbWavesEffect>Sim</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide(); esvaziarCarrinhoToggle(false)">Não</a>
-      </div>
+            <div class="modal-footer flex-center">
+                <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); removeItem();" mdbWavesEffect>Sim</a>
+                <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide(); esvaziarCarrinhoToggle(false)">Não</a>
+            </div>
+        </div>
     </div>
-  </div>
+</div>
+<div class="text-center">
+    <a mdbBtn color="primary" outline="true" class="waves-effect" (click)="loadMoreProducts()" mdbWavesEffect>Carregar mais</a>
+</div>
+
+<div *ngIf="loader" class="text-center">
+    <app-custom-loader></app-custom-loader>
 </div>

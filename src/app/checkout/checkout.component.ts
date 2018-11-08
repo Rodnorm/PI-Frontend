@@ -16,6 +16,9 @@ export class CheckoutComponent implements OnInit {
   itens = this.GS.carrinho;
   isCardMethod: boolean = false;
   tipoPagamento: string;
+
+  // Criação de um usuário fictício. Para teste de checkout
+  // implementação do usuário real deve ser feita no onInit
   user = {
     cep:'04890550',
     rua:'Rua da Paz',
@@ -33,7 +36,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     //pega os dados to usuário
-    this.createFormGroup();
+    // usuario
+    this.createFormGroup(); //passa os dados do usuario
   }
   setFrete(frete) {
     if (frete == 'sedex') {
@@ -47,20 +51,26 @@ export class CheckoutComponent implements OnInit {
 
   }
   private createFormGroup() {
+    //verifica se há usuário
     
-    if (this.GS.testScenario) {
-      this.checkoutFormAddress = this.formBuilder.group({
-        'rua' : ['Rua Y', Validators.required],
-        'numero' : ['9', Validators.required],
-        'complemento' : ['Apartamento B', Validators.required],
-        'cep' : ['30120-000', Validators.required],
-      });
-      return;
-    }
+    /**
+     *  exemplo de código para quando houver o objeto usuário
+     *  if (user) {
+     *     this.checkoutFormAddress = this.formBuilder.group({
+              'rua' : [user.rua, Validators.required],
+              'numero' : [user.numero, Validators.required],
+              'complemento' : [user.complemento, Validators.required],
+              'cep' : [user.cep, Validators.required],
+        });
+     * 
+     * }
+     * 
+     */
+
     this.checkoutFormAddress = this.formBuilder.group({
       'rua' : [null, Validators.required],
       'numero' : [null, Validators.required],
-      'complemento' : [null, Validators.required],
+      'complemento' : [null],
       'cep' : [null, Validators.required],
     });
 
@@ -76,6 +86,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   private cardToggle(i?) {
+    
     if (i) {
       this.isCardMethod = true;
       this.tipoPagamento = 'cartao'

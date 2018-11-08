@@ -27,10 +27,14 @@
             <label for="inputPasswordLogin">Senha</label>
         </div>  
       </div>
+      <div *ngIf="loader" class="text-center">
+          <app-custom-loader></app-custom-loader>
+      </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" data-toggle="modal" data-target="#loginModal" mdbWavesEffect>Cancelar</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" data-toggle="modal" data-target="#loginModal" mdbWavesEffect>Entrar</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="validateValues()">Entrar</button>
       </div>
     </div>
   </div>
 </div>
+

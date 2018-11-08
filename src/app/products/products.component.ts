@@ -17,7 +17,8 @@ export class ProductsComponent implements OnInit {
     item = [];
     total = 0;
     removeId;
-    products = [];
+    private loader = true;
+    public products = [];
     esvaziarCarrinho = false;
     logado = this.GS.logado;
 
@@ -37,6 +38,7 @@ export class ProductsComponent implements OnInit {
     this.GS.getProducts()
     .subscribe(data => {
         this.products = data;
+        this.loader = false;
     }, error => {
         console.log(error);
     });
@@ -145,5 +147,16 @@ export class ProductsComponent implements OnInit {
             return
         }
         this.esvaziarCarrinho = true;
+    }
+    private loadMoreProducts() {
+        debugger
+        this.GS.getMoreProducts()
+        .subscribe(data => {
+            Object.keys(data['data']).forEach( key => {
+                this.products['data'].push(data['data'][key]);
+            });
+        }, error => {
+            console.log(error);
+        });
     }
 }

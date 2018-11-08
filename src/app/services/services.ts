@@ -7,39 +7,45 @@ import { Injectable } from '@angular/core';
 
 export class GeneralServices {
 
-    // endPointUrl = 'http://localhost:8080/';
-    endPointUrl = 'http://10.135.147.13:8080/';
+    endPointUrl = 'http://localhost:8080/';
+    // endPointUrl = 'http://10.135.147.13:8080/';
 
     produtos = [];
     total;
     // 
-    public logado: boolean = true;
+    public logado: boolean = false;
     public testScenario:  boolean = false;
     // 
+    private headers = new HttpHeaders({
+        "Content-Type": "application/json"
+    });
+
     public carrinho = [];
-    constructor(
+    constructor (
         private http: HttpClient
     ) {}
 
     public getProducts() {
         return this.http.get<any[]>(this.endPointUrl + 'produto/list-produto');
     }
-
+    
+    public getPedidos() {
+        return this.http.get(this.endPointUrl + 'pedido/list-pedido');
+    }
+    
+    public getMoreProducts() {
+        return this.http.get<any[]>(this.endPointUrl + 'produto/list-produto');
+    }
+    
     public postClient(body) {
-        const headers = new HttpHeaders({
-            "Content-Type": "application/json"
-        });
-        return this.http.post<any>(this.endPointUrl+'cliente/save', body, {headers : headers});
+        return this.http.post<any>(this.endPointUrl + 'cliente/save', body, {headers : this.headers});
     }
 
     public postOrder(body) {
-        const headers = new HttpHeaders({
-            "Content-Type": "application/json"
-        });
-        return this.http.post<any>(this.endPointUrl+'pedido/save', body, {headers : headers});
+        return this.http.post<any>(this.endPointUrl + 'pedido/save', body, {headers : this.headers});
     }
 
-    public getPedidos() {
-        return this.http.get(this.endPointUrl+'pedido/list-pedido');
+    public postClientAuth(body) {
+        return this.http.post<any[]>(this.endPointUrl + 'cliente/auth', body, {headers : this.headers})
     }
 }

@@ -16,6 +16,7 @@ import { GeneralServices } from 'src/app/services/services';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
+import { CustomLoaderComponent } from './custom-loader/custom-loader.component';
 
 
 export function getAuthServiceConfigs() {
@@ -44,7 +45,8 @@ export function getAuthServiceConfigs() {
     DescriptionComponent,
     SubscribeComponent,
     CheckoutComponent,
-    LoginComponent
+    LoginComponent,
+    CustomLoaderComponent, 
     ],
   imports: [
     SocialLoginModule,
@@ -71,5 +73,5 @@ export function getAuthServiceConfigs() {
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   bootstrap: [AppComponent],
-})
+}) 
 export class AppModule { }
