@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
     item = [];
     total = 0;
     removeId;
-    private loader = true;
+    public loader = true;
     public products = [];
     esvaziarCarrinho = false;
     logado = this.GS.logado;
@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
         this.item = product;
     }
     
-    private checkValue(nomeProduto, id, preco) {
+    public checkValue(nomeProduto, id, preco) {
 
         if (this.formulario.value.quantidade === 0 ||
             this.formulario.value.quantidade === null ) {
@@ -137,7 +137,7 @@ export class ProductsComponent implements OnInit {
             index++;
         }
     }
-    private esvaziarCarrinhoToggle(checker?) {
+    public esvaziarCarrinhoToggle(checker?) {
         if (!checker) {
             this.esvaziarCarrinho = false;
         }
@@ -148,7 +148,7 @@ export class ProductsComponent implements OnInit {
         }
         this.esvaziarCarrinho = true;
     }
-    private loadMoreProducts() {
+    public loadMoreProducts() {
         debugger
         this.GS.getMoreProducts()
         .subscribe(data => {

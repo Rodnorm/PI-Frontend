@@ -12,7 +12,7 @@ export class SubscribeComponent implements OnInit {
  
   private ps1;
   private ps2;
-  private matchPassword: boolean;
+  public matchPassword: boolean;
   private clicked = false;
   value;
 
@@ -68,7 +68,7 @@ export class SubscribeComponent implements OnInit {
   }
 
 
-  private sendData() {
+  public sendData() {
 
     console.log(this.subscribeForm.value);
     debugger
@@ -109,7 +109,7 @@ export class SubscribeComponent implements OnInit {
   }
 
 
-  private checkPassword(event) {
+  public checkPassword(event) {
     this.clicked = true;  
     if (event.target.value == this.subscribeForm.value.senha) {
         this.matchPassword = true;

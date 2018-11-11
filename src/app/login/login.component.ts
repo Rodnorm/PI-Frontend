@@ -10,7 +10,7 @@ import { GeneralServices } from '../services/services';
 export class LoginComponent implements OnInit {
   
   loginForm: FormGroup;
-  private loader: boolean = false;
+  public loader: boolean = false;
 
   constructor(
     private fb : FormBuilder,
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private validateValues() {
+  public validateValues() {
     
     this.loader = true;
 

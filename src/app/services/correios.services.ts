@@ -28,7 +28,7 @@ export class CorreiosService {
     
     private url = 'http://ws.correios.com.br/';
     
-    private calcFrete(cep) {
+    public calcFrete(cep) {
         this.loading = true;
         cep = cep.replace('-','');
         this.http.get(this.url+

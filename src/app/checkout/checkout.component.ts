@@ -28,10 +28,10 @@ export class CheckoutComponent implements OnInit {
   checkoutFormAddress: FormGroup;
   checkoutFormCard: FormGroup;
   constructor(
-    private products: ProductsComponent, 
+    public products: ProductsComponent, 
     private GS: GeneralServices,
     private formBuilder: FormBuilder,
-    private correiosService: CorreiosService
+    public correiosService: CorreiosService
   ) { }
 
   ngOnInit() {
@@ -76,7 +76,7 @@ export class CheckoutComponent implements OnInit {
 
     
   }
-  private createCardFormGroup() {
+  public createCardFormGroup() {
     this.checkoutFormCard = this.formBuilder.group({
       'numero':[null, Validators.compose([Validators.required])],
       'cvv':[null, Validators.compose([Validators.required])],
@@ -85,7 +85,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  private cardToggle(i?) {
+  public cardToggle(i?) {
     
     if (i) {
       this.isCardMethod = true;
@@ -100,7 +100,7 @@ export class CheckoutComponent implements OnInit {
     this.isCardMethod = false;
   }
 
-  private sendData() {
+  public sendData() {
 
     for (let i = 0; i < this.itens.length; i++) {
 
