@@ -7,9 +7,9 @@ const port = normalizePort(process.env.PORT || '3000');
 app.use(express.static(__dirname + '/dist/PI-Frontend'));
 
 // Send all requests to index.html
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/PI-Frontend/index.html'));
-});
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname + '/dist/PI-Frontend/index.html'));
+// });
 
 // default Heroku port
 console.log(`Frontend rodando na porta ${port}`);
