@@ -754,7 +754,7 @@ var CheckoutComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img class=\"loaderImg\" src=\"../../assets/imgs/icons/loader.gif\">"
+module.exports = "<img class=\"loaderImg\" src=\"../../PI-Frontend/assets/imgs/icons/loader.gif\">"
 
 /***/ }),
 
