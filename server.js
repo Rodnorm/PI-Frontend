@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/dist/PI-Frontend'));
 // app.get('/*', function(req, res) {
 //   res.sendFile(path.join(__dirname + '/dist/PI-Frontend/index.html'));
 // });
-
+  
 // default Heroku port
 console.log(`Frontend rodando na porta ${port}`);
 app.listen(port);
