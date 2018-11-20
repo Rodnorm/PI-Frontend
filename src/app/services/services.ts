@@ -13,7 +13,7 @@ export class GeneralServices {
     produtos = [];
     total;
     // 
-    public logado: boolean = false;
+    public logado: boolean = true;
     public testScenario:  boolean = false;
     // 
     private headers = new HttpHeaders({

@@ -3,20 +3,23 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+   
+import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';  
 import { CarousselComponent } from './caroussel/caroussel.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProductsComponent } from './products/products.component';
 import { DescriptionComponent } from './description/description.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { GeneralServices } from 'src/app/services/services';
-import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
 import { CustomLoaderComponent } from './custom-loader/custom-loader.component';
+import { PedidosComponent } from './userAccount/userAccount.component';
+import { RouterModule } from '@angular/router';
 
 
 export function getAuthServiceConfigs() {
@@ -46,7 +49,8 @@ export function getAuthServiceConfigs() {
     SubscribeComponent,
     CheckoutComponent,
     LoginComponent,
-    CustomLoaderComponent, 
+    CustomLoaderComponent,
+    PedidosComponent, 
     ],
   imports: [
     SocialLoginModule,
@@ -55,7 +59,8 @@ export function getAuthServiceConfigs() {
     NgbModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(routing)
   ],
   entryComponents:[
     DescriptionComponent

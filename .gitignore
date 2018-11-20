@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+PI-Frontend
 
 # dependencies
 /node_modules
