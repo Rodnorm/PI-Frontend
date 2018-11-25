@@ -157,7 +157,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="!logado; else checkout">
+                            <div *ngIf="!this.GS.logado; else checkout">
                                 <app-subscribe></app-subscribe>
                             </div>
                             <ng-template #checkout>

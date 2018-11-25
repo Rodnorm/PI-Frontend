@@ -20,7 +20,6 @@ export class ProductsComponent implements OnInit {
     public loader = true;
     public products = [];
     esvaziarCarrinho = false;
-    logado = this.GS.logado;
 
 
   constructor(
