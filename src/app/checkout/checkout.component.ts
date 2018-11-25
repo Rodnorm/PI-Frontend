@@ -20,15 +20,15 @@ export class CheckoutComponent implements OnInit {
   // Criação de um usuário fictício. Para teste de checkout
   // implementação do usuário real deve ser feita no onInit
   user = {
-    cep:'04890550',
-    rua:'Rua da Paz',
-    numero:'14',
-    complemento:'Apartamento B'
+    cep: '04890550',
+    rua: 'Rua da Paz',
+    numero: '14',
+    complemento: 'Apartamento B'
   }
   checkoutFormAddress: FormGroup;
   checkoutFormCard: FormGroup;
   constructor(
-    public products: ProductsComponent, 
+    public products: ProductsComponent,
     private GS: GeneralServices,
     private formBuilder: FormBuilder,
     public correiosService: CorreiosService
@@ -41,18 +41,18 @@ export class CheckoutComponent implements OnInit {
   }
   setFrete(frete) {
     if (frete == 'sedex') {
-      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',','.'));
-      return; 
+      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',', '.'));
+      return;
     }
     if (frete == 'PAC') {
-      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',','.'));
+      this.valorFrete = parseFloat(this.correiosService.correiosInfo[frete].valor.replace(',', '.'));
       return;
     }
 
   }
   private createFormGroup() {
     //verifica se há usuário
-    
+
     /**
      *  exemplo de código para quando houver o objeto usuário
      *  if (user) {
@@ -68,25 +68,25 @@ export class CheckoutComponent implements OnInit {
      */
 
     this.checkoutFormAddress = this.formBuilder.group({
-      'rua' : [null, Validators.required],
-      'numero' : [null, Validators.required],
-      'complemento' : [null],
-      'cep' : [null, Validators.required],
+      'rua': [null, Validators.required],
+      'numero': [null, Validators.required],
+      'complemento': [null],
+      'cep': [null, Validators.required],
     });
 
-    
+
   }
   public createCardFormGroup() {
     this.checkoutFormCard = this.formBuilder.group({
-      'numero':[null, Validators.compose([Validators.required])],
-      'cvv':[null, Validators.compose([Validators.required])],
-      'data_expiracao':[null, Validators.compose([Validators.required])],
-      'nome_titular':[null, Validators.compose([Validators.required])]
+      'numero': [null, Validators.compose([Validators.required])],
+      'cvv': [null, Validators.compose([Validators.required])],
+      'data_expiracao': [null, Validators.compose([Validators.required])],
+      'nome_titular': [null, Validators.compose([Validators.required])]
     });
   }
 
   public cardToggle(i?) {
-    
+
     if (i) {
       this.isCardMethod = true;
       this.tipoPagamento = 'cartao'
@@ -94,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     if (this.checkoutFormCard) {
-      this.checkoutFormCard.reset();      
+      this.checkoutFormCard.reset();
     }
     this.tipoPagamento = 'boleto'
     this.isCardMethod = false;
@@ -104,31 +104,37 @@ export class CheckoutComponent implements OnInit {
 
     for (let i = 0; i < this.itens.length; i++) {
 
-      Object.keys(this.itens[i]).forEach( key => {
+      Object.keys(this.itens[i]).forEach(key => {
         if (key == 'nome' || key == 'subtotal') {
           delete this.itens[i][key];
         }
       });
     }
 
-    let sendObj = { 
+    let sendObj = {
       idCliente: 1,
-      enderecoEntrega: `${this.checkoutFormAddress.value.rua}, ${this.checkoutFormAddress.value.numero}, `,
+      enderecoEntrega: {
+        rua: this.checkoutFormAddress.value.rua,
+        numero: this.checkoutFormAddress.value.numero,
+        cep: this.checkoutFormAddress.value.cep,
+        complemento: this.checkoutFormAddress.value.complemento
+      },
       status: 'aguardando pagamento',
       tipoPagamento: this.tipoPagamento,
-      itens: this.itens, 
+      itens: this.itens,
       valorFrete: this.valorFrete
     }
+    debugger
+    
     this.GS.postOrder(JSON.stringify(sendObj))
-    .subscribe( response => {
-      debugger
-      if (response.response.returnMsg == 'Success.') {
-        this.protocolo = response.data;
-        alert(`Anote seu protocolo ${this.protocolo}`)
-      }else {
-        alert('Algo deu errado. ;(')
-      }
-    });
+      .subscribe(response => {
+        if (response.response.returnMsg == 'Success.') {
+          this.protocolo = response.data;
+          alert(`Anote seu protocolo ${this.protocolo}`)
+        } else {
+          alert('Algo deu errado. ;(')
+        }
+      });
 
   }
 }

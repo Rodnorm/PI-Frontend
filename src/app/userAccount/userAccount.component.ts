@@ -1,3 +1,4 @@
+import { GeneralServices } from './../services/services';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PedidosComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private GS: GeneralServices
+  ) { }
 
   ngOnInit() {
+    this.GS.getUserDetails({
+      email: this.GS.userLogin
+    });
   }
 
 }

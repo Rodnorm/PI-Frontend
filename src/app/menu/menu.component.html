@@ -25,10 +25,9 @@
             <li class="nav-item waves-light" mdbRippleRadius>
                 <a class="nav-link btn btn-primary blue waves-effect waves-light" data-toggle="modal" data-target="#sideCartModalId"><i class="fa fa-shopping-cart"></i></a>
             </li>
-            <div *ngIf="!logado; else userOK">
+            <div *ngIf="!this.GS.logado; else userOK">
                 <li class="nav-item waves-light" mdbRippleRadius>
                     <a class="nav-link btn btn-primary blue waves-effect waves-light" data-toggle="modal" data-target="#loginModal">Login</a>
-                    <!-- <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="loginModal.show()" mdbWavesEffect>Login</button> -->
                 </li>
             </div>
             <ng-template #userOK>
@@ -40,7 +39,7 @@
     </links>
 </mdb-navbar>
 
-<div mdbModal #listarPedidos="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mylistarPedidosLabel" aria-hidden="true">
+<!-- <div mdbModal #listarPedidos="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mylistarPedidosLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -81,4 +80,4 @@
             </div>
             </div>
         </div>
-    </div>
+    </div> -->

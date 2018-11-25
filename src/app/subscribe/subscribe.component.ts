@@ -56,7 +56,7 @@ export class SubscribeComponent implements OnInit {
     //   return;
     // }
     this.subscribeForm = this.formBuilder.group({
-      'login': [null, Validators.compose([Validators.required, Validators.email])],
+      'email': [null, Validators.compose([Validators.required, Validators.email])],
       'senha': [null, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
       'nome' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
       'rua' : [null],
@@ -73,9 +73,8 @@ export class SubscribeComponent implements OnInit {
     console.log(this.subscribeForm.value);
     debugger
     let sendableObj = {
-      email: this.subscribeForm.value.email,
       nome: this.subscribeForm.value.nome,
-      login: this.subscribeForm.value.login,
+      email: this.subscribeForm.value.email,
       senha: this.subscribeForm.value.senha,
       cpf: this.subscribeForm.value.cpf
     }

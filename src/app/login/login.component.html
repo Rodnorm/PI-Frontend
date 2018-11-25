@@ -1,5 +1,5 @@
-<div mdbModal #loginModal="mdbModal" class="modal fade right" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myloginModalLabel"
-  aria-hidden="true">
+<div mdbModal #loginModal="mdbModal" class="modal fade right" id="loginModal" tabindex="-1" role="dialog"
+  aria-labelledby="myloginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-side modal-top-right " role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,33 +8,29 @@
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">Login</h4>
       </div>
-      <div class="modal-body text-center md-form form-sm" [formGroup]="loginForm">
+      <div *ngIf="!loader && !loggedIn" class="modal-body text-center md-form form-sm" [formGroup]="loginForm">
         <div class="input-group mb-4">
-            <input mdbInputDirective 
-                type="email" class="form-control input-sm" id="inputEmailLogin"
-                aria-describedby="dataHelp"
-                data-error="email invalido" data-success="email dos bons"
-                formControlName="login"
-                >
-            <label for="inputEmailLogin">Email</label>
-        </div>  
-        <div class="input-group mb-4">  
-            <input type="password" class="form-control input-sm" id="inputPasswordLogin" 
-                mdbInputDirective 
-                formControlName="senha"
-                [mdbValidate]="false"
-            >
-            <label for="inputPasswordLogin">Senha</label>
-        </div>  
+          <input mdbInputDirective type="email" class="form-control input-sm" id="inputEmailLogin" aria-describedby="dataHelp"
+            data-error="email invalido" data-success="email dos bons" formControlName="login">
+          <label for="inputEmailLogin">Email</label>
+        </div>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control input-sm" id="inputPasswordLogin" mdbInputDirective
+            formControlName="senha" [mdbValidate]="false">
+          <label for="inputPasswordLogin">Senha</label>
+        </div>
+      </div>
+      <div *ngIf="loggedIn">
+        <h3>Olá, {{name}}!</h3>
       </div>
       <div *ngIf="loader" class="text-center">
-          <app-custom-loader></app-custom-loader>
+        <app-custom-loader></app-custom-loader>
       </div>
       <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" data-toggle="modal" data-target="#loginModal" mdbWavesEffect>Cancelar</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="validateValues()">Entrar</button>
+        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" data-toggle="modal"
+          data-target="#loginModal" mdbWavesEffect>Cancelar</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect (click)="validateValues()" [disabled]="!loginForm.valid">Entrar</button>
       </div>
     </div>
   </div>
 </div>
-
