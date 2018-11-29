@@ -43,7 +43,7 @@
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                <button type="button" class="close pull-right" aria-label="Fechar" (click)="basicModal.hide()">
                     <span aria-hidden="true">×</span>
                 </button>
                 <h4 class="modal-title w-100" id="myModalLabel">{{item.nome}}</h4>
@@ -82,7 +82,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
                     </div>
-                    <input type="number" class="form-control" placeholder="00" aria-label="quantity" aria-required="true" formControlName="quantidade" aria-describedby="basic-addon1"
+                    <input type="number" class="form-control" placeholder="00" aria-label="quantidade do produto" aria-required="true" formControlName="quantidade" 
                         autofocus>
                 </div>
                 <div class="alert alert-success" role="alert" *ngIf="success" id="productAddedToCartAlert">
@@ -94,8 +94,8 @@
             </div>
             <div class="modal-footer">
                 <div class="alignModalButtons">
-                    <button type="button" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.nome, item.idProduto, item.preco)">Adicionar</button>
-                    <button type="button" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
+                    <button type="button" aria-label="Adicionar o item ao carrinho" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.nome, item.idProduto, item.preco)">Adicionar</button>
+                    <button type="button" aria-label="Adicionar e finalizar compra" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <p class="heading lead">Carrinho</p>
-                <button type="button" class="close pull-right" aria-label="Close" data-toggle="modal" data-target="#sideCartModalId">
+                <button type="button" class="close pull-right" aria-label="Fechar" data-toggle="modal" data-target="#sideCartModalId">
                     <span aria-hidden="true" class="white-text">×</span>
                 </button>
             </div>
@@ -146,7 +146,7 @@
                                                     <td scope="row">{{product.quantidade}}</td>
                                                     <td scope="row">{{product.subtotal}}</td>
                                                     <td>
-                                                        <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
+                                                        <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}}" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
                                                             <i class="fa fa-remove"></i>
                                                         </button>
                                                     </td>
