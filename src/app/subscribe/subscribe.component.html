@@ -66,7 +66,8 @@
             <div class="input-group mb-4">
                 <input mdbInputDirective 
                   type="email" class="form-control input-sm" id="inputEmail"
-                  aria-describedby="dataHelp"
+                  aria-describedby="dataHelp" 
+                  aria-required="true" 
                   data-error="email invalido" data-success="email dos bons"
                   formControlName="email" 
                   [value]=value?.email
@@ -77,6 +78,7 @@
                 
                 <input type="password" class="form-control input-sm" id="inputPassword" 
                   mdbInputDirective 
+                  aria-required="true" 
                   data-error="senha pequena" data-success="senha boa"
                   formControlName="senha"
                   [value]=value?.senha
@@ -85,7 +87,8 @@
             </div>  
             <div class="input-group mb-4">  
                 <input type="password" (keyup)="checkPassword($event)" class="form-control input-sm" id="inputRepeatPassword"
-                  mdbInputDirective
+                  mdbInputDirective 
+                  aria-required="true" 
                   [mdbValidate]="false"
                   [value]="value?.senha"> 
                 <label>Repita a senha</label>
@@ -117,12 +120,12 @@
             </div>
             <div class="input-group mt-4">  
               <input mdbInputDirective
-                type="text" class="form-control input-sm" id="cpf" formControlName="cpf" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório"
+                type="text" class="form-control input-sm" id="cpf" aria-required="true" formControlName="cpf" data-success="Que nome bonito, hein ;)" data-error="campo obrigatório"
                 [value]=value?.cpf>
               <label for="cpf">CPF</label>
             </div>      
             <div class="input-group mt-4">  
-                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?"
+                <input mdbInputDirective type="text" aria-label="rua" aria-required="true" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?"
                 [value]=value?.cep>
                 <label for="cep">CEP</label>
             </div> 
