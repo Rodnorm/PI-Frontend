@@ -17,7 +17,7 @@
         <p class="heading lead">Finalize sua compra
         </p>
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="checkoutModal.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" (click)="checkoutModal.hide()">
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
@@ -34,22 +34,22 @@
         <div class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutFormAddress">
           Confirme ou altere seus dados de entrega =)
             <div class="input-group mt-4">
-                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
+                <input mdbInputDirective type="text" aria-labelledby="cep" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
                 <label for="cep">CEP</label>
             </div> 
             <div class="input-group mt-4">
-                <input mdbInputDirective type="text" aria-label="rua" class="form-control" id="rua" formControlName="rua"
+                <input mdbInputDirective type="text" aria-labelledby="rua" aria-required="true" class="form-control" id="rua" formControlName="rua"
                 data-error="campo obrigatório">
                 <label for="rua">Rua</label>
               </div>
               <div class="input-group mt-4">
-                <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" 
+                <input mdbInputDirective type="number" aria-labelledby="numero" aria-required="true" class="form-control" id="numero" formControlName="numero" 
                 data-error="campo obrigatório" >
                 <!-- [value]="user.numero"   -->
                 <label for="numero">Número</label>
               </div>
               <div class="input-group mt-4">
-                <input mdbInputDirective type="text" aria-label="complemento" class="form-control" id="complemento" formControlName="complemento" 
+                <input mdbInputDirective type="text" aria-labelledby="complemento" class="form-control" id="complemento" formControlName="complemento" 
                 data-error="campo obrigatório" >
                 <!-- [value]="user.complemento" -->
                 <label for="complemento">Complemento</label>
@@ -81,7 +81,7 @@
                              <td scope="row">{{product.quantidade}}</td>
                              <td scope="row">{{product.subtotal}}</td>
                              <td>
-                                <button class="btn btn-secondary btn-sm" mdbTooltip="Remover Item" placement="top" (click)="products.removeThis(product.id); deleteModal.show();">
+                                <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}} do carrinho" mdbTooltip="Remover Item" placement="top" (click)="products.removeThis(product.id); deleteModal.show();">
                                 <i class="fa fa-remove"></i>
                                 </button>
                              </td>
@@ -104,22 +104,22 @@
                 <label class="custom-control-label" for="metodoCartao" data-toggle="collapse" href="#dadosCartao" (click)="cardToggle('1'); createCardFormGroup()">Cartão</label>
               </div>
               <div *ngIf="isCardMethod" id="dadosCartao">
-                  <div class="text-center md-form form-sm" [formGroup]="checkoutFormCard">
+                  <div class="text-center md-form form-sm" [formGroup]="checkoutFormCard" id="dadosCartao" aria-label="Insira os dados do cartão">
                     Insira os dados do cartao
                     <div class="input-group mt-4">
-                        <input mdbInputDirective type="number" aria-label="nome_titular" class="form-control" id="nome_titular" formControlName="nome_titular" data-error="">
+                        <input mdbInputDirective type="number" aria-labelledby="nome_titular dadosCartao" class="form-control" id="nome_titular" formControlName="nome_titular" data-error="">
                         <label for="nome_titular">Nome do Titular</label>
                     </div> 
                     <div class="input-group mt-4">
-                        <input mdbInputDirective type="number" aria-label="numero" class="form-control" id="numero" formControlName="numero" data-error="">
+                        <input mdbInputDirective type="number" aria-labelledby="numero dadosCartao" class="form-control" id="numero" formControlName="numero" data-error="">
                         <label for="numero">Número</label>
                     </div>
                     <div class="input-group mt-4">
-                        <input mdbInputDirective type="number" aria-label="cvv" class="form-control" id="cvv" formControlName="cvv" data-error="">
+                        <input mdbInputDirective type="number" aria-labelledby="cvv dadosCartao" class="form-control" id="cvv" formControlName="cvv" data-error="">
                         <label for="cvv">CVV</label>
                     </div> 
                     <div class="input-group mt-4">
-                        <input mdbInputDirective type="number" aria-label="data_expiracao" class="form-control" id="data_expiracao" formControlName="data_expiracao" data-error="">
+                        <input mdbInputDirective type="number" aria-labelledby="data_expiracao dadosCartao" class="form-control" id="data_expiracao" formControlName="data_expiracao" data-error="">
                         <label for="data_expiracao">Data de expiração</label>
                     </div> 
                   </div> 
@@ -133,14 +133,14 @@
                       <span><strong>Sedex</strong></span>
                       <p>Por R${{correiosService.correiosInfo.sedex.valor}}.</p>
                       <p>Em até {{correiosService.correiosInfo.sedex.prazo}} dia(s).</p>
-                      <input type="radio" class="custom-control-input" id="sedex" name="frete" mdbInputDirective (click)="setFrete('sedex')">
+                      <input type="radio" class="custom-control-input" id="sedex" name="frete" aria-labelledby="sedex" mdbInputDirective (click)="setFrete('sedex')">
                       <label class="custom-control-label" for="sedex">Sedex</label>  
                   </div>
                   <div>
                       <span><strong>PAC</strong></span>
                       <p>Por R${{correiosService.correiosInfo.pac.valor}}.</p>  
                       <p>Em até {{correiosService.correiosInfo.pac.prazo}} dia(s).</p>  
-                      <input type="radio" class="custom-control-input" id="PAC"name="frete" mdbInputDirective (click)="setFrete('PAC')">
+                      <input type="radio" class="custom-control-input" id="PAC"name="frete" aria-labelledby="PAC" mdbInputDirective (click)="setFrete('PAC')">
                       <label class="custom-control-label" for="PAC">PAC</label>  
                   </div>
                 </div>
@@ -149,7 +149,7 @@
               Confirme seu endereço para ver o frete :)
             </div>
                 <div *ngIf="correiosService.loading">
-                  <img class="loaderImg" src="../../assets/imgs/icons/loader.gif">
+                  <img class="loaderImg" src="../../assets/imgs/icons/loader.gif" alt="carregando...">
                 </div>
           
       <!--Footer-->
