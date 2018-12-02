@@ -23,9 +23,4 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
   }
-public carregarPedidos() {
-  this.GS.getPedidos().subscribe(response => {
-    this.pedidos = response;
-  });
-}
 }

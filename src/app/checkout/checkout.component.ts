@@ -124,9 +124,8 @@ export class CheckoutComponent implements OnInit {
       itens: this.itens,
       valorFrete: this.valorFrete
     }
-    debugger
     
-    this.GS.postOrder(JSON.stringify(sendObj))
+    this.GS.postOrder(JSON.stringify(sendObj), this.GS.token)
       .subscribe(response => {
         if (response.response.returnMsg == 'Success.') {
           this.protocolo = response.data;

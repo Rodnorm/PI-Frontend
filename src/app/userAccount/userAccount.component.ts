@@ -13,9 +13,18 @@ export class PedidosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.GS.getUserDetails({
-      email: this.GS.userLogin
+    this.GS.getUserDetails(this.GS.userLogin, this.GS.token)
+    .subscribe( data => {
+      console.log(data);
     });
+    this.getOrders();
   }
 
+
+  private getOrders(){
+    this.GS.getOrdersByUser(this.GS.userLogin, this.GS.token)
+    .subscribe(response => {
+      console.log(response);
+    });
+  }
 }

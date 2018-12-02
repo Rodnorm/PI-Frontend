@@ -62,16 +62,19 @@ export class LoginComponent implements OnInit {
     });
 
     this.GS.postClientAuth(obj)
-      .subscribe(data => {
-        
+      .subscribe(async data => {
         this.loggedIn = true;
         if (data['data']) {
-          this.GS.getUserDetails(this.loginForm.value.login)
+          this.GS.token = await data['data'].token;
+          this.GS.getUserDetails(this.loginForm.value.login, data['data'].token)
           .subscribe(resp => {
-            console.log(resp);
             this.loader = false;
             this.GS.logado = true;
-            this.name = resp['data'][0].nome; 
+            setInterval(() => {
+              this.checkSession();
+            }, 240000) //a cada 4 minutos verifica se a sessão ainda é válida
+            console.log(resp);
+            this.name = resp['data'].nome; 
           });
 
         }
@@ -80,5 +83,9 @@ export class LoginComponent implements OnInit {
         this.loader = false;
         console.log(error);
       });
+  }
+
+  private checkSession() {
+
   }
 }
