@@ -25,10 +25,31 @@
       <div *ngIf="loader" class="text-center" aria-describedby="Carregando">
         <app-custom-loader></app-custom-loader>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" *ngIf="!loader && !loggedIn">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Cancelar login" data-toggle="modal" data-target="#loginModal"
           mdbWavesEffect>Cancelar</button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" aria-label="Entrar" mdbWavesEffect (click)="validateValues()" [disabled]="!loginForm.valid">Entrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div mdbModal #logoutModal="mdbModal" class="modal fade top" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Quer mesmo sair?</p>
+      </div>
+      <div class="modal-body">
+        <i class="fa fa-times fa-4x animated rotateIn"></i>
+      </div>
+      <div class="modal-footer flex-center">
+        <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="logoutModal.hide(); logout();"
+          mdbWavesEffect>Sim</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="logoutModal.hide();">Não</a>
       </div>
     </div>
   </div>

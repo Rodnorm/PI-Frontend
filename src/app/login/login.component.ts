@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   public loader: boolean = false;
   public loggedIn: boolean = false;
   private name: String;
+  private keyToken = 'Token';
+  private keyLogin = 'Login';
   constructor(
     private fb: FormBuilder,
     private GS: GeneralServices
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.GS.userLogin = '';
     this.createLoginForm();
+    this.checkSession();
   }
 
   private createLoginForm() {
@@ -63,29 +66,58 @@ export class LoginComponent implements OnInit {
 
     this.GS.postClientAuth(obj)
       .subscribe(async data => {
-        this.loggedIn = true;
+
         if (data['data']) {
-          this.GS.token = await data['data'].token;
+          this.setLocalStore(data);
+
           this.GS.getUserDetails(this.loginForm.value.login, data['data'].token)
-          .subscribe(resp => {
-            this.loader = false;
-            this.GS.logado = true;
-            setInterval(() => {
-              this.checkSession();
-            }, 240000) //a cada 4 minutos verifica se a sessão ainda é válida
-            console.log(resp);
-            this.name = resp['data'].nome; 
-          });
+            .subscribe(resp => {
+              this.GS.token = data['data'].token;
+              this.resolveLoggin(resp, this.loginForm.value.login);
+
+              setInterval(() => {
+                this.checkSession(data['data'].token);
+              }, 240000) //a cada 4 minutos verifica se a sessão ainda é válida
+
+            });
 
         }
-        console.log(data)
       }, error => {
         this.loader = false;
         console.log(error);
       });
   }
 
-  private checkSession() {
+  private resolveLoggin(resp, login) {
+    localStorage.setItem(this.keyLogin, login);
+    this.loader = false;
+    this.GS.logado = true;
+    this.name = resp['data'].nome;
+    this.loggedIn = true;
+  }
 
+  private checkSession(token?) {
+
+    if (!token && localStorage.getItem(this.keyToken) && localStorage.getItem(this.keyLogin)) {
+      let token = localStorage.getItem(this.keyToken);
+      let login = localStorage.getItem(this.keyLogin);
+      this.GS.sessionChecker(token)
+        .subscribe(res => {
+          this.GS.getUserDetails(login, token)
+            .subscribe(resp => {
+              this.resolveLoggin(resp, login);
+            });
+        });
+      return;
+    }
+  }
+
+  private setLocalStore(data) {
+    localStorage.setItem(this.keyToken, data['data'].token);
+  }
+
+
+  private logout() {
+    this.GS.logado = false;
   }
 }

@@ -29,7 +29,10 @@
             </div>
             <ng-template #userOK>
                 <li class="nav-item waves-light" mdbRippleRadius>
-                    <a href="#" class="nav-link" [routerLink]="['/minhaconta']">Minha Conta</a>
+                    <a href="#" class="nav-link btn btn-primary blue waves-effect waves-light" [routerLink]="['/minhaconta']">Minha Conta</a>
+                </li>
+                <li class="nav-item waves-light" mdbRippleRadius>
+                    <a class="nav-link btn btn-primary blue waves-effect waves-light" data-toggle="modal" data-target="#logoutModal">Sair</a>
                 </li>
             </ng-template>
         </ul>

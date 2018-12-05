@@ -37,7 +37,7 @@ export class GeneralServices {
         return this.http.get<any[]>(this.endPointUrl + `customers/customer/${login}`, {headers : {"x-access-token":token}});//ok
     }
     public getOrdersByUser(login, token){
-        return this.http.get<any[]>(this.endPointUrl + `orders/${login}`, {headers : {"x-access-token":token}});//ok
+        return this.http.post<any[]>(this.endPointUrl + `orders/${login}`, token, {headers : {"x-access-token":token}});//ok
     }
     public postClient(body) {
         return this.http.post<any>(this.endPointUrl + 'customers/customer/create', body, {headers : this.headers});//ok
@@ -49,5 +49,11 @@ export class GeneralServices {
 
     public postClientAuth(body) {
         return this.http.post<any[]>(this.endPointUrl + 'customers/customer/authenticate', body, {headers : this.headers})//ok
+    }
+    public sessionChecker(token) {
+        let headers = new HttpHeaders({
+            "x-access-token": `${token}`
+        });
+        return this.http.post<any>(this.endPointUrl + 'customers/session', token, {headers});//ok
     }
 }

@@ -8,21 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PedidosComponent implements OnInit {
 
+  private keyToken = 'Token';
+  private keyLogin = 'Login';
+
   constructor(
     private GS: GeneralServices
   ) { }
 
   ngOnInit() {
-    this.GS.getUserDetails(this.GS.userLogin, this.GS.token)
+    let token = localStorage.getItem(this.keyToken);
+    let login = localStorage.getItem(this.keyLogin);
+    this.GS.getUserDetails(login, token)
     .subscribe( data => {
       console.log(data);
     });
-    this.getOrders();
+    this.getOrders(login, token);
   }
 
 
-  private getOrders(){
-    this.GS.getOrdersByUser(this.GS.userLogin, this.GS.token)
+  private getOrders(login, token){
+    this.GS.getOrdersByUser(login, token)
     .subscribe(response => {
       console.log(response);
     });

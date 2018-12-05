@@ -14,5 +14,3 @@ export const routing: Routes = [
         path: 'minhaconta', component: PedidosComponent
     }
 ];
-
-// export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
