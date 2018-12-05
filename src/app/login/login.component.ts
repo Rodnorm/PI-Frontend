@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   private name: String;
   private keyToken = 'Token';
   private keyLogin = 'Login';
+  private keyCustomer = 'Customer';
   constructor(
     private fb: FormBuilder,
     private GS: GeneralServices
@@ -74,7 +75,7 @@ export class LoginComponent implements OnInit {
             .subscribe(resp => {
               this.GS.token = data['data'].token;
               this.resolveLoggin(resp, this.loginForm.value.login);
-
+              localStorage.setItem(this.keyCustomer, resp['data'].idCliente);
               setInterval(() => {
                 this.checkSession(data['data'].token);
               }, 240000) //a cada 4 minutos verifica se a sessão ainda é válida
@@ -105,6 +106,7 @@ export class LoginComponent implements OnInit {
         .subscribe(res => {
           this.GS.getUserDetails(login, token)
             .subscribe(resp => {
+              localStorage.setItem(this.keyCustomer, resp['data'].idCliente);
               this.resolveLoggin(resp, login);
             });
         });
@@ -114,6 +116,8 @@ export class LoginComponent implements OnInit {
 
   private setLocalStore(data) {
     localStorage.setItem(this.keyToken, data['data'].token);
+    
+    
   }
 
 

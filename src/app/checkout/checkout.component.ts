@@ -11,20 +11,17 @@ import { ProductsComponent } from '../products/products.component';
 })
 
 export class CheckoutComponent implements OnInit {
+  private keyToken = 'Token';
+  private keyLogin = 'Login';
+  private keyCustomer = 'Customer';
+  private success: boolean = false;
+  private loader: boolean = false;
   protocolo;
   valorFrete: number;
   itens = this.GS.carrinho;
   isCardMethod: boolean = false;
   tipoPagamento: string;
 
-  // Criação de um usuário fictício. Para teste de checkout
-  // implementação do usuário real deve ser feita no onInit
-  user = {
-    cep: '04890550',
-    rua: 'Rua da Paz',
-    numero: '14',
-    complemento: 'Apartamento B'
-  }
   checkoutFormAddress: FormGroup;
   checkoutFormCard: FormGroup;
   constructor(
@@ -72,6 +69,9 @@ export class CheckoutComponent implements OnInit {
       'numero': [null, Validators.required],
       'complemento': [null],
       'cep': [null, Validators.required],
+      'uf': [null],
+      'cidade': [null],
+      'bairro': [null]
     });
 
 
@@ -102,38 +102,50 @@ export class CheckoutComponent implements OnInit {
 
   public sendData() {
 
-    for (let i = 0; i < this.itens.length; i++) {
-
-      Object.keys(this.itens[i]).forEach(key => {
-        if (key == 'nome' || key == 'subtotal') {
-          delete this.itens[i][key];
-        }
-      });
-    }
-
-    let sendObj = {
-      idCliente: 1,
-      enderecoEntrega: {
-        rua: this.checkoutFormAddress.value.rua,
-        numero: this.checkoutFormAddress.value.numero,
-        cep: this.checkoutFormAddress.value.cep,
-        complemento: this.checkoutFormAddress.value.complemento
-      },
-      status: 'aguardando pagamento',
-      tipoPagamento: this.tipoPagamento,
-      itens: this.itens,
-      valorFrete: this.valorFrete
-    }
-    
-    this.GS.postOrder(JSON.stringify(sendObj), this.GS.token)
+    let sendObj = this.createObj();
+    let token = localStorage.getItem(this.keyToken);
+    let login = localStorage.getItem(this.keyLogin);
+    this.loader = true;
+    this.GS.postOrder(JSON.stringify(sendObj), token)
       .subscribe(response => {
-        if (response.response.returnMsg == 'Success.') {
-          this.protocolo = response.data;
+        console.log(response);
+        this.success = true;
+        this.loader = false;
+        if (response.body.response.returnMsg == 'Success.') {
+          this.protocolo = response.body.data;
           alert(`Anote seu protocolo ${this.protocolo}`)
         } else {
           alert('Algo deu errado. ;(')
         }
       });
 
+  }
+
+  createObj() {
+    let itens = [];
+
+    for (let i = 0; i < this.itens.length; i++) {
+      itens.push({
+        produto: {
+          idProduto: this.itens[i].idProduto
+        },
+        quantidade: this.itens[i].quantidade,
+        preco: this.itens[i].preco
+      });
+    }
+
+    return {
+      idCliente: localStorage.getItem(this.keyCustomer),
+      logradouro: this.checkoutFormAddress.value.rua,
+      numero: this.checkoutFormAddress.value.numero,
+      complemento: this.checkoutFormAddress.value.complemento,
+      cep: this.checkoutFormAddress.value.cep.replace('-', ''),
+      bairro: this.checkoutFormAddress.value.bairro,
+      cidade: this.checkoutFormAddress.value.cidade,
+      uf: this.checkoutFormAddress.value.uf,
+      status: 'aguardando pagamento',
+      tipoPagamento: this.tipoPagamento,
+      itens
+    }
   }
 }
