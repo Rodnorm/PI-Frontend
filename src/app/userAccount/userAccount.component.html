@@ -2,10 +2,9 @@
 
 <div class="content">
     <div class="row">
-        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrder" role="button" aria-expanded="false"
-            aria-controls="multiCollapseExample1" (click)="getOrders()">Ver pedidos</a>
-        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrdere" role="button" aria-expanded="false"
-            aria-controls="multiCollapseExample1">Editar minhas informações</a>
+        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrder" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
+            (click)="getOrders()">Ver pedidos</a>
+        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrdere" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Editar minhas informações</a>
         <table class="table table-hover table-sm collapse" id="tableOrder">
             <thead>
                 <tr>
@@ -18,80 +17,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td scope="row">Pago</td>
-                    <td>Boleto</td>
-                    <td>19,90</td>
-                    <td>26/5/18</td>
-                    <td>adsfasd1324</td>
-                    <td>adsfasd1324</td>
+                <tr *ngFor="let order of orders">
+                    <td scope="row">{{order.status}}</td>
+                    <td>{{order.tipoPagamento}}</td>
+                    <td>{{order.valorFrete}}</td>
+                    <td>{{order.dataPedido}}</td>
+                    <td>{{order.protocolo}}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let itens of order.itens">{{itens.produto.nome}}</li>
+                        </ul>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
 
-
-
-        <table class="table table-hover table-sm collapse">
-            <thead>
-                <tr>
-                    <th scope="col">Status</th>
-                    <th scope="col">Pagamento</th>
-                    <th scope="col">Frete</th>
-                    <th scope="col">Data da compra</th>
-                    <th scope="col">Protocolo</th>
-                    <th scope="col">Produtos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">Pago</td>
-                    <td>Boleto</td>
-                    <td>19,90</td>
-                    <td>26/5/18</td>
-                    <td>adsfasd1324</td>
-                    <td>adsfasd1324</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
     <div class="collapse" id="tableOrdere">
         <div class="text-center md-form form-sm ">
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="email" class="form-control input-sm" id="inputEmail" aria-labelledby="inputEmail"
-                    data-error="email invalido" data-success="email dos bons">
-                <label for="inputEmail">Email</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="password" class="form-control input-sm" id="inputNome" aria-labelledby="inputNome"
-                    data-error="email invalido" data-success="email dos bons">
-                <label for="inputNome">Nome</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="text" class="form-control input-sm" id="inputCPF" aria-labelledby="inputCPF"
-                    data-error="email invalido" data-success="email dos bons">
-                <label for="inputCPF">CPF</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="text" class="form-control input-sm" id="inputCEP" aria-labelledby="inputCEP"
-                    data-error="email invalido" data-success="email dos bons">
-                <label for="inputCEP">CEP</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="text" class="form-control input-sm" id="inputEndereco" aria-labelledby="inputEndereco"
-                    data-error="email invalido" data-success="email dos bons">
-                <label for="inputEndereco">Endereço</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="text" class="form-control input-sm" id="inputComplemento"
-                    aria-labelledby="inputComplemento" data-error="email invalido" data-success="email dos bons">
-                <label for="inputComplemento">Complemento</label>
-            </div>
-            <div class="input-group mb-4">
-                <input mdbInputDirective type="password" class="form-control input-sm" id="inputPassword"
-                    aria-labelledby="inputPassword" data-error="email invalido" data-success="email dos bons">
-                <label for="inputPassword">Senha</label>
-            </div>
+            <app-subscribe-form [formGroup]=updateInfo></app-subscribe-form>
         </div>
     </div>
 

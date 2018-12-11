@@ -39,11 +39,7 @@
       <div class="modal-body" *ngIf="facebook">
         <small class="form-text text-muted">Por favor, complete seus dados :)</small>
         <div class="text-center md-form form-sm">
-          <app-subscribe-form 
-          [formGroup] = subscribeWithFacebook 
-          [facebook] = true
-          [facebookToken] = facebookToken
-          ></app-subscribe-form>
+          <app-subscribe-form [formGroup]= subscribeWithFacebook [facebook]=t rue [facebookToken]=f acebookToken></app-subscribe-form>
         </div>
       </div>
     </div>
@@ -72,7 +68,10 @@
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Prosseguir" data-dismiss="modal"
               mdbWavesEffect (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#loginModal">Prosseguir para o login</a>
           </div>
-          <app-subscribe-form [formGroup]= subscribeForm></app-subscribe-form>
+          <app-subscribe-form *ngIf="!loading || success" [formGroup]=subscribeForm></app-subscribe-form>
+          <div *ngIf="error && !success">
+            <small class="form-text text-muted">Ops, algo deu errado. Tente novamente xD</small>
+          </div>
           <div class="modal-footer justify-content-center">
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cancelar" data-dismiss="modal" mdbWavesEffect
               (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#sideCartModalId">Cancelar</a>

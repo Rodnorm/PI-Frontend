@@ -18,7 +18,7 @@ export class SubscribeComponent implements OnInit {
   private returnMessage: boolean = false;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder, 
     private socialAuthService: AuthService,
     private GS: GeneralServices
   ) { }
@@ -49,6 +49,13 @@ export class SubscribeComponent implements OnInit {
 
 
   public sendData() {
+
+    if (this.subscribeForm.invalid) {
+      this.error = true;
+      return;
+    }
+
+
     this.loading = true;
     let sendableObj = {}
     if (!this.facebook) {
