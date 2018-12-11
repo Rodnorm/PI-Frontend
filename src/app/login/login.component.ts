@@ -122,6 +122,7 @@ export class LoginComponent implements OnInit {
 
 
   private logout() {
+    localStorage.clear();
     this.GS.logado = false;
   }
 }

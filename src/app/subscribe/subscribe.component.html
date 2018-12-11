@@ -107,28 +107,43 @@
             </div>
             <div class="input-group mt-4">
               <input mdbInputDirective type="text" class="form-control input-sm" id="cpf" aria-labelledby="cpf" aria-required="true" formControlName="cpf"
-                data-success="Que nome bonito, hein ;)" data-error="campo obrigatório" [value]=value?.cpf>
+                data-success="Boa, jovem!" data-error="campo obrigatório" [value]=value?.cpf>
               <label for="cpf">CPF</label>
             </div>
             <div class="input-group mt-4">
               <input mdbInputDirective type="text" aria-labelledby="cep" aria-required="true" class="form-control" id="cep" formControlName="cep"
-                data-error="seu cep está certo?" [value]=value?.cep>
+                data-error="seu cep está certo?" data-success="Campo não obrigatório ;)" [value]=value?.cep>
               <label for="cep">CEP</label>
             </div>
             <div class="input-group mt-4">
-              <input mdbInputDirective type="text" aria-labelledby="rua" class="form-control" id="rua" formControlName="rua" data-error="campo obrigatório"
-                [value]=value?.rua>
+              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="rua" class="form-control" id="rua" formControlName="logradouro" 
+                [value]=value?.logradouro>
               <label for="rua">Rua</label>
             </div>
             <div class="input-group mt-4">
-              <input mdbInputDirective type="number" aria-labelledby="numero" aria-required="true" class="form-control" id="numero" formControlName="numero"
+              <input mdbInputDirective type="number" data-success="Campo não obrigatório ;)" aria-labelledby="numero" aria-required="true" class="form-control" id="numero" formControlName="numero"
                 data-error="campo obrigatório" [value]=value?.numero>
               <label for="numero">Número</label>
             </div>
             <div class="input-group mt-4">
-              <input mdbInputDirective type="text" aria-labelledby="complemento" class="form-control" id="complemento" formControlName="complemento"
+              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="complemento" class="form-control" id="complemento" formControlName="complemento"
                 data-error="campo obrigatório" [value]=value?.complemento>
               <label for="complemento">Complemento</label>
+            </div>
+            <div class="input-group mt-4">
+                <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="bairro" class="form-control" id="bairro" formControlName="bairro"
+                  [value]=value?.bairro>
+                <label for="bairro">Bairro</label>
+              </div>
+            <div class="input-group mt-4">
+              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="cidade" class="form-control" id="cidade" formControlName="cidade"
+                [value]=value?.cidade>
+              <label for="cidade">Cidade</label>
+            </div>
+            <div class="input-group mt-4">
+              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="uf" class="form-control" id="uf" formControlName="uf"
+                [value]=value?.uf>
+              <label for="uf">UF</label>
             </div>
             <!--Footer-->
             <div class="modal-footer justify-content-center">

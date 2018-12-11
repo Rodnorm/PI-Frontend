@@ -34,14 +34,17 @@ export class SubscribeComponent implements OnInit {
 
   private createFormGroup(){
     this.subscribeForm = this.formBuilder.group({
+      'nome' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'senha': [null, Validators.compose([Validators.minLength(8),Validators.required, Validators.maxLength(28)])],
-      'nome' : [null, Validators.compose([Validators.required, Validators.minLength(2)])],
-      'rua' : [null],
+      'cpf' : [null, Validators.compose([Validators.required, Validators.minLength(11)])],
+      'logradouro' : [null],
       'numero' : [null],
       'complemento' : [null],
       'cep' : [null],
-      'cpf' : [null],
+      'bairro' : [null],
+      'cidade' : [null],
+      'uf' : [null,Validators.minLength(2) ]
     });
   }
 
@@ -52,8 +55,16 @@ export class SubscribeComponent implements OnInit {
       nome: this.subscribeForm.value.nome,
       email: this.subscribeForm.value.email,
       senha: this.subscribeForm.value.senha,
-      cpf: this.subscribeForm.value.cpf
+      cpf: this.subscribeForm.value.cpf,
+      logradouro: this.subscribeForm.value.logradouro,
+      numero: this.subscribeForm.value.numero,
+      complemento: this.subscribeForm.value.complemento,
+      cep: this.subscribeForm.value.cep,
+      bairro: this.subscribeForm.value.bairro,
+      cidade: this.subscribeForm.value.cidade,
+      uf: this.subscribeForm.value.uf
     }
+    console.log(JSON.stringify(sendableObj));
     this.GS.postClient(JSON.stringify(sendableObj))
     .subscribe( response => {
       this.loading = false;
