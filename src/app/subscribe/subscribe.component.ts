@@ -14,7 +14,10 @@ export class SubscribeComponent implements OnInit {
   private ps2;
   public matchPassword: boolean;
   private clicked = false;
-  value;
+  private loading: boolean = false;
+  private success: boolean = false;
+  private error: boolean = false;
+  private returnMessage: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,9 +47,7 @@ export class SubscribeComponent implements OnInit {
 
 
   public sendData() {
-
-    console.log(this.subscribeForm.value);
-    debugger
+    this.loading = true;
     let sendableObj = {
       nome: this.subscribeForm.value.nome,
       email: this.subscribeForm.value.email,
@@ -55,8 +56,15 @@ export class SubscribeComponent implements OnInit {
     }
     this.GS.postClient(JSON.stringify(sendableObj))
     .subscribe( response => {
+      this.loading = false;
+      this.returnMessage = true;
+      this.success = true;
+      this.error = false;
 
     }, error => {
+      this.loading = false;
+      this.success = false;
+      this.error = true;
       console.log(error);
     });
   }
