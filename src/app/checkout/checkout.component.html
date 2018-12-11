@@ -18,17 +18,17 @@
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
-      <div *ngIf="loader">
-        <app-custom-loader></app-custom-loader>
-      </div>
 
+      <app-custom-loader *ngIf="loader"></app-custom-loader>
+      
       <div class="modal-body" *ngIf="!success || !loader">
         <a class="btn btn-outline-secondary btn-sm" data-toggle="collapse" role="button" aria-expanded="false"
           data-target="#confirmAddress">
           Confirmar endereço
           <i class="fa fa-heart"></i>
         </a>
-        <div class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutFormAddress">
+        <app-custom-loader *ngIf="gettingData"></app-custom-loader>
+        <div *ngIf="!gettingData" class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutFormAddress">
           Confirme ou altere seus dados de entrega =)
           <div class="input-group mt-4">
             <input mdbInputDirective type="text" aria-labelledby="cep" class="form-control" id="cep" formControlName="cep"
@@ -37,13 +37,12 @@
           </div>
           <div class="input-group mt-4">
             <input mdbInputDirective type="text" aria-labelledby="rua" aria-required="true" class="form-control" id="rua"
-              formControlName="rua" data-error="campo obrigatório">
+              formControlName="logradouro" data-error="campo obrigatório">
             <label for="rua">Rua</label>
           </div>
           <div class="input-group mt-4">
             <input mdbInputDirective type="number" aria-labelledby="numero" aria-required="true" class="form-control"
               id="numero" formControlName="numero" data-error="campo obrigatório">
-            <!-- [value]="user.numero"   -->
             <label for="numero">Número</label>
           </div>
           <div class="input-group mt-4">

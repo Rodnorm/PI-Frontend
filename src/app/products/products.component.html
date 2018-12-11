@@ -161,7 +161,7 @@
                                 <app-subscribe></app-subscribe>
                             </div>
                             <ng-template #checkout>
-                                <app-checkout></app-checkout>
+                                <app-checkout *ngIf="!carrinho.length == 0"></app-checkout>
                             </ng-template>
                         </div>
                     </form>
@@ -171,7 +171,6 @@
     </div>
 </div>
 
-<!-- Confirm delete -->
 
 <div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
