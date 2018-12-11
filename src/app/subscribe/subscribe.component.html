@@ -18,7 +18,7 @@
         </button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!facebook">
         <div class="text-center">
           <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
           <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect (click)="socialSignIn('facebook')">Entrar com facebook
@@ -32,9 +32,18 @@
         <i class="fa fa-user fa-4x mb-3 animated rotateIn"></i>
         <a type="button" mdbBtn color="primary" class="waves-light mb-4" mdbWavesEffect (click)="oldUser.show()">Cadastre-se à moda antiga :)
         </a>
-        <!--Footer-->
         <div class="modal-footer justify-content-center">
           <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" data-dismiss="modal" mdbWavesEffect (click)="subscribeModal.hide()">Cancelar</a>
+        </div>
+      </div>
+      <div class="modal-body" *ngIf="facebook">
+        <small class="form-text text-muted">Por favor, complete seus dados :)</small>
+        <div class="text-center md-form form-sm">
+          <app-subscribe-form 
+          [formGroup] = subscribeWithFacebook 
+          [facebook] = true
+          [facebookToken] = facebookToken
+          ></app-subscribe-form>
         </div>
       </div>
     </div>
@@ -63,96 +72,12 @@
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Prosseguir" data-dismiss="modal"
               mdbWavesEffect (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#loginModal">Prosseguir para o login</a>
           </div>
-          <div *ngIf='!loading && !returnMessage' class="text-center md-form form-sm" [formGroup]="subscribeForm">
-
-            <div class="input-group mb-4">
-              <input mdbInputDirective type="email" class="form-control input-sm" id="inputEmail" aria-label="insira o email" aria-required="true"
-                data-error="email invalido" data-success="email dos bons" formControlName="email" [value]=value?.email>
-              <label for="inputEmail">Email</label>
-            </div>
-            <div class="input-group mb-4">
-
-              <input type="password" class="form-control input-sm" id="inputPassword" mdbInputDirective aria-label="insira a senha" aria-describedby="senha com no mínimo 8 caracteres"
-                aria-required="true" data-error="senha pequena" data-success="senha boa" formControlName="senha" [value]=value?.senha>
-              <label for="inputPassword">Senha</label>
-            </div>
-            <div class="input-group mb-4">
-              <input type="password" (keyup)="checkPassword($event)" class="form-control input-sm" id="inputRepeatPassword" mdbInputDirective
-                aria-label="repita a senha" aria-required="true" [mdbValidate]="false" [value]="value?.senha">
-              <label>Repita a senha</label>
-            </div>
-            <div *ngIf="matchPassword; else errorPass">
-              <div class="alert alert-success" role="alert" aria-label="as senhas coincidem">
-                As senhas coincidem ;)
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true" class="text-info">&times;</span>
-                </button>
-              </div>
-            </div>
-            <ng-template #errorPass>
-              <div class="alert alert-danger" role="alert" *ngIf="!dontMatch && clicked" aria-label="as senhas não coincidem">
-                As senhas não coincidem :O
-                <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-                  <span aria-hidden="true" class="text-white /bn">&times;</span>
-                </button>
-              </div>
-            </ng-template>
-
-            <small id="dataHelp" class="form-text text-muted">Seus dados estão seguros conosco :)</small>
-
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" class="form-control input-sm" id="name" aria-labelledby="name" formControlName="nome"
-                data-success="Que nome bonito, hein ;)" data-error="campo obrigatório" [value]=value?.nome>
-              <label for="name">Nome</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" class="form-control input-sm" id="cpf" aria-labelledby="cpf" aria-required="true" formControlName="cpf"
-                data-success="Boa, jovem!" data-error="campo obrigatório" [value]=value?.cpf>
-              <label for="cpf">CPF</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" aria-labelledby="cep" aria-required="true" class="form-control" id="cep" formControlName="cep"
-                data-error="seu cep está certo?" data-success="Campo não obrigatório ;)" [value]=value?.cep>
-              <label for="cep">CEP</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="rua" class="form-control" id="rua" formControlName="logradouro" 
-                [value]=value?.logradouro>
-              <label for="rua">Rua</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="number" data-success="Campo não obrigatório ;)" aria-labelledby="numero" aria-required="true" class="form-control" id="numero" formControlName="numero"
-                data-error="campo obrigatório" [value]=value?.numero>
-              <label for="numero">Número</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="complemento" class="form-control" id="complemento" formControlName="complemento"
-                data-error="campo obrigatório" [value]=value?.complemento>
-              <label for="complemento">Complemento</label>
-            </div>
-            <div class="input-group mt-4">
-                <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="bairro" class="form-control" id="bairro" formControlName="bairro"
-                  [value]=value?.bairro>
-                <label for="bairro">Bairro</label>
-              </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="cidade" class="form-control" id="cidade" formControlName="cidade"
-                [value]=value?.cidade>
-              <label for="cidade">Cidade</label>
-            </div>
-            <div class="input-group mt-4">
-              <input mdbInputDirective type="text" data-success="Campo não obrigatório ;)" aria-labelledby="uf" class="form-control" id="uf" formControlName="uf"
-                [value]=value?.uf>
-              <label for="uf">UF</label>
-            </div>
-            <!--Footer-->
-            <div class="modal-footer justify-content-center">
-              <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cancelar" data-dismiss="modal" mdbWavesEffect
-                (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#sideCartModalId">Cancelar</a>
-              <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cadastrar" mdbWavesEffect (click)="sendData()"
-                data-target="#sideCartModalId">Cadastrar</a>
-
-            </div>
+          <app-subscribe-form [formGroup]= subscribeForm></app-subscribe-form>
+          <div class="modal-footer justify-content-center">
+            <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cancelar" data-dismiss="modal" mdbWavesEffect
+              (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#sideCartModalId">Cancelar</a>
+            <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cadastrar" mdbWavesEffect (click)="sendData()"
+              data-target="#sideCartModalId">Cadastrar</a>
           </div>
         </div>
       </div>

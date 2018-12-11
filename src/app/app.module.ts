@@ -20,6 +20,7 @@ import { LoginComponent } from './login/login.component';
 import { CustomLoaderComponent } from './custom-loader/custom-loader.component';
 import { PedidosComponent } from './userAccount/userAccount.component';
 import { RouterModule } from '@angular/router';
+import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
 
 
 export function getAuthServiceConfigs() {
@@ -50,7 +51,8 @@ export function getAuthServiceConfigs() {
     CheckoutComponent,
     LoginComponent,
     CustomLoaderComponent,
-    PedidosComponent, 
+    PedidosComponent,
+    SubscribeFormComponent, 
     ],
   imports: [
     SocialLoginModule,

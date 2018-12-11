@@ -116,13 +116,12 @@ export class LoginComponent implements OnInit {
 
   private setLocalStore(data) {
     localStorage.setItem(this.keyToken, data['data'].token);
-    
-    
   }
 
 
   private logout() {
     localStorage.clear();
     this.GS.logado = false;
+    this.loggedIn = false;
   }
 }
