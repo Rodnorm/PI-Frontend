@@ -103,6 +103,8 @@ export class CheckoutComponent implements OnInit {
         this.loader = false;
         if (response.body.response.returnMsg == 'Success.') {
           this.protocolo = response.body.data;
+          debugger
+          this.itens = this.GS.carrinho = []
         }
       });
 
@@ -112,10 +114,32 @@ export class CheckoutComponent implements OnInit {
     let token = localStorage.getItem(this.keyToken);
     this.GS.createBill(body, token)
       .subscribe(response => {
-        console.log(response);
+        // var sampleArr = this.base64ToArrayBuffer(JSON.stringify(response['body']));
+        // this.saveByteArray("Sample Report", sampleArr);
+        
       });
   }
+// -------------------------------
+//   public base64ToArrayBuffer(base64) {
+//     var binaryString = window.atob(base64);
+//     var binaryLen = binaryString.length;
+//     var bytes = new Uint8Array(binaryLen);
+//     for (var i = 0; i < binaryLen; i++) {
+//        var ascii = binaryString.charCodeAt(i);
+//        bytes[i] = ascii;
+//     }
+//     return bytes;
+//  }
 
+//  public saveByteArray(reportName, byte) {
+//   var blob = new Blob([byte], {type: "application/pdf"});
+//   var link = document.createElement('a');
+//   link.href = window.URL.createObjectURL(blob);
+//   var fileName = reportName;
+//   link.download = fileName;
+//   link.click();
+// };
+// -------------------------------
   private getOrder() {
 
     let token = localStorage.getItem(this.keyToken);
