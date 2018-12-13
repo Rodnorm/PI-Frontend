@@ -11,7 +11,7 @@ import { GeneralServices } from '../services/services';
 export class LoginComponent implements OnInit {
 
 
-
+ 
   loginForm: FormGroup;
   public loader: boolean = false;
   
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem(this.keyCustomer, resp['data'].idCliente);
               setInterval(() => {
                 this.checkSession(data['data'].token);
-              }, 240000) //a cada 4 minutos verifica se a sessão ainda é válida
+              }, 240000) 
 
             });
 
@@ -93,8 +93,8 @@ export class LoginComponent implements OnInit {
     localStorage.setItem(this.keyLogin, login);
     this.loader = false;
     this.GS.logado = true;
-    this.name = resp['data'].nome;
     this.GS.loggedIn = true;
+    this.name = resp['data'].nome;
   }
 
   private checkSession(token?) {

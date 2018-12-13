@@ -63,16 +63,16 @@
           <div *ngIf="error && !success">
             <small class="form-text text-muted">Ops, algo deu errado. Tente novamente xD</small>
           </div>
-          <div *ngIf="success && !error">
+          <div *ngIf="success && !error"> 
             <small class="form-text text-muted">Cadastro realizado com sucesso!</small>
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Prosseguir" data-dismiss="modal"
               mdbWavesEffect (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#loginModal">Prosseguir para o login</a>
           </div>
-          <app-subscribe-form *ngIf="!loading || success" [formGroup]=subscribeForm></app-subscribe-form>
+          <app-subscribe-form *ngIf="!loading && !success" [formGroup]=subscribeForm></app-subscribe-form>
           <div *ngIf="error && !success">
             <small class="form-text text-muted">Ops, algo deu errado. Tente novamente xD</small>
           </div>
-          <div class="modal-footer justify-content-center">
+          <div class="modal-footer justify-content-center" *ngIf="!loading && !success" >
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cancelar" data-dismiss="modal" mdbWavesEffect
               (click)="oldUser.hide(); subscribeModal.hide();" data-toggle="modal" data-target="#sideCartModalId">Cancelar</a>
             <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cadastrar" mdbWavesEffect (click)="sendData()"

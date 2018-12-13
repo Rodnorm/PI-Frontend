@@ -8,7 +8,7 @@
         </button>
         <h4 class="modal-title w-100" id="myModalLabel">Login</h4>
       </div>
-      <div *ngIf="!loader && !loggedIn" id= "formLogin" class="modal-body text-center md-form form-sm" [formGroup]="loginForm" aria-label="formulário para login">
+      <div *ngIf="!loader && !this.GS.loggedIn" id= "formLogin" class="modal-body text-center md-form form-sm" [formGroup]="loginForm" aria-label="formulário para login">
         <div class="input-group mb-4">
           <input mdbInputDirective type="email" class="form-control input-sm" id="inputEmailLogin" aria-labelledby="inputEmailLogin formLogin" aria-required="true" data-error="email invalido"
             data-success="email dos bons" formControlName="login">
@@ -19,13 +19,13 @@
           <label for="inputPasswordLogin">Senha</label>
         </div>
       </div>
-      <div *ngIf="loggedIn" aria-label="Olá, {{name}}">
+      <div *ngIf="this.GS.loggedIn" aria-label="Olá, {{name}}">
         <h3>Olá, {{name}}!</h3>
       </div>
       <div *ngIf="loader" class="text-center" aria-describedby="Carregando">
         <app-custom-loader></app-custom-loader>
       </div>
-      <div class="modal-footer" *ngIf="!loader && !loggedIn">
+      <div class="modal-footer" *ngIf="!loader && !this.GS.loggedIn">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Cancelar login" data-toggle="modal" data-target="#loginModal"
           mdbWavesEffect>Cancelar</button>
         <button type="button" mdbBtn color="primary" class="relative waves-light" aria-label="Entrar" mdbWavesEffect (click)="validateValues()" [disabled]="!loginForm.valid">Entrar</button>
