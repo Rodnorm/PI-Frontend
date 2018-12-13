@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.GS.userLogin = '';
     this.createLoginForm();
-    this.checkSession();
+    this.checkSession(); 
   }
 
   private createLoginForm() {

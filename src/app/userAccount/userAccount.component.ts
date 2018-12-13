@@ -14,6 +14,7 @@ export class PedidosComponent implements OnInit {
   private orders;
   private loader:boolean = false;
   updateInfo: FormGroup;
+  private keyCustomer = 'Customer';
 
 
   constructor(
@@ -25,6 +26,7 @@ export class PedidosComponent implements OnInit {
 
     this.getUser();
     this.getOrders();
+    this.checkSession(); 
   }
 
   public getUser() {
@@ -68,5 +70,29 @@ export class PedidosComponent implements OnInit {
     localStorage.clear();
     this.GS.logado = false;
     this.GS.loggedIn = false;
+  }
+
+  private checkSession(token?) {
+
+    if (!token && localStorage.getItem(this.keyToken) && localStorage.getItem(this.keyLogin)) {
+      let token = localStorage.getItem(this.keyToken);
+      let login = localStorage.getItem(this.keyLogin);
+      this.GS.sessionChecker(token)
+        .subscribe(res => {
+          this.GS.getUserDetails(login, token)
+            .subscribe(resp => {
+              localStorage.setItem(this.keyCustomer, resp['data'].idCliente);
+              this.resolveLoggin(resp, login);
+            });
+        });
+      return;
+    }
+  }
+
+  private resolveLoggin(resp, login) {
+    localStorage.setItem(this.keyLogin, login);
+    this.loader = false;
+    this.GS.logado = true;
+    this.GS.loggedIn = true;
   }
 }
