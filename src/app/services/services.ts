@@ -56,4 +56,7 @@ export class GeneralServices {
         });
         return this.http.post<any>(this.endPointUrl + 'customers/session', token, {headers});//ok
     }
+    public letMeKnow(body){
+        return this.http.post<any[]>(this.endPointUrl + 'customers/letMeKnow', body, {headers : this.headers})
+    }
 }

@@ -20,14 +20,15 @@
 
       <app-custom-loader *ngIf="loader"></app-custom-loader>
       <div class="modal-body" *ngIf="!loader && success">
-        <small id="dataHelp" class="form-text text-muted">
+        <small class="form-text text-muted">
           <strong>Obrigado</strong> por comprar conosco! :)</small>
-        <small id="dataHelp" class="form-text text-muted">Anote seu protocolo
+        <small class="form-text text-muted">Anote seu protocolo
           <strong>{{protocolo}}</strong>.</small>
-        <small id="dataHelp" class="form-text text-muted">Ele e outras informações estão disponíveis em
+        <small class="form-text text-muted">Ele e outras informações estão disponíveis em
           <strong>Minha Conta</strong>.</small>
         <a class="btn btn-outline-success btn-sm" role="button" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">
-          Finalizar 
+          Finalizar
+          <i class="fa fa-heart"></i>
         </a>
 
       </div>

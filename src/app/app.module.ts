@@ -21,6 +21,7 @@ import { CustomLoaderComponent } from './custom-loader/custom-loader.component';
 import { PedidosComponent } from './userAccount/userAccount.component';
 import { RouterModule } from '@angular/router';
 import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
+import { LowInventoryComponent } from './low-inventory/low-inventory.component';
 
 
 export function getAuthServiceConfigs() {
@@ -30,10 +31,10 @@ export function getAuthServiceConfigs() {
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider("1364820396988229")
         },
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider("Your-Google-Client-Id")
-        }
+        // {
+        //   id: GoogleLoginProvider.PROVIDER_ID,
+        //   provider: new GoogleLoginProvider("Your-Google-Client-Id")
+        // }
       ]
   );
   return config;
@@ -52,7 +53,8 @@ export function getAuthServiceConfigs() {
     LoginComponent,
     CustomLoaderComponent,
     PedidosComponent,
-    SubscribeFormComponent, 
+    SubscribeFormComponent,
+    LowInventoryComponent, 
     ],
   imports: [
     SocialLoginModule,

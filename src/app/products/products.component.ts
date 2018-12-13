@@ -42,8 +42,6 @@ export class ProductsComponent implements OnInit {
         console.log(error);
     });
 
-    //implementar aqui o método que verifica usuário
-    
   }
   
     private changeProduct(product){

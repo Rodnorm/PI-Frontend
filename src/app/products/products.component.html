@@ -23,10 +23,16 @@
                                     R$ {{produto?.preco}}
                                 </p>
                             </div>
-                            <div class="col-xs-12 col-md-6">
+                            <div *ngIf="produto.estoque > 0; else lowInventory" class="col-xs-12 col-md-6">
                                 <button type="button" mdbBtn color="primary" class="relative waves-light" aria-label="Comprar" (click)="changeProduct(produto); basicModal.show()"
                                     mdbWavesEffect>Comprar</button>
                             </div>
+                            <ng-template #lowInventory>
+                                <div style="display: flex; justify-content:center; flex-direction:column;">
+                                    <small class="form-text text-muted">Parece que não temos esse :(</small>
+                                    <app-low-inventory [produto]=produto.idProduto></app-low-inventory>
+                                </div>
+                            </ng-template>
                         </div>
                     </div>
                 </div>
@@ -82,7 +88,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text autofocus" id="basic-addon1">Quantidade</span>
                     </div>
-                    <input type="number" class="form-control" placeholder="00" aria-label="quantidade do produto" aria-required="true" formControlName="quantidade" 
+                    <input type="number" class="form-control" placeholder="00" aria-label="quantidade do produto" aria-required="true" formControlName="quantidade"
                         autofocus>
                 </div>
                 <div class="alert alert-success" role="alert" *ngIf="success" id="productAddedToCartAlert">
@@ -143,7 +149,8 @@
                                                     <td scope="row">{{product.quantidade}}</td>
                                                     <td scope="row">{{product.subtotal}}</td>
                                                     <td>
-                                                        <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}}" mdbTooltip="Remover Item" placement="top" (click)="removeThis(product.id); deleteModal.show();">
+                                                        <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}}" mdbTooltip="Remover Item" placement="top"
+                                                            (click)="removeThis(product.id); deleteModal.show();">
                                                             <i class="fa fa-remove"></i>
                                                         </button>
                                                     </td>
