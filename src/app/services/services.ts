@@ -60,4 +60,7 @@ export class GeneralServices {
     public letMeKnow(body){
         return this.http.post<any[]>(this.endPointUrl + 'customers/letMeKnow', body, {headers : this.headers})
     }
+    public createBill(body, token){
+        return this.http.post<any[]>(this.endPointUrl + 'orders/order/bill', body, {headers : {"x-access-token":token, "Content-Type": "application/json"})
+    }
 }

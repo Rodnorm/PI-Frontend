@@ -18,6 +18,7 @@ export class CheckoutComponent implements OnInit {
   private success: boolean = false;
   private loader: boolean = false;
   private userData;
+  private order;
   protocolo;
   valorFrete: number;
   itens = this.GS.carrinho;
@@ -94,9 +95,10 @@ export class CheckoutComponent implements OnInit {
     let token = localStorage.getItem(this.keyToken);
     let login = localStorage.getItem(this.keyLogin);
     this.loader = true;
+
     this.GS.postOrder(JSON.stringify(sendObj), token)
       .subscribe(response => {
-        
+        this.getOrder();
         this.success = true;
         this.loader = false;
         if (response.body.response.returnMsg == 'Success.') {
@@ -104,6 +106,24 @@ export class CheckoutComponent implements OnInit {
         }
       });
 
+  }
+
+  private createBill(body) {
+    let token = localStorage.getItem(this.keyToken);
+    this.GS.createBill(body, token)
+      .subscribe(response => {
+        console.log(response);
+      });
+  }
+
+  private getOrder() {
+
+    let token = localStorage.getItem(this.keyToken);
+    let login = localStorage.getItem(this.keyLogin);
+    this.GS.getOrdersByUser(login, token)
+      .subscribe(response => {
+        this.createBill(JSON.stringify(response['data'][response['data'].length - 1]))
+      });
   }
 
   createObj() {
@@ -134,7 +154,7 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-   private getUserData() {
+  private getUserData() {
 
     let token = localStorage.getItem(this.keyToken);
     let login = localStorage.getItem(this.keyLogin);
@@ -151,6 +171,6 @@ export class CheckoutComponent implements OnInit {
           'bairro': [this.userData.bairro]
         });
       });
-      
+
   }
 }
