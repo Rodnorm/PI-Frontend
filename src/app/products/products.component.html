@@ -95,16 +95,13 @@
             <div class="modal-footer">
                 <div class="alignModalButtons">
                     <button type="button" aria-label="Adicionar o item ao carrinho" mdbBtn class="btn btn-secondary btn-sm" (click)="checkValue(item.nome, item.idProduto, item.preco)">Adicionar</button>
-                    <button type="button" aria-label="Adicionar e finalizar compra" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button>
+                    <!-- <button type="button" aria-label="Adicionar e finalizar compra" mdbBtn class="btn btn-primary btn-sm" OnClick="addItemToCart('+i+'); createCheckoutModal();">Adicionar e finalizar</button> -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!--  -->
-<!--  -->
-<!--  -->
 <!-- Cart Modal -->
 
 <div mdbModal #sideCartModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" id="sideCartModalId" aria-labelledby="myBasicModalLabel"

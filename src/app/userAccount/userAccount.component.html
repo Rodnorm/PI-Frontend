@@ -4,7 +4,7 @@
     <div class="row">
         <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrder" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
             (click)="getOrders()">Ver pedidos</a>
-        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrdere" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Editar minhas informações</a>
+        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrdere" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" (click)="getUser()">Editar minhas informações</a>
         <table class="table table-hover table-sm collapse" id="tableOrder">
             <thead>
                 <tr>
@@ -36,7 +36,8 @@
     </div>
     <div class="collapse" id="tableOrdere">
         <div class="text-center md-form form-sm ">
-            <app-subscribe-form [formGroup]=updateInfo></app-subscribe-form>
+            <app-custom-loader *ngIf="loader"></app-custom-loader>
+            <app-subscribe-form *ngIf="!loader" [formGroup]=updateInfo></app-subscribe-form>
         </div>
     </div>
 
