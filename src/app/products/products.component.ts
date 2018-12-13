@@ -3,92 +3,101 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { DescriptionComponent } from '../description/description.component';
 import { GeneralServices } from 'src/app/services/services';
 
-@Component({ 
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
-}) 
+@Component({
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrls: ['./products.component.scss']
+})
 
 export class ProductsComponent implements OnInit {
-    formulario : FormGroup;
+    formulario: FormGroup;
+    nameSearchForm: FormGroup;
     quantityError: boolean = false;
     success: boolean = false;
     public carrinho = [] = this.GS.carrinho;
     item = [];
     total = 0;
     removeId;
+    private noHits: boolean = false;
     public loader = true;
     public products = [];
     esvaziarCarrinho = false;
 
 
-  constructor(
-      private DescriptionComponent: DescriptionComponent,
-      private formBuilder: FormBuilder,
-      private GS: GeneralServices
-      ) {}
+    constructor(
+        private DescriptionComponent: DescriptionComponent,
+        private formBuilder: FormBuilder,
+        private GS: GeneralServices
+    ) { }
 
-  ngOnInit() {
+    ngOnInit() {
 
-    this.formulario = this.formBuilder.group({
-        'quantidade': [1]
-    });
+        this.formulario = this.formBuilder.group({
+            'quantidade': [1]
+        });
+        this.nameSearchForm = this.formBuilder.group({
+            'name': [null]
+        })
+        this.getProducts();
+    }
 
-    this.GS.getProducts()
-    .subscribe(data => {
-        this.products = data;
-        this.loader = false;
-    }, error => {
-        console.log(error);
-    });
+    private getProducts() {
+        this.noHits = false;
+        this.nameSearchForm.reset();
+        this.GS.getProducts()
+            .subscribe(data => {
+                this.products = data;
+                this.loader = false;
+            }, error => {
+                console.log(error);
+            });
+    }
 
-  }
-  
-    private changeProduct(product){
+    private changeProduct(product) {
         this.item = product;
     }
-    
+
     public checkValue(nomeProduto, id, preco) {
 
         if (this.formulario.value.quantidade === 0 ||
-            this.formulario.value.quantidade === null ) {
+            this.formulario.value.quantidade === null) {
             this.quantityError = true;
             return;
         }
         if (this.formulario.value.quantidade != 0) {
             this.success = true;
-            
+
             this.addItemToCart(nomeProduto, id, preco);
 
-            setTimeout (() => {
+            setTimeout(() => {
                 this.success = false;
                 this.formulario.reset();
             }, 2000);
         }
     }
-    
+
     private addItemToCart(nomeProduto, id, preco): void {
-        
+
         let subtotal = parseInt(preco, 10) * this.formulario.value.quantidade
         for (let i in this.carrinho) {
             if (this.carrinho[i].id === id) {
                 this.carrinho[i] = {
-                idProduto : id,
-                nome : nomeProduto,
-                quantidade: this.formulario.value.quantidade,
-                preco: preco,
-                subtotal: subtotal
+                    idProduto: id,
+                    nome: nomeProduto,
+                    quantidade: this.formulario.value.quantidade,
+                    preco: preco,
+                    subtotal: subtotal
                 }
                 this.updateTotal();
                 return;
             }
         }
-     
+
         if (this.carrinho.length === 0) {
-            
+
             this.carrinho.push({
-                idProduto : id,
-                nome : nomeProduto,
+                idProduto: id,
+                nome: nomeProduto,
                 quantidade: this.formulario.value.quantidade,
                 preco: preco,
                 subtotal: subtotal
@@ -97,8 +106,8 @@ export class ProductsComponent implements OnInit {
             return;
         }
         this.carrinho.push({
-            idProduto : id,
-            nome : nomeProduto,
+            idProduto: id,
+            nome: nomeProduto,
             quantidade: this.formulario.value.quantidade,
             preco: preco,
             subtotal: subtotal
@@ -106,7 +115,7 @@ export class ProductsComponent implements OnInit {
         this.updateTotal();
     }
 
-    protected updateTotal(){
+    protected updateTotal() {
         if (this.carrinho.length === 0) {
             this.total = 0;
         }
@@ -115,7 +124,7 @@ export class ProductsComponent implements OnInit {
         }
     }
 
-    public removeThis(id){
+    public removeThis(id) {
         this.removeId = id;
     }
     public removeItem() {
@@ -146,14 +155,28 @@ export class ProductsComponent implements OnInit {
         this.esvaziarCarrinho = true;
     }
     public loadMoreProducts() {
-        debugger
+
         this.GS.getMoreProducts()
-        .subscribe(data => {
-            Object.keys(data['data']).forEach( key => {
-                this.products['data'].push(data['data'][key]);
+            .subscribe(data => {
+                Object.keys(data['data']).forEach(key => {
+                    this.products['data'].push(data['data'][key]);
+                });
+            }, error => {
+                console.log(error);
             });
-        }, error => {
-            console.log(error);
-        });
+    }
+
+    private makeSearch(event) {
+        if (event.keyCode != 13) return;
+
+        this.GS.getSearchByName(this.nameSearchForm.value.name)
+            .subscribe(response => {
+                this.products = response['data']['body'];
+                if (this.products['data'].length === 0) {
+                    this.noHits = true;
+                    return;
+                }
+                this.noHits = false;
+            });
     }
 }

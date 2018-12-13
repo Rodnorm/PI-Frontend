@@ -1,10 +1,18 @@
-<div class="container text-center md-form form-sm">
-    <input class="form-control form-control-lg " type="search" placeholder="Pesquise um produto e pressione enter" aria-label="Search">
+<div class="container text-center md-form form-sm" [formGroup]="nameSearchForm">
+    <input class="form-control form-control-lg " type="search" placeholder="Pesquise um produto pressionando enter" aria-label="Search"
+        (keyup)="makeSearch($event)" formControlName="name">
+    <div class="text-center">
+        <a mdbBtn color="secondary" outline="true" class="waves-effect btn btn-outline-info btn-sm" (click)="getProducts()" mdbWavesEffect>Resetar pesquisa</a>
+    </div>
 </div>
 
 <div id="products" class="row view-group mb-5">
     <div class="container">
         <div class="row">
+            <div *ngIf="noHits">
+                <small id="dataHelp" class="form-text text-muted">
+                    <strong>Eita,</strong>não encontramos nada, tente pesquisar por outro produto</small>
+            </div>
             <div class="item col-xs-4 col-lg-4 mt-4" *ngFor="let produto of products?.data">
                 <div class="thumbnail card">
                     <mdb-carousel [isControls]="true" [animation]="'slide'">
@@ -33,7 +41,6 @@
                             </div>
                             <ng-template #lowInventory>
                                 <div style="display: flex; justify-content:center; flex-direction:column;">
-                                    <small class="form-text text-muted">Parece que não temos esse :(</small>
                                     <app-low-inventory [produto]=produto.idProduto></app-low-inventory>
                                 </div>
                             </ng-template>

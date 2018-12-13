@@ -8,8 +8,6 @@ import { Injectable } from '@angular/core';
 export class GeneralServices {
     userLogin: String = '';
     endPointUrl = 'http://localhost:3000/'
-    // endPointUrl = 'http://localhost:8080/';
-    // endPointUrl = 'http://10.135.147.13:8080/';
 
     produtos = [];
     total;
@@ -26,6 +24,9 @@ export class GeneralServices {
         private http: HttpClient
     ) {}
 
+    public getSearchByName(name) {
+        return this.http.get<any[]>(this.endPointUrl + `products/search/${name}`);//ok
+    }
     public getProducts() {
         return this.http.get<any[]>(this.endPointUrl + 'products');//ok
     }
