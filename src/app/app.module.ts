@@ -22,6 +22,7 @@ import { PedidosComponent } from './userAccount/userAccount.component';
 import { RouterModule } from '@angular/router';
 import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
 import { LowInventoryComponent } from './low-inventory/low-inventory.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 export function getAuthServiceConfigs() {
@@ -54,7 +55,8 @@ export function getAuthServiceConfigs() {
     CustomLoaderComponent,
     PedidosComponent,
     SubscribeFormComponent,
-    LowInventoryComponent
+    LowInventoryComponent,
+    FooterComponent
     ],
   imports: [
     SocialLoginModule,
