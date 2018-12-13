@@ -14,7 +14,10 @@
         </button>
       </div> 
       <div class="loader">
-        <app-custom-loader *ngIf="loader"></app-custom-loader>
+        <div *ngIf="loader" class="modal-body text-center md-form form-sm">
+          <app-custom-loader ></app-custom-loader>
+
+        </div>
       </div>
       <div *ngIf="!loader && success" class="modal-body text-center md-form form-sm">
         <small class="form-text text-muted">{{message}}</small>

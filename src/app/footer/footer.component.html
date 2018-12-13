@@ -1,4 +1,4 @@
-<footer class="page-footer fixed-bottom font-small blue pt-4">
+<footer class="page-footer font-small blue pt-4">
 
   <div class="container-fluid text-center text-md-left">
 
@@ -74,7 +74,7 @@
             data-error="Pode caprichar no texto! xD" data-success="É hora do textão!"></textarea>
           <label for="form7">Sua mensagem</label>
         </div>
-        <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendEmail()" [disabled]="this.contactForm.invalid">
+        <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendEmail()" [disabled]="contactForm.invalid">
           Enviar
         </a>
       </div>

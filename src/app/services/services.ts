@@ -44,6 +44,9 @@ export class GeneralServices {
     public postClient(body) {
         return this.http.post<any>(this.endPointUrl + 'customers/customer/create', body, {headers : this.headers});//ok
     }
+    public updateClient(body) {
+        return this.http.post<any>(this.endPointUrl + 'customers/customer/update', body, {headers : this.headers});//ok
+    }
 
     public postOrder(body, token) {
         return this.http.post<any>(this.endPointUrl + 'orders/order/create', body, {headers : {"x-access-token":token, "Content-Type": "application/json"}});

@@ -4,7 +4,8 @@
     <div class="row">
         <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#tableOrder" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
             (click)="getOrders()">Ver pedidos</a>
-        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#updateInfo" role="button" aria-expanded="false" aria-controls="multiCollapseExample1" (click)="getUser()">Editar minhas informações</a>
+        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#updateInfo" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"
+            (click)="getUser()">Editar minhas informações</a>
         <table class="table table-hover table-sm collapse" id="tableOrder">
             <thead>
                 <tr>
@@ -37,27 +38,34 @@
     <div class="collapse" id="updateInfo">
         <div class="text-center md-form form-sm ">
             <app-custom-loader *ngIf="loader"></app-custom-loader>
-            <app-subscribe-form *ngIf="!loader" [formGroup]=updateInfo></app-subscribe-form>
+            <div *ngIf="!loader && !success">
+                <app-subscribe-form [formGroup]=updateInfo></app-subscribe-form>
+                <button type="button" mdbBtn color="primary" outline="true" class="waves-effect" aria-label="Cadastrar" mdbWavesEffect (click)="sendData()"
+                    data-target="#sideCartModalId">Salvar</button>
+            </div>
+            <div class="modal-body" *ngIf="!loader && success">
+                <small class="form-text text-muted">
+                    <strong>{{message}}</strong></small>
+            </div>
         </div>
     </div>
 </div>
 
 <div mdbModal #logoutModal="mdbModal" class="modal fade top" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">Quer mesmo sair?</p>
-      </div>
-      <div class="modal-body">
-        <i class="fa fa-times fa-4x animated rotateIn"></i>
-      </div>
-      <div class="modal-footer flex-center">
-        <a mdbBtn color="danger" outline="true" data-dismiss="modal" class="waves-effect" (click)="logoutModal.hide(); logout();"
-          mdbWavesEffect>Sim</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="logoutModal.hide();">Não</a>
-      </div>
+    aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <div class="modal-content text-center">
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Quer mesmo sair?</p>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-times fa-4x animated rotateIn"></i>
+            </div>
+            <div class="modal-footer flex-center">
+                <a mdbBtn color="danger" outline="true" data-dismiss="modal" class="waves-effect" (click)="logoutModal.hide(); logout();"
+                    mdbWavesEffect>Sim</a>
+                <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="logoutModal.hide();">Não</a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-<app-footer></app-footer>

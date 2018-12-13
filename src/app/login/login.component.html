@@ -28,7 +28,7 @@
       <div class="modal-footer" *ngIf="!loader && !this.GS.loggedIn">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Cancelar login" data-toggle="modal" data-target="#loginModal"
           mdbWavesEffect>Cancelar</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" aria-label="Entrar" mdbWavesEffect (click)="validateValues()" [disabled]="!loginForm.valid">Entrar</button>
+        <button type="button" mdbBtn color="primary" class="relative waves-light" aria-label="Entrar" mdbWavesEffect (click)="validateValues()">Entrar</button>
       </div>
     </div>
   </div>

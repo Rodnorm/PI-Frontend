@@ -88,7 +88,7 @@ export class SubscribeComponent implements OnInit {
         token: this.facebookToken
       }
     }
-    console.log(JSON.stringify(sendableObj));
+
     this.GS.postClient(JSON.stringify(sendableObj))
       .subscribe(response => {
         this.loading = false;

@@ -41,6 +41,7 @@ export class FooterComponent implements OnInit {
       this.success = true;
       this.loader = false;
       this.message = response['body']['data'];
+      this.loader = false;
     });
   }
 }

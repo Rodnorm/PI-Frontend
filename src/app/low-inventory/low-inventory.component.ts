@@ -39,7 +39,7 @@ export class LowInventoryComponent implements OnInit {
 
     let obj = JSON.stringify({
       "idProduto": this.produto,
-      "nomeInteressado": this.lowInventoryForm.value.name,
+      "nome": this.lowInventoryForm.value.name,
       "email": this.lowInventoryForm.value.email,
     });
 
