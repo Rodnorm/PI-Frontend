@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 import { SubscribeFormComponent } from './subscribe-form/subscribe-form.component';
 import { LowInventoryComponent } from './low-inventory/low-inventory.component';
 import { FooterComponent } from './footer/footer.component';
+import { InstitucionalComponent } from './institucional/institucional.component';
 
 
 export function getAuthServiceConfigs() {
@@ -56,7 +57,8 @@ export function getAuthServiceConfigs() {
     PedidosComponent,
     SubscribeFormComponent,
     LowInventoryComponent,
-    FooterComponent
+    FooterComponent,
+    InstitucionalComponent
     ],
   imports: [
     SocialLoginModule,
