@@ -64,7 +64,7 @@ export class PedidosComponent implements OnInit {
         this.orders = response['data'];
         console.log(this.orders);
       });
-  }
+  } 
 
   private logout() {
     localStorage.clear();

@@ -4,6 +4,7 @@ import { ModuleWithProviders } from "@angular/core";
 
 
 import { PedidosComponent } from './userAccount/userAccount.component';
+import { InstitucionalComponent } from 'src/app/institucional/institucional.component';
 
 
 export const routing: Routes = [
@@ -12,5 +13,8 @@ export const routing: Routes = [
     },
     {
         path: 'minhaconta', component: PedidosComponent
+    },
+    {
+        path: 'quemsomos', component: InstitucionalComponent
     }
 ];
