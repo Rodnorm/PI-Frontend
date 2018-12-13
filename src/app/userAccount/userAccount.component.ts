@@ -63,4 +63,10 @@ export class PedidosComponent implements OnInit {
         console.log(this.orders);
       });
   }
+
+  private logout() {
+    localStorage.clear();
+    this.GS.logado = false;
+    this.GS.loggedIn = false;
+  }
 }

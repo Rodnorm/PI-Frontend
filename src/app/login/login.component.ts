@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   public loader: boolean = false;
-  public loggedIn: boolean = false;
+  
   private name: String;
   private keyToken = 'Token';
   private keyLogin = 'Login';
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
     this.loader = false;
     this.GS.logado = true;
     this.name = resp['data'].nome;
-    this.loggedIn = true;
+    this.GS.loggedIn = true;
   }
 
   private checkSession(token?) {
@@ -122,6 +122,6 @@ export class LoginComponent implements OnInit {
   private logout() {
     localStorage.clear();
     this.GS.logado = false;
-    this.loggedIn = false;
+    this.GS.loggedIn = false;
   }
 }

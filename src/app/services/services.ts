@@ -15,6 +15,7 @@ export class GeneralServices {
     public logado: boolean = false;
     public testScenario:  boolean = false; 
     public token = '';
+    public loggedIn: boolean = false;
     private headers = new HttpHeaders({
         "Content-Type": "application/json"
     });

@@ -135,6 +135,7 @@ export class ProductsComponent implements OnInit {
             return;
         }
         let index = 0;
+        
         for (let item in this.carrinho) {
             if (this.carrinho[item].idProduto === this.removeId) {
                 this.carrinho.splice(index, 1);

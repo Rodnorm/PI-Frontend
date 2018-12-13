@@ -1,4 +1,4 @@
-<app-menu></app-menu>
+<app-menu [update]=true></app-menu>
 
 <div class="content">
     <div class="row">
@@ -40,5 +40,23 @@
             <app-subscribe-form *ngIf="!loader" [formGroup]=updateInfo></app-subscribe-form>
         </div>
     </div>
+</div>
 
+<div mdbModal #logoutModal="mdbModal" class="modal fade top" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">Quer mesmo sair?</p>
+      </div>
+      <div class="modal-body">
+        <i class="fa fa-times fa-4x animated rotateIn"></i>
+      </div>
+      <div class="modal-footer flex-center">
+        <a mdbBtn color="danger" outline="true" data-dismiss="modal" class="waves-effect" (click)="logoutModal.hide(); logout();"
+          mdbWavesEffect>Sim</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="logoutModal.hide();">Não</a>
+      </div>
+    </div>
+  </div>
 </div>

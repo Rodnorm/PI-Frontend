@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GeneralServices } from 'src/app/services/services';
 
 @Component({
@@ -9,6 +9,7 @@ import { GeneralServices } from 'src/app/services/services';
 export class MenuComponent implements OnInit {
   protected menu: Array<any> = []
   pedidos; 
+  @Input() update: boolean;
   constructor(
     private GS: GeneralServices
   ) {
@@ -23,4 +24,5 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
   }
+
 }
