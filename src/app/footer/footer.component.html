@@ -21,7 +21,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Contato</a>
+            <a href="#!" data-toggle="collapse" role="button" aria-expanded="false" data-toggle="modal" (click)="getContact.show()">Contato</a>
           </li>
           <li>
             <a [routerLink]="['/quemsomos']">Quem Somos</a>
@@ -39,3 +39,44 @@
   </div>
 
 </footer>
+
+<div mdbModal #getContact="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  style="overflow-y: auto" aria-hidden="true">
+  <div class="modal-dialog modal-right modal-secondary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="heading lead" *ngIf="!loader && !success"> Fale Conosco! 😍</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" (click)="getContact.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div *ngIf="loader" class="loader modal-body text-center md-form form-sm">
+        <app-custom-loader ></app-custom-loader>
+      </div>
+      <div *ngIf="!loader && success" class="modal-body text-center md-form form-sm">
+        <small class="form-text text-muted">{{message}}</small>
+        <button type="button" mdbBtn class="waves-light btn btn-outline-secondary btn-sm" aria-label="Finalizar" data-dismiss="modal"
+          (click)="getContact.hide()" mdbWavesEffect>Finalizar</button>
+      </div>
+      <div *ngIf="!loader && !success" class="modal-body text-center md-form form-sm" [formGroup]="contactForm">
+        <div class="input-group mb-4">
+          <input mdbInputDirective type="text" class="form-control input-sm" id="inputNome" aria-label="insira o nome" aria-required="true"
+            data-error="epa" data-success="Eita nome lindo!" formControlName="name">
+          <label for="inputNome">Nome</label>
+        </div>
+        <div class="input-group mb-4">
+          <input mdbInputDirective type="email" class="form-control input-sm" id="iinputEmail" aria-label="insira o email" aria-required="true"
+            data-error="email invalido" data-success="email dos bons" formControlName="email">
+          <label for="iinputEmail">Email</label>
+        </div>
+        <div class="md-form">
+          <textarea type="text" id="form7" class="md-textarea md-textarea-auto form-control" formControlName="message" mdbInputDirective
+            data-error="Pode caprichar no texto! xD" data-success="É hora do textão!"></textarea>
+          <label for="form7">Sua mensagem</label>
+        </div>
+        <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendEmail()" [disabled]="this.contactForm.invalid">
+          Enviar
+        </a>
+      </div>
+    </div>
+  </div>

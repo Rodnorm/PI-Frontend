@@ -61,6 +61,9 @@ export class GeneralServices {
     public letMeKnow(body){
         return this.http.post<any[]>(this.endPointUrl + 'customers/letMeKnow', body, {headers : this.headers})
     }
+    public sendContact(body){
+        return this.http.post<any[]>(this.endPointUrl + 'customers/contact', body, {headers : this.headers})
+    }
     public createBill(body, token){
         return this.http.post<any[]>(this.endPointUrl + 'orders/order/bill', body, {headers : {"x-access-token":token, "Content-Type": "application/json"}});
         // return this.http.post<any[]>('http://localhost:8080/boleto/save', body, {headers : {"Content-Type": "application/json"}});
