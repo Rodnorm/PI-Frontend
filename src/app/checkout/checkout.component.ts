@@ -101,9 +101,6 @@ export class CheckoutComponent implements OnInit {
         this.loader = false;
         if (response.body.response.returnMsg == 'Success.') {
           this.protocolo = response.body.data;
-          alert(`Anote seu protocolo ${this.protocolo}`)
-        } else {
-          alert('Algo deu errado. ;(')
         }
       });
 

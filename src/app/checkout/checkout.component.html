@@ -6,24 +6,33 @@
 </a>
 
 
-<div mdbModal #checkoutModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel" style="overflow-y: auto" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+<div mdbModal #checkoutModal="mdbModal" class="modal fade right" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  style="overflow-y: auto" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
   <div class="modal-dialog modal-full-height modal-right modal-secondary modal-info" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <p class="heading lead">Finalize sua compra
         </p>
-
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar" (click)="checkoutModal.hide()">
           <span aria-hidden="true" class="white-text">×</span>
         </button>
       </div>
 
       <app-custom-loader *ngIf="loader"></app-custom-loader>
-      
-      <div class="modal-body" *ngIf="!success || !loader">
-        <a class="btn btn-outline-secondary btn-sm" data-toggle="collapse" role="button" aria-expanded="false"
-          data-target="#confirmAddress">
+      <div class="modal-body" *ngIf="!loader && success">
+        <small id="dataHelp" class="form-text text-muted">
+          <strong>Obrigado</strong> por comprar conosco! :)</small>
+        <small id="dataHelp" class="form-text text-muted">Anote seu protocolo
+          <strong>{{protocolo}}</strong>.</small>
+        <small id="dataHelp" class="form-text text-muted">Ele e outras informações estão disponíveis em
+          <strong>Minha Conta</strong>.</small>
+        <a class="btn btn-outline-success btn-sm" role="button" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">
+          Finalizar 
+        </a>
+
+      </div>
+      <div class="modal-body" *ngIf="!loader && !success">
+        <a class="btn btn-outline-secondary btn-sm" data-toggle="collapse" role="button" aria-expanded="false" data-target="#confirmAddress">
           Confirmar endereço
           <i class="fa fa-heart"></i>
         </a>
@@ -31,39 +40,34 @@
         <div *ngIf="!gettingData" class="collapse in text-center md-form form-sm" id="confirmAddress" [formGroup]="checkoutFormAddress">
           Confirme ou altere seus dados de entrega =)
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="cep" class="form-control" id="cep" formControlName="cep"
-              data-error="seu cep está certo?">
+            <input mdbInputDirective type="text" aria-labelledby="cep" class="form-control" id="cep" formControlName="cep" data-error="seu cep está certo?">
             <label for="cep">CEP</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="rua" aria-required="true" class="form-control" id="rua"
-              formControlName="logradouro" data-error="campo obrigatório">
+            <input mdbInputDirective type="text" aria-labelledby="rua" aria-required="true" class="form-control" id="rua" formControlName="logradouro"
+              data-error="campo obrigatório">
             <label for="rua">Rua</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="number" aria-labelledby="numero" aria-required="true" class="form-control"
-              id="numero" formControlName="numero" data-error="campo obrigatório">
+            <input mdbInputDirective type="number" aria-labelledby="numero" aria-required="true" class="form-control" id="numero" formControlName="numero"
+              data-error="campo obrigatório">
             <label for="numero">Número</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="complemento" class="form-control" id="complemento"
-              formControlName="complemento" data-error="campo obrigatório">
-            <!-- [value]="user.complemento" -->
+            <input mdbInputDirective type="text" aria-labelledby="complemento" class="form-control" id="complemento" formControlName="complemento"
+              data-error="campo obrigatório">
             <label for="complemento">Complemento</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="bairro" class="form-control" id="bairro"
-              formControlName="bairro" data-error="sue bairro está certo?">
+            <input mdbInputDirective type="text" aria-labelledby="bairro" class="form-control" id="bairro" formControlName="bairro" data-error="sue bairro está certo?">
             <label for="bairro">Bairro</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="estado" class="form-control" id="estado"
-              formControlName="uf" data-error="seu estado está certo?">
+            <input mdbInputDirective type="text" aria-labelledby="estado" class="form-control" id="estado" formControlName="uf" data-error="seu estado está certo?">
             <label for="estado">Estado</label>
           </div>
           <div class="input-group mt-4">
-            <input mdbInputDirective type="text" aria-labelledby="cidade" class="form-control" id="cidade"
-              formControlName="cidade" data-error="sua cidade está certa?">
+            <input mdbInputDirective type="text" aria-labelledby="cidade" class="form-control" id="cidade" formControlName="cidade" data-error="sua cidade está certa?">
             <label for="cidade">Cidade</label>
           </div>
           <a class="btn btn-outline-success btn-sm" role="button" (click)="correiosService.calcFrete(checkoutFormAddress.value.cep)">
@@ -71,8 +75,8 @@
           </a>
         </div>
 
-        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button"
-          aria-expanded="false" aria-controls="multiCollapseExample1">Mostrar produtos</a>
+        <a class="btn btn-outline-info btn-sm" data-toggle="collapse" href="#cartProductTable" role="button" aria-expanded="false"
+          aria-controls="multiCollapseExample1">Mostrar produtos</a>
         <div class="row">
           <div class="col">
             <div class="collapse" id="cartProductTable">
@@ -93,8 +97,8 @@
                     <td scope="row">{{product.quantidade}}</td>
                     <td scope="row">{{product.subtotal}}</td>
                     <td>
-                      <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}} do carrinho"
-                        mdbTooltip="Remover Item" placement="top" (click)="products.removeThis(product.id); deleteModal.show();">
+                      <button class="btn btn-secondary btn-sm" aria-label="remover {{product.nome}} do carrinho" mdbTooltip="Remover Item" placement="top"
+                        (click)="products.removeThis(product.id); deleteModal.show();">
                         <i class="fa fa-remove"></i>
                       </button>
                     </td>
@@ -114,31 +118,30 @@
             <label class="custom-control-label" for="metodoBoleto" (click)="cardToggle()">Boleto</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="metodoCartao" name="inlineDefaultRadiosExample"
-              disabled mdbInputDirective>
+            <input type="radio" class="custom-control-input" id="metodoCartao" name="inlineDefaultRadiosExample" disabled mdbInputDirective>
             <label class="custom-control-label" for="metodoCartao" data-toggle="collapse" href="#dadosCartao" (click)="cardToggle('1'); createCardFormGroup()">Cartão</label>
           </div>
           <div *ngIf="isCardMethod" id="dadosCartao">
             <div class="text-center md-form form-sm" [formGroup]="checkoutFormCard" id="dadosCartao" aria-label="Insira os dados do cartão">
               Insira os dados do cartao
               <div class="input-group mt-4">
-                <input mdbInputDirective type="number" aria-labelledby="nome_titular dadosCartao" class="form-control"
-                  id="nome_titular" formControlName="nome_titular" data-error="">
+                <input mdbInputDirective type="number" aria-labelledby="nome_titular dadosCartao" class="form-control" id="nome_titular"
+                  formControlName="nome_titular" data-error="">
                 <label for="nome_titular">Nome do Titular</label>
               </div>
               <div class="input-group mt-4">
-                <input mdbInputDirective type="number" aria-labelledby="numero dadosCartao" class="form-control" id="numero"
-                  formControlName="numero" data-error="">
+                <input mdbInputDirective type="number" aria-labelledby="numero dadosCartao" class="form-control" id="numero" formControlName="numero"
+                  data-error="">
                 <label for="numero">Número</label>
               </div>
               <div class="input-group mt-4">
-                <input mdbInputDirective type="number" aria-labelledby="cvv dadosCartao" class="form-control" id="cvv"
-                  formControlName="cvv" data-error="">
+                <input mdbInputDirective type="number" aria-labelledby="cvv dadosCartao" class="form-control" id="cvv" formControlName="cvv"
+                  data-error="">
                 <label for="cvv">CVV</label>
               </div>
               <div class="input-group mt-4">
-                <input mdbInputDirective type="number" aria-labelledby="data_expiracao dadosCartao" class="form-control"
-                  id="data_expiracao" formControlName="data_expiracao" data-error="">
+                <input mdbInputDirective type="number" aria-labelledby="data_expiracao dadosCartao" class="form-control" id="data_expiracao"
+                  formControlName="data_expiracao" data-error="">
                 <label for="data_expiracao">Data de expiração</label>
               </div>
             </div>
@@ -149,19 +152,21 @@
           <i class="fa fa-gift mb-2 fa-3x"></i>
           <div class="flexFrete">
             <div>
-              <span><strong>Sedex</strong></span>
+              <span>
+                <strong>Sedex</strong>
+              </span>
               <p>Por R${{correiosService.correiosInfo.sedex.valor}}.</p>
               <p>Em até {{correiosService.correiosInfo.sedex.prazo}} dia(s).</p>
-              <input type="radio" class="custom-control-input" id="sedex" name="frete" aria-labelledby="sedex"
-                mdbInputDirective (click)="setFrete('sedex')">
+              <input type="radio" class="custom-control-input" id="sedex" name="frete" aria-labelledby="sedex" mdbInputDirective (click)="setFrete('sedex')">
               <label class="custom-control-label" for="sedex">Sedex</label>
             </div>
             <div>
-              <span><strong>PAC</strong></span>
+              <span>
+                <strong>PAC</strong>
+              </span>
               <p>Por R${{correiosService.correiosInfo.pac.valor}}.</p>
               <p>Em até {{correiosService.correiosInfo.pac.prazo}} dia(s).</p>
-              <input type="radio" class="custom-control-input" id="PAC" name="frete" aria-labelledby="PAC"
-                mdbInputDirective (click)="setFrete('PAC')">
+              <input type="radio" class="custom-control-input" id="PAC" name="frete" aria-labelledby="PAC" mdbInputDirective (click)="setFrete('PAC')">
               <label class="custom-control-label" for="PAC">PAC</label>
             </div>
           </div>
@@ -175,18 +180,17 @@
 
         <!--Footer-->
         <div class="modal-footer justify-content-center">
-          <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn-sm" data-dismiss="modal"
-            mdbWavesEffect (click)="checkoutModal.hide()">Cancelar</a>
-          <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendData()">Finalizar
-            Compra</a>
+          <a type="button" mdbBtn color="primary" outline="true" class="waves-effect btn-sm" data-dismiss="modal" mdbWavesEffect (click)="checkoutModal.hide()">Cancelar</a>
+          <a class="btn btn-outline-secondary btn-sm" role="button" aria-expanded="false" (click)="sendData()">Finalizar Compra
+          </a>
         </div>
       </div>
     </div>
   </div>
 
 
-  <div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+  <div mdbModal #deleteModal="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
       <div class="modal-content text-center">
         <div class="modal-header d-flex justify-content-center">
@@ -198,8 +202,7 @@
         </div>
 
         <div class="modal-footer flex-center">
-          <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); products.removeItem();"
-            mdbWavesEffect>Sim</a>
+          <a mdbBtn color="danger" outline="true" class="waves-effect" (click)="deleteModal.hide(); products.removeItem();" mdbWavesEffect>Sim</a>
           <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="deleteModal.hide(); product.esvaziarCarrinhoToggle(false)">Não</a>
         </div>
       </div>
